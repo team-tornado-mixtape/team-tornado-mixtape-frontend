@@ -1,7 +1,12 @@
 import "./App.css";
 
 function App() {
-  return <div className="App">Hello, world! Here is some more text so netlify stops complaining.</div>;
+  return <div>
+    <h1>
+      Hello, world!
+    </h1>
+    <p>This is MUI with CSS Baseline!</p>
+  </div>;
 }
 
 export default App;
