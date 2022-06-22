@@ -6,7 +6,6 @@ import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Icon } from '@iconify/react';
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
