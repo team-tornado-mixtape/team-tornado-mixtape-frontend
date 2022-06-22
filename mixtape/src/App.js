@@ -1,6 +1,6 @@
 import "./App.css";
-import Landing from "./Components/Landing";
-import PermanentDrawerLeft from "./Components/Sidebar.jsx";
+import Landing from "./components/Landing";
+import PermanentDrawerLeft from "./components/Sidebar.jsx";
 
 function App() {
   return (
