@@ -78,7 +78,7 @@ export default function Landing() {
               <Button variant="outlined">Forgot password?</Button>
               <br></br>
               <Stack spacing={2} direction="row">
-                <Button variant="contained">Sign Up</Button>
+                <Button color="secondary" variant="contained">Sign Up</Button>
                 <Button variant="contained">Sign In</Button>
               </Stack>
             </Box>

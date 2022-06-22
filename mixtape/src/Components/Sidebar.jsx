@@ -1,13 +1,13 @@
 import * as React from "react";
 import Landing from "./Landing";
 import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
-import AlarmIcon from "@mui/icons-material/Alarm";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Icon } from '@iconify/react';
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 
@@ -20,6 +20,8 @@ export default function PermanentDrawerLeft() {
       <Drawer
         sx={{
           width: drawerWidth,
+          // alignItems: "center",
+          // justifyContent: "center",
           flexShrink: 0,
           "& .MuiDrawer-paper": {
             width: drawerWidth,
@@ -29,20 +31,25 @@ export default function PermanentDrawerLeft() {
         variant="permanent"
         anchor="left"
       >
-        <Stack spacing={30} direction="column">
-          <IconButton aria-label="delete" color="primary">
-            <DeleteIcon />
+        {/* <Box sx={{ display: "flex", flexDirection: "column", alignItems: "spaceBetween" }}> */}
+        {/* <Stack spacing={2}> */}
+        <Stack spacing={15} direction="column">
+          <IconButton aria-label="the rack" color="primary">
+            <Icon icon="bi:play-btn" />
           </IconButton>
-          <IconButton color="secondary" aria-label="add an alarm">
-            <AlarmIcon />
+          <IconButton aria-label="add a mixtape" color="info">
+            <Icon icon="bxs:message-square-add" />
           </IconButton>
-          <IconButton color="primary" aria-label="add to shopping cart">
-            <AddShoppingCartIcon />
+          <IconButton aria-label="player" color="primary">
+            <Icon icon="bi:play-btn" />
           </IconButton>
-          <IconButton color="secondary" aria-label="add an alarm">
-            <AlarmIcon />
+          <IconButton aria-label="profile" color="primary">
+            <Icon icon="healthicons:ui-user-profile" />
+            {/* ternary operator here for conditionally showing avi when user is logged in */}
           </IconButton>
         </Stack>
+        {/* </Stack> */}
+        {/* </Box> */}
       </Drawer>
       <Box
         component="main"
