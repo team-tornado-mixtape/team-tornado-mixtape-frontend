@@ -7,9 +7,15 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 
+import { Link } from "react-router-dom";
+
 export default function Landing() {
   return (
     <>
+      <div>
+        <Button component={Link} to="/" variant="outlined">Landing Page</Button>
+        <Button component={Link} to="/sidebar" variant="outlined">Sidebar</Button>
+      </div>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Box
           sx={{
