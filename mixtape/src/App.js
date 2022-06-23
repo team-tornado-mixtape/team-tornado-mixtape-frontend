@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Player from "./components/Player";
 import PasswordReset from "./components/PasswordReset";
 import ResetForm from "./components/ResetForm";
+import SignUp from "./components/SignUp";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/player" element={<Player />}></Route>
         <Route path="/passwordreset" element={<PasswordReset />}></Route>
         <Route path="/resetform" element={<ResetForm />}></Route>
+        <Route path="/signup" element={<SignUp />}></Route>
       </Routes>
     </BrowserRouter>
   );
