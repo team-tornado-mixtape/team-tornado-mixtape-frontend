@@ -3,13 +3,12 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 
 import { Link } from "react-router-dom";
 
-export default function player() {
+export default function Player() {
   <>
     <Box sx={{ display: "flex", justifyContent: "center" }}>
       <Box
