@@ -1,5 +1,5 @@
 import * as React from "react";
-import Landing from "./Landing";
+// import Landing from "./Landing";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
@@ -54,7 +54,7 @@ export default function PermanentDrawerLeft() {
         component="main"
         sx={{ flexGrow: 1, bgcolor: "background.default", p: 3 }}
       >
-        <Landing />
+        {/* <Landing /> */}
       </Box>
     </Box>
   );
