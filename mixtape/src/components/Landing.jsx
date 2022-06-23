@@ -100,7 +100,7 @@ export default function Landing() {
               <br></br>
 
               <Stack spacing={2} direction="row">
-                <Button color="secondary" variant="contained">
+                <Button component={Link} to="/signup" color="secondary" variant="contained">
                   Sign Up
                 </Button>
                 <Button variant="contained">Sign In</Button>
