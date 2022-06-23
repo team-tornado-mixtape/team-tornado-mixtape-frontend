@@ -13,10 +13,18 @@ export default function Landing() {
   return (
     <>
       <div>
-        <Button component={Link} to="/" variant="outlined">Landing Page</Button>
-        <Button component={Link} to="/sidebar" variant="outlined">Sidebar</Button>
-        <Button component={Link} to="/profile" variant="outlined">Profile</Button>
-        <Button component={Link} to="/player" variant="outlined">Player</Button>
+        <Button component={Link} to="/" variant="outlined">
+          Landing Page
+        </Button>
+        <Button component={Link} to="/sidebar" variant="outlined">
+          Sidebar
+        </Button>
+        <Button component={Link} to="/profile" variant="outlined">
+          Profile
+        </Button>
+        <Button component={Link} to="/player" variant="outlined">
+          Player
+        </Button>
       </div>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Box
@@ -83,10 +91,15 @@ export default function Landing() {
                 label="password"
               />
               <br></br>
-              <Button variant="outlined">Forgot password?</Button>
+              <Button component={Link} to="/passwordreset" variant="outlined">
+                Forgot Password?
+              </Button>
               <br></br>
+
               <Stack spacing={2} direction="row">
-                <Button color="secondary" variant="contained">Sign Up</Button>
+                <Button color="secondary" variant="contained">
+                  Sign Up
+                </Button>
                 <Button variant="contained">Sign In</Button>
               </Stack>
             </Box>
