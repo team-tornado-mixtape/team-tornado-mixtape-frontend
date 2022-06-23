@@ -36,7 +36,9 @@ export default function Player() {
             }}
           >
             <Button variant="outlined">Link</Button>
-            <Button variant="outlined">Add to Rack</Button>
+            <Button color="secondary" variant="outlined">
+              Add to Rack
+            </Button>
             <Button variant="outlined">Edit Tape</Button>
           </Box>
           <Box
@@ -77,11 +79,13 @@ export default function Player() {
               }}
             >
               <Stack spacing={2} direction="row">
-                <Button color="primary" variant="contained">
+                <Button color="secondary" variant="contained">
                   Back
                 </Button>
                 <Button variant="contained">Play</Button>
-                <Button variant="contained">Next</Button>
+                <Button color="secondary" variant="contained">
+                  Next
+                </Button>
               </Stack>
             </Box>
           </Box>
