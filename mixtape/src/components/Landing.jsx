@@ -15,6 +15,7 @@ export default function Landing() {
       <div>
         <Button component={Link} to="/" variant="outlined">Landing Page</Button>
         <Button component={Link} to="/sidebar" variant="outlined">Sidebar</Button>
+        <Button component={Link} to="/profile" variant="outlined">Profile</Button>
         <Button component={Link} to="/player" variant="outlined">Player</Button>
       </div>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
