@@ -5,6 +5,7 @@ import Profile from "./components/Profile.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Player from "./components/Player";
 import PasswordReset from "./components/PasswordReset";
+import ResetForm from "./components/ResetForm";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="/player" element={<Player />}></Route>
         <Route path="/passwordreset" element={<PasswordReset />}></Route>
+        <Route path="/resetform" element={<ResetForm />}></Route>
       </Routes>
     </BrowserRouter>
   );

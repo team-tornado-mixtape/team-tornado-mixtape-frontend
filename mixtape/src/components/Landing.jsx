@@ -25,6 +25,9 @@ export default function Landing() {
         <Button component={Link} to="/player" variant="outlined">
           Player
         </Button>
+        <Button component={Link} to="/resetform" variant="outlined">
+          Reset Form
+        </Button>
       </div>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Box
