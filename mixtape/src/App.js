@@ -7,6 +7,8 @@ import Player from "./components/Player";
 import PasswordReset from "./components/PasswordReset";
 import ResetForm from "./components/ResetForm";
 import SignUp from "./components/SignUp";
+import Rack from "./components/Rack";
+
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
         <Route path="/passwordreset" element={<PasswordReset />}></Route>
         <Route path="/resetform" element={<ResetForm />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
+        <Route path="/rack" element={<Rack />}></Route>
       </Routes>
     </BrowserRouter>
   );

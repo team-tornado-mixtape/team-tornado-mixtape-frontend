@@ -28,6 +28,9 @@ export default function Landing() {
         <Button component={Link} to="/resetform" variant="outlined">
           Reset Form
         </Button>
+        <Button component={Link} to="/rack" variant="outlined">
+          The Rack
+        </Button>
       </div>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Box
@@ -100,7 +103,12 @@ export default function Landing() {
               <br></br>
 
               <Stack spacing={2} direction="row">
-                <Button component={Link} to="/signup" color="secondary" variant="contained">
+                <Button
+                  component={Link}
+                  to="/signup"
+                  color="secondary"
+                  variant="contained"
+                >
                   Sign Up
                 </Button>
                 <Button variant="contained">Sign In</Button>
