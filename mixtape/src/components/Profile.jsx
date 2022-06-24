@@ -23,7 +23,7 @@ export default function Profile() {
 
     const InfoText = {
         userSelect: "none",
-        color: "#9298E0"
+        color: "#E2E2DF"
     }
 
     function enterEditingMode() {
@@ -50,54 +50,71 @@ export default function Profile() {
                         flexDirection: "column",
                     }}
                 >
-                    <Stack spacing={2} direction="row">
-                        <Avatar alt="Avatar Aang" src="https://sportshub.cbsistatic.com/i/2022/03/01/fdf9fb59-929a-42c1-aa1e-4af3d16f2339/avatar-aang-cosplay.jpg" />
-                        <Stack spacing={1} direction="column">
-                            <Typography variant="h3" style={NormalText}>Aang</Typography>
-                            <Typography variant="h6" style={NormalText}>@avataraang</Typography>
-                        </Stack>
-                    </Stack>
                     <br></br>
-                    <Typography variant="p" style={NormalText}>My Info</Typography>
+                    <Typography variant="h3" style={NormalText}>Profile</Typography>
                     <br></br>
                     <TableContainer component={Paper} sx={{ width: 400 }}>
-                        <Table sx={{ width: 400 }} aria-label="simple table">
+                        <Table component="form" sx={{ width: 400 }} aria-label="simple table">
                             <TableBody>
                                 {/* conditionally render TextFields to accept updated user input when they select "update profile" */}
-                                <TableRow>
-                                    <TableCell align="left">
-                                        <Typography variant="p" style={InfoText}>name</Typography>
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        <Typography variant="p" style={NormalText}>Aang</Typography>
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell align="left">
-                                        <Typography variant="p" style={InfoText}>username</Typography>
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        <Typography variant="p" style={NormalText}>avataraang</Typography>
-                                    </TableCell>
-                                </TableRow>
                                 {editingMode === 'false' ? (
-                                    <TableRow>
-                                        <TableCell align="left">
-                                            <Typography variant="p" style={InfoText}>password</Typography>
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            <Typography variant="p" style={NormalText}>updated: 3 june 2022</Typography>
-                                        </TableCell>
-                                    </TableRow>
+                                    <>
+                                        {/* set background color of first tablerow, and text color in cells, based on avi  */}
+                                        <TableRow sx={{ backgroundColor: "#8F4F6A" }}>
+                                            <TableCell align="left">
+                                                <Avatar sx={{ width: 70, height: 70 }} alt="Avatar Aang" src="https://sportshub.cbsistatic.com/i/2022/03/01/fdf9fb59-929a-42c1-aa1e-4af3d16f2339/avatar-aang-cosplay.jpg" />
+                                            </TableCell>
+                                            <TableCell align="right">
+                                                <Stack spacing={1} direction="column">
+                                                    <Typography variant="h3" style={NormalText}>Aang</Typography>
+                                                    <Typography variant="h6" style={NormalText}>@avataraang</Typography>
+                                                </Stack>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell align="left">
+                                                <Typography variant="p" style={InfoText}>username</Typography>
+                                            </TableCell>
+                                            <TableCell align="right">
+                                                <Typography variant="p" style={NormalText}>avataraang</Typography>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell align="left">
+                                                <Typography variant="p" style={InfoText}>password</Typography>
+                                            </TableCell>
+                                            <TableCell align="right">
+                                                <Typography variant="p" style={NormalText}>updated: 3 june 2022</Typography>
+                                            </TableCell>
+                                        </TableRow>
+                                    </>
                                 ) : (
-                                    <TableRow>
-                                        <TableCell align="left">
-                                            <Typography variant="p" style={InfoText}>password</Typography>
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            <Typography variant="p" style={NormalText}>password</Typography>
-                                        </TableCell>
-                                    </TableRow>
+                                    <>
+                                        <TableRow>
+                                            <TableCell align="left">
+                                                <Typography variant="p" style={InfoText}>username</Typography>
+                                            </TableCell>
+                                            <TableCell align="right">
+                                                <TextField label="update username" defaultValue="avataraang" />
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell align="left">
+                                                <Typography variant="p" style={InfoText}>password</Typography>
+                                            </TableCell>
+                                            <TableCell align="right">
+                                                <TextField type="password" label="update password" />
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell align="left">
+                                                <Typography variant="p" style={InfoText}>password</Typography>
+                                            </TableCell>
+                                            <TableCell align="right">
+                                                <TextField type="password" label="confirm new password" />
+                                            </TableCell>
+                                        </TableRow>
+                                    </>
                                 )}
                             </TableBody>
                         </Table>
@@ -105,7 +122,7 @@ export default function Profile() {
                     <br></br>
                     {editingMode === 'false' ? (
                         <Stack spacing={1} direction="row">
-                            <Button variant="outlined" onClick={() => enterEditingMode()}> Edit Info</Button>
+                            <Button variant="outlined" onClick={() => enterEditingMode()}> Update Info</Button>
                         </Stack>
                     ) : (
                         <Stack spacing={1} direction="row">
