@@ -1,11 +1,13 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Avatar from '@mui/material/Avatar';
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
+import InputAdornment from '@mui/material/InputAdornment';
 import Button from "@mui/material/Button";
-
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -13,16 +15,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-import SpeedDial from '@mui/material/SpeedDial';
-import SpeedDialIcon from '@mui/material/SpeedDialIcon';
-import SpeedDialAction from '@mui/material/SpeedDialAction';
-import FileCopyIcon from '@mui/icons-material/FileCopyOutlined';
-import SaveIcon from '@mui/icons-material/Save';
-import PrintIcon from '@mui/icons-material/Print';
-import ShareIcon from '@mui/icons-material/Share';
-import EditIcon from '@mui/icons-material/Edit';
-
 export default function Profile() {
+    const [editingMode, setEditingMode] = useState('false')
 
     const NormalText = {
         userSelect: "none",
@@ -30,15 +24,20 @@ export default function Profile() {
 
     const InfoText = {
         userSelect: "none",
-        color: "#9298E0"
-    };
+        color: "#E2E2DF"
+    }
 
-    const actions = [
-        { icon: <FileCopyIcon />, name: 'Copy' },
-        { icon: <SaveIcon />, name: 'Save' },
-        { icon: <PrintIcon />, name: 'Print' },
-        { icon: <ShareIcon />, name: 'Share' },
-    ];
+    function enterEditingMode() {
+        setEditingMode('true')
+    }
+
+    function cancelEditingMode() {
+        setEditingMode('false')
+    }
+
+    function saveEdit() {
+        setEditingMode('false')
+    }
 
     return (
         <>
@@ -52,58 +51,115 @@ export default function Profile() {
                         flexDirection: "column",
                     }}
                 >
-                    <Stack spacing={2} direction="row">
-                        <Avatar alt="Avatar Aang" src="https://sportshub.cbsistatic.com/i/2022/03/01/fdf9fb59-929a-42c1-aa1e-4af3d16f2339/avatar-aang-cosplay.jpg" />
-                        <Stack spacing={1} direction="column">
-                            <Typography variant="h3" style={NormalText}>Aang</Typography>
-                            <Typography variant="h6" style={NormalText}>@avataraang</Typography>
-                        </Stack>
-                    </Stack>
                     <br></br>
-                    <Typography variant="p" style={NormalText}>Profile Info</Typography>
+                    <Typography variant="h3" style={NormalText}>Profile</Typography>
                     <br></br>
-                    <Box sx={{ height: 100, transform: 'translateZ(0px)', flexGrow: 1 }}>
-                        <SpeedDial
-                            ariaLabel="SpeedDial openIcon example"
-                            sx={{ position: 'absolute', bottom: 10, right: 16 }}
-                            icon={<SpeedDialIcon openIcon={<EditIcon />} />}
-                        >
-                            {actions.map((action) => (
-                                <SpeedDialAction
-                                    key={action.name}
-                                    icon={action.icon}
-                                    tooltipTitle={action.name}
-                                />
-                            ))}
-                        </SpeedDial>
-                    </Box>
-                    <TableContainer component={Paper} sx={{ width: 400 }}>
-                        <Table sx={{ width: 400 }} aria-label="simple table">
+                    <TableContainer component={Paper} sx={{ width: 404, border: "2px solid #E2E2DF" }}>
+                        <Table component="form" sx={{ width: 400 }}>
                             <TableBody>
                                 {/* conditionally render TextFields to accept updated user input when they select "update profile" */}
-                                <TableRow>
-                                    <TableCell align="left">
-                                        <Typography variant="p" style={InfoText}>name</Typography>
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        <Typography variant="p" style={NormalText}>Aang</Typography>
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell align="left">
-                                        <Typography variant="p" style={InfoText}>username</Typography>
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        <Typography variant="p" style={NormalText}>avataraang</Typography>
-                                    </TableCell>
-                                </TableRow>
-                                {/* conditionally render this password row
-                    <TableRow>
-                        <TableCell align="left">password</TableCell>
-                    </TableRow> */}
+                                {/* add toggle for password visibility */}
+                                {/* standardize small TextFields across app */}
+                                {editingMode === 'false' ? (
+                                    <>
+                                        {/* set background color of first tablerow based on avi  */}
+                                        <TableRow sx={{ backgroundColor: "#8F4F6A" }}>
+                                            <TableCell align="left">
+                                                <Avatar sx={{ width: 70, height: 70, border: "2.5px solid #E2E2DF" }} alt="Avatar Aang" src="https://sportshub.cbsistatic.com/i/2022/03/01/fdf9fb59-929a-42c1-aa1e-4af3d16f2339/avatar-aang-cosplay.jpg" />
+                                            </TableCell>
+                                            <TableCell align="right">
+                                                <Stack spacing={1} direction="column">
+                                                    <Typography variant="h3" style={NormalText}>Aang</Typography>
+                                                    <Typography variant="h6" style={NormalText}>@avataraang</Typography>
+                                                </Stack>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell align="left">
+                                                <Typography variant="p" style={InfoText}>username</Typography>
+                                            </TableCell>
+                                            <TableCell align="right">
+                                                <Typography variant="p" style={NormalText}>avataraang</Typography>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell align="left">
+                                                <Typography variant="p" style={InfoText}>password</Typography>
+                                            </TableCell>
+                                            <TableCell align="right">
+                                                <Typography variant="p" style={NormalText}>updated: 3 june 2022</Typography>
+                                            </TableCell>
+                                        </TableRow>
+                                    </>
+                                ) : (
+                                    <>
+                                        <TableRow sx={{ backgroundColor: "#8F4F6A" }}>
+                                            <TableCell align="left">
+                                                <Avatar sx={{ width: 70, height: 70 }} alt="Avatar Aang" src="https://sportshub.cbsistatic.com/i/2022/03/01/fdf9fb59-929a-42c1-aa1e-4af3d16f2339/avatar-aang-cosplay.jpg" />
+                                            </TableCell>
+                                            <TableCell align="right">
+                                                <Stack spacing={1} direction="column">
+                                                    <Typography variant="h3" style={NormalText}>Aang</Typography>
+                                                    <Typography variant="h6" style={NormalText}>@avataraang</Typography>
+                                                </Stack>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell align="left">
+                                                <Typography variant="p" style={InfoText}>current username</Typography>
+                                            </TableCell>
+                                            <TableCell align="right">
+                                                <Typography variant="p" style={NormalText}>avataraang</Typography>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell align="left">
+                                                <Typography variant="p" style={InfoText}>change username</Typography>
+                                            </TableCell>
+                                            <TableCell align="right">
+                                                <TextField size="small" defaultValue="avataraang" />
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell align="left">
+                                                <Typography variant="p" style={InfoText}>current password</Typography>
+                                            </TableCell>
+                                            <TableCell align="right">
+                                                <Typography variant="p" style={NormalText}>updated: 3 june 2022</Typography>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell align="left">
+                                                <Typography variant="p" style={InfoText}>change password</Typography>
+                                            </TableCell>
+                                            <TableCell align="right">
+                                                <TextField size="small" type="password" />
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell align="left">
+                                                <Typography variant="p" style={InfoText}>confirm new password</Typography>
+                                            </TableCell>
+                                            <TableCell align="right">
+                                                <TextField size="small" type="password" />
+                                            </TableCell>
+                                        </TableRow>
+                                    </>
+                                )}
                             </TableBody>
                         </Table>
                     </TableContainer>
+                    <br></br>
+                    {editingMode === 'false' ? (
+                        <Stack spacing={1} direction="row">
+                            <Button variant="contained" onClick={() => enterEditingMode()}> Edit Profile</Button>
+                        </Stack>
+                    ) : (
+                        <Stack spacing={1} direction="row">
+                            <Button variant="contained" color="secondary" onClick={() => cancelEditingMode()}>Cancel</Button>
+                            <Button variant="contained" onClick={() => saveEdit()}>Save</Button>
+                        </Stack>
+                    )}
                 </Box>
                 <Box
                     sx={{
