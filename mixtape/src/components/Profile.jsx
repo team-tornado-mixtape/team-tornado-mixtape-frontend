@@ -26,20 +26,16 @@ export default function Profile() {
         color: "#9298E0"
     }
 
-    const enterEditingMode = (e) => {
-        setEditingMode(e.target.value)
-        console.log(e.target.value)
-        console.log(`Editing mode clicked. Value should be true: ${editingMode}`)
+    function enterEditingMode() {
+        setEditingMode('true')
     }
 
-    const cancelEditingMode = (e) => {
-        setEditingMode(e.value)
-        console.log(`Cancel editing mode clicked. Value should be false: ${editingMode}`)
+    function cancelEditingMode() {
+        setEditingMode('false')
     }
 
-    const saveEdit = (e) => {
-        setEditingMode(e.value)
-        console.log(`Save edit clicked. Value should be false: ${editingMode}`)
+    function saveEdit() {
+        setEditingMode('false')
     }
 
     return (
@@ -84,22 +80,37 @@ export default function Profile() {
                                         <Typography variant="p" style={NormalText}>avataraang</Typography>
                                     </TableCell>
                                 </TableRow>
-                                {/* conditionally render this password row
-                    <TableRow>
-                        <TableCell align="left">password</TableCell>
-                    </TableRow> */}
+                                {editingMode === 'false' ? (
+                                    <TableRow>
+                                        <TableCell align="left">
+                                            <Typography variant="p" style={InfoText}>password</Typography>
+                                        </TableCell>
+                                        <TableCell align="right">
+                                            <Typography variant="p" style={NormalText}>updated: 3 june 2022</Typography>
+                                        </TableCell>
+                                    </TableRow>
+                                ) : (
+                                    <TableRow>
+                                        <TableCell align="left">
+                                            <Typography variant="p" style={InfoText}>password</Typography>
+                                        </TableCell>
+                                        <TableCell align="right">
+                                            <Typography variant="p" style={NormalText}>password</Typography>
+                                        </TableCell>
+                                    </TableRow>
+                                )}
                             </TableBody>
                         </Table>
                     </TableContainer>
                     <br></br>
-                    {editingMode === 'true' ? (
+                    {editingMode === 'false' ? (
                         <Stack spacing={1} direction="row">
-                            <Button variant="outlined" value={'true'} onClick={(e) => enterEditingMode(e.target.value)}>Edit Info</Button>
+                            <Button variant="outlined" onClick={() => enterEditingMode()}> Edit Info</Button>
                         </Stack>
                     ) : (
                         <Stack spacing={1} direction="row">
-                            <Button variant="outlined" value={'false'} onClick={(e) => cancelEditingMode(e.target.value)}>Cancel</Button>
-                            <Button variant="contained" value={'false'} onClick={(e) => saveEdit(e.target.value)}>Update</Button>
+                            <Button variant="outlined" onClick={() => cancelEditingMode()}>Cancel</Button>
+                            <Button variant="contained" onClick={() => saveEdit()}>Update</Button>
                         </Stack>
                     )}
                 </Box>
