@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Avatar from '@mui/material/Avatar';
 import Stack from "@mui/material/Stack";
@@ -13,16 +14,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-import SpeedDial from '@mui/material/SpeedDial';
-import SpeedDialIcon from '@mui/material/SpeedDialIcon';
-import SpeedDialAction from '@mui/material/SpeedDialAction';
-import FileCopyIcon from '@mui/icons-material/FileCopyOutlined';
-import SaveIcon from '@mui/icons-material/Save';
-import PrintIcon from '@mui/icons-material/Print';
-import ShareIcon from '@mui/icons-material/Share';
-import EditIcon from '@mui/icons-material/Edit';
-
 export default function Profile() {
+    const [editingMode, setEditingMode] = useState('false')
 
     const NormalText = {
         userSelect: "none",
@@ -31,14 +24,23 @@ export default function Profile() {
     const InfoText = {
         userSelect: "none",
         color: "#9298E0"
-    };
+    }
 
-    const actions = [
-        { icon: <FileCopyIcon />, name: 'Copy' },
-        { icon: <SaveIcon />, name: 'Save' },
-        { icon: <PrintIcon />, name: 'Print' },
-        { icon: <ShareIcon />, name: 'Share' },
-    ];
+    const enterEditingMode = (e) => {
+        setEditingMode(e.target.value)
+        console.log(e.target.value)
+        console.log(`Editing mode clicked. Value should be true: ${editingMode}`)
+    }
+
+    const cancelEditingMode = (e) => {
+        setEditingMode(e.value)
+        console.log(`Cancel editing mode clicked. Value should be false: ${editingMode}`)
+    }
+
+    const saveEdit = (e) => {
+        setEditingMode(e.value)
+        console.log(`Save edit clicked. Value should be false: ${editingMode}`)
+    }
 
     return (
         <>
@@ -60,23 +62,8 @@ export default function Profile() {
                         </Stack>
                     </Stack>
                     <br></br>
-                    <Typography variant="p" style={NormalText}>Profile Info</Typography>
+                    <Typography variant="p" style={NormalText}>My Info</Typography>
                     <br></br>
-                    <Box sx={{ height: 100, transform: 'translateZ(0px)', flexGrow: 1 }}>
-                        <SpeedDial
-                            ariaLabel="SpeedDial openIcon example"
-                            sx={{ position: 'absolute', bottom: 10, right: 16 }}
-                            icon={<SpeedDialIcon openIcon={<EditIcon />} />}
-                        >
-                            {actions.map((action) => (
-                                <SpeedDialAction
-                                    key={action.name}
-                                    icon={action.icon}
-                                    tooltipTitle={action.name}
-                                />
-                            ))}
-                        </SpeedDial>
-                    </Box>
                     <TableContainer component={Paper} sx={{ width: 400 }}>
                         <Table sx={{ width: 400 }} aria-label="simple table">
                             <TableBody>
@@ -104,6 +91,17 @@ export default function Profile() {
                             </TableBody>
                         </Table>
                     </TableContainer>
+                    <br></br>
+                    {editingMode === 'true' ? (
+                        <Stack spacing={1} direction="row">
+                            <Button variant="outlined" value={'true'} onClick={(e) => enterEditingMode(e.target.value)}>Edit Info</Button>
+                        </Stack>
+                    ) : (
+                        <Stack spacing={1} direction="row">
+                            <Button variant="outlined" value={'false'} onClick={(e) => cancelEditingMode(e.target.value)}>Cancel</Button>
+                            <Button variant="contained" value={'false'} onClick={(e) => saveEdit(e.target.value)}>Update</Button>
+                        </Stack>
+                    )}
                 </Box>
                 <Box
                     sx={{
