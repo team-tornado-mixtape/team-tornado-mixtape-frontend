@@ -31,6 +31,9 @@ export default function Landing() {
         <Button component={Link} to="/rack" variant="outlined">
           The Rack
         </Button>
+        <Button component={Link} to="/mixcreate" variant="outlined">
+          Create a mixtape
+        </Button>
       </div>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Box

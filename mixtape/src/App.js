@@ -8,6 +8,7 @@ import PasswordReset from "./components/PasswordReset";
 import ResetForm from "./components/ResetForm";
 import SignUp from "./components/SignUp";
 import Rack from "./components/Rack";
+import MixCreate from "./components/MixCreate";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/resetform" element={<ResetForm />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/rack" element={<Rack />}></Route>
+        <Route path="/mixcreate" element={<MixCreate />}></Route>
       </Routes>
     </BrowserRouter>
   );
