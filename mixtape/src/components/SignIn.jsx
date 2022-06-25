@@ -45,14 +45,14 @@ export default function SignIn({ setAuth, isLoggedIn }) {
                 setAuth(username, res.data.auth_token)
             })
             .catch((e) => {
-                // e.message === 'Request failed with status code 400'
+                // e.message === 'Request failed with status code 401'
                 //     ? setError(
                 //         'Your username or password is incorrect. Please try again.'
                 //     )
                 //     : setError(
-                //         'An error occurred. Please check your username and password and try again.'
+                //         setError(e.response.data.password[0])
                 //     )
-                // setError(e.response.data.password[0])
+                setError(e.response.data.password[0])
                 setOpen(true)
             })
     }
@@ -83,7 +83,29 @@ export default function SignIn({ setAuth, isLoggedIn }) {
                     </Alert>
                 </Snackbar>
             )}
-            <Box
+            <Box component="form" onSubmit={handleLogin}>
+                <Box>
+                    <TextField
+                        label="username"
+                        value={username}
+                        margin="normal"
+                        onChange={(e) => setUsername(e.target.value)} />
+                </Box>
+                <Box>
+                    <TextField
+                        label="password"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)} />
+                </Box>
+                <Box textAlign="center">
+                    <Button size="large" component={Link} to="/signup">Create account</Button>
+                </Box>
+                <Box textAlign="center">
+                    <Button size="large" variant="outlined" type="submit">Sign in</Button>
+                </Box>
+            </Box>
+            {/* <Box
                 component="form" onSubmit={handleLogin}
                 sx={{
                     width: "90%",
@@ -134,7 +156,7 @@ export default function SignIn({ setAuth, isLoggedIn }) {
                         <Button variant="contained" type="submit">Sign In</Button>
                     </Stack>
                 </Box>
-            </Box>
+            </Box> */}
         </>
     );
 }
