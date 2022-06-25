@@ -18,6 +18,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 export default function SignUp({ setAuth, isLoggedIn }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [isRegistered, setIsRegistered] = useState(false);
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
   const [open, setOpen] = React.useState(false)
@@ -45,23 +46,22 @@ export default function SignUp({ setAuth, isLoggedIn }) {
       )
       .then((res) => {
         console.log(res.data)
+        setIsRegistered(true)
         setAuth(username, res.data.auth_token)
       })
       .catch((e) => {
-        // e.message === 'Request failed with status code 400'
-        //   ? setError(
-        //     'Please try another username and password. The username may be taken, and/or your password is too short.'
-        //   )
-        //   : setError(
-        //     'Your account has been created. Please log in to continue.'
-        //   )
         setError(e.response.data.password[0])
         setOpen(true)
       })
   }
 
   if (isLoggedIn) {
-    return <Navigate to="/sidebar" replace={true} />
+    return <Navigate to="/profile" replace={true} />
+  }
+
+  if (isRegistered) {
+    console.log("Registered!");
+    return <Navigate to="/profile" />;
   }
 
   return (
@@ -93,13 +93,6 @@ export default function SignUp({ setAuth, isLoggedIn }) {
         <Box component="form" onSubmit={handleLogin}>
           <Typography variant="h3">Sign up</Typography>
           <br></br>
-          {/* <Typography variant="p">Add your name</Typography>
-        <br></br>
-
-        <TextField id="outlined-basic" variant="outlined" label="first name" />
-        <br></br>
-        <TextField id="outlined-basic" variant="outlined" label="last name" />
-        <br></br> */}
           <Typography variant="p">Choose a username</Typography>
           <br></br>
           <Box>

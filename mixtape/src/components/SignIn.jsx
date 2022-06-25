@@ -17,7 +17,6 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 export default function SignIn({ setAuth, isLoggedIn }) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [isRegistered, setIsRegistered] = useState(false);
     const [error, setError] = useState('')
     const [open, setOpen] = React.useState(false)
 
@@ -32,7 +31,6 @@ export default function SignIn({ setAuth, isLoggedIn }) {
     const handleLogin = (event) => {
         event.preventDefault()
         console.log(event)
-        setIsRegistered(true);
         setError('')
         axios
             .post(
@@ -61,11 +59,6 @@ export default function SignIn({ setAuth, isLoggedIn }) {
 
     if (isLoggedIn) {
         return <Navigate to="/profile" replace={true} />
-    }
-
-    if (isRegistered) {
-        console.log("Registered!");
-        return <Navigate to="/profile" />;
     }
 
     return (

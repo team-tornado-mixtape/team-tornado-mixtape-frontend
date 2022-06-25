@@ -1,5 +1,6 @@
 import * as React from "react";
 // import Landing from "./Landing";
+import { Link } from 'react-router-dom';
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
@@ -12,7 +13,7 @@ import Divider from "@mui/material/Divider";
 
 const drawerWidth = 100;
 
-export default function PermanentDrawerLeft() {
+export default function PermanentDrawerLeft({ handleLogout, isLoggedIn, username }) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -46,15 +47,20 @@ export default function PermanentDrawerLeft() {
             <Icon icon="healthicons:ui-user-profile" />
             {/* ternary operator here for conditionally showing avi when user is logged in */}
           </IconButton>
+          {!isLoggedIn ? (
+            <Typography>not logged in</Typography>
+          ) : (
+            <>
+              <Typography>you are logged in as @{username}</Typography>
+              <Button variant="contained" component={Link} onClick={handleLogout} to="/">Log out</Button>
+            </>
+          )}
         </Stack>
-        {/* </Stack> */}
-        {/* </Box> */}
       </Drawer>
       <Box
         component="main"
         sx={{ flexGrow: 1, bgcolor: "background.default", p: 3 }}
       >
-        {/* <Landing /> */}
       </Box>
     </Box>
   );
