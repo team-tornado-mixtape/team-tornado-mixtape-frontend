@@ -1,4 +1,5 @@
 import React from "react";
+import SignIn from "./SignIn"
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
@@ -66,58 +67,7 @@ export default function Landing() {
         </Box>
 
         <Box sx={{ width: "50%" }}>
-          <Box sx={{ width: "90%", textAlign: "center" }}>
-            <Typography variant="h2">Sign In or Sign Up</Typography>
-          </Box>
-          <br></br>
-          <Box
-            component="form"
-            sx={{
-              width: "90%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-            }}
-          >
-            <Box
-              sx={{
-                width: "80%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <TextField
-                id="outlined-basic"
-                variant="outlined"
-                label="username"
-              />
-              <br></br>
-              <TextField
-                id="outlined-basic"
-                variant="outlined"
-                label="password"
-              />
-              <br></br>
-              <Button component={Link} to="/passwordreset" variant="outlined">
-                Forgot Password?
-              </Button>
-              <br></br>
-
-              <Stack spacing={2} direction="row">
-                <Button
-                  component={Link}
-                  to="/signup"
-                  color="secondary"
-                  variant="contained"
-                >
-                  Sign Up
-                </Button>
-                <Button variant="contained">Sign In</Button>
-              </Stack>
-            </Box>
-          </Box>
+          <SignIn />
         </Box>
       </Box>
     </>
