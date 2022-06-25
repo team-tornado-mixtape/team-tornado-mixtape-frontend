@@ -3,7 +3,8 @@ import axios from "axios";
 import { Link, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-import MuiAlert from '@mui/material/Alert'
+import MuiAlert from '@mui/material/Alert';
+import { Snackbar } from '@mui/material'
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -40,7 +41,6 @@ export default function SignUp({ setAuth, isLoggedIn }) {
           username: username,
           password: password,
           re_password: password,
-          email: email
         }
       )
       .then((res) => {
@@ -48,13 +48,14 @@ export default function SignUp({ setAuth, isLoggedIn }) {
         setAuth(username, res.data.auth_token)
       })
       .catch((e) => {
-        e.message === 'Request failed with status code 400'
-          ? setError(
-            'Please try another username and password. The username may be taken, and/or your password is too short.'
-          )
-          : setError(
-            'Your account has been created. Please log in to continue.'
-          )
+        // e.message === 'Request failed with status code 400'
+        //   ? setError(
+        //     'Please try another username and password. The username may be taken, and/or your password is too short.'
+        //   )
+        //   : setError(
+        //     'Your account has been created. Please log in to continue.'
+        //   )
+        setError(e.response.data.password[0])
         setOpen(true)
       })
   }
@@ -73,6 +74,22 @@ export default function SignUp({ setAuth, isLoggedIn }) {
         justifyContent="center"
         style={{ minHeight: '75vh' }}
       >
+        {error && (
+          <Snackbar
+            open={open}
+            onClose={handleClose}
+            autoHideDuration={6000}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          >
+            <Alert
+              onClose={handleClose}
+              severity="warning"
+              sx={{ width: '100%' }}
+            >
+              {error}
+            </Alert>
+          </Snackbar>
+        )}
         <Box component="form" onSubmit={handleLogin}>
           <Typography variant="h3">Sign up</Typography>
           <br></br>
