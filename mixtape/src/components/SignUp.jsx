@@ -61,7 +61,7 @@ export default function SignUp({ setAuth, isLoggedIn }) {
 
   if (isRegistered) {
     console.log("Registered!");
-    return <Navigate to="/profile" />;
+    return <Navigate to="/profile" replace={true} />;
   }
 
   return (

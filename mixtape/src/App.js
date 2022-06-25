@@ -45,24 +45,28 @@ function App() {
 
   return (
     <BrowserRouter>
-      <PermanentDrawerLeft isLoggedIn={isLoggedIn} username={username} handleLogout={handleLogout} />
+      <PermanentDrawerLeft isLoggedIn={isLoggedIn} username={username} handleLogout={handleLogout} token={token} />
       <Routes>
-        <Route path="/" element={<Landing />}></Route>
+        <Route path="/" element={<Landing setAuth={setAuth}
+          isLoggedIn={isLoggedIn}
+          handleLogout={handleLogout} />}></Route>
         {/* <Route path="/sidebar" element={
           <PermanentDrawerLeft isLoggedIn={isLoggedIn} username={username} handleLogout={handleLogout} />}></Route> */}
-        <Route path="/profile" isLoggedIn={isLoggedIn} username={username} element={<Profile />}></Route>
+        <Route path="/profile" element={
+          <Profile isLoggedIn={isLoggedIn} username={username} token={token} />}>
+        </Route>
         <Route path="/player" element={<Player />}></Route>
         <Route path="/passwordreset" element={<PasswordReset />}></Route>
-        <Route path="/resetform" element={<ResetForm />}></Route>
-        <Route path="/signin"
+        <Route path="/resetform" element={<ResetForm isLoggedIn={isLoggedIn} />}></Route>
+        {/* <Route path="/signin"
           element={
             <SignIn setAuth={setAuth}
               isLoggedIn={isLoggedIn}
               handleLogout={handleLogout} />}>
-        </Route>
-        <Route path="/signup" element={<SignUp />}></Route>
-        <Route path="/rack" element={<Rack />}></Route>
-        <Route path="/mixcreate" element={<MixCreate />}></Route>
+        </Route> */}
+        <Route path="/signup" element={<SignUp isLoggedIn={isLoggedIn} />}></Route>
+        <Route path="/rack" element={<Rack isLoggedIn={isLoggedIn} username={username} token={token} />}></Route>
+        <Route path="/mixcreate" element={<MixCreate isLoggedIn={isLoggedIn} username={username} token={token} />}></Route>
       </Routes>
     </BrowserRouter>
   );

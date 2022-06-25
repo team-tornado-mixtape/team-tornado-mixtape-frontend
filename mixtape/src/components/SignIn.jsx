@@ -14,7 +14,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
 })
 
-export default function SignIn({ setAuth, isLoggedIn }) {
+export default function SignIn({ setAuth, isLoggedIn, handleLogout }) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
@@ -41,20 +41,23 @@ export default function SignIn({ setAuth, isLoggedIn }) {
                 }
             )
             .then((res) => {
+                // setAuth(username, token)
+                // console.log(setAuth)
                 console.log(res.data)
-                setAuth(username, res.data.auth_token)
+                console.log(`this is the token: ${res.data.auth_token}`)
+                setAuth(username, res.data.auth_token);
             })
-            .catch((e) => {
-                // e.message === 'Request failed with status code 401'
-                //     ? setError(
-                //         'Your username or password is incorrect. Please try again.'
-                //     )
-                //     : setError(
-                //         setError(e.response.data.password[0])
-                //     )
-                setError(e.response.data.password[0])
-                setOpen(true)
-            })
+        // .catch((e) => {
+        //     // e.message === 'Request failed with status code 400'
+        //     //     ? setError(
+        //     //         'Your username or password is incorrect. Please try again.'
+        //     //     )
+        //     //     : setError(
+        //     //         setError(e.response.data.password[0])
+        //     //     )
+        //     setError(e.response.data.password[0])
+        //     setOpen(true)
+        // })
     }
 
     if (isLoggedIn) {
@@ -105,58 +108,6 @@ export default function SignIn({ setAuth, isLoggedIn }) {
                     <Button size="large" variant="outlined" type="submit">Sign in</Button>
                 </Box>
             </Box>
-            {/* <Box
-                component="form" onSubmit={handleLogin}
-                sx={{
-                    width: "90%",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                }}
-            >
-                <Box
-                    sx={{
-                        width: "80%",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                    }}
-                >
-                    <TextField
-                        id="outlined-basic"
-                        variant="outlined"
-                        label="username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <br></br>
-                    <TextField
-                        id="outlined-basic"
-                        variant="outlined"
-                        label="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <br></br>
-                    <Button component={Link} to="/passwordreset" variant="outlined">
-                        Forgot Password?
-                    </Button>
-                    <br></br>
-
-                    <Stack spacing={2} direction="row">
-                        <Button
-                            component={Link}
-                            to="/signup"
-                            color="secondary"
-                            variant="contained"
-                        >
-                            Sign Up
-                        </Button>
-                        <Button variant="contained" type="submit">Sign In</Button>
-                    </Stack>
-                </Box>
-            </Box> */}
         </>
     );
 }

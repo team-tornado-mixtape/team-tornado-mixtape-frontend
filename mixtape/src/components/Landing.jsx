@@ -10,7 +10,7 @@ import Stack from "@mui/material/Stack";
 
 import { Link } from "react-router-dom";
 
-export default function Landing() {
+export default function Landing({ setAuth, isLoggedIn, handleLogout }) {
   return (
     <>
       <div>
@@ -65,9 +65,10 @@ export default function Landing() {
             </Typography>
           </Box>
         </Box>
-
         <Box sx={{ width: "50%" }}>
-          <SignIn />
+          <SignIn setAuth={setAuth}
+            isLoggedIn={isLoggedIn}
+            handleLogout={handleLogout} />
         </Box>
       </Box>
     </>

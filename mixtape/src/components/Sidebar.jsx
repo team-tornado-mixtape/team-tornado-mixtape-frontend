@@ -13,7 +13,7 @@ import Divider from "@mui/material/Divider";
 
 const drawerWidth = 100;
 
-export default function PermanentDrawerLeft({ handleLogout, isLoggedIn, username }) {
+export default function PermanentDrawerLeft({ handleLogout, isLoggedIn, username, token }) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
