@@ -45,13 +45,13 @@ function App() {
 
   return (
     <BrowserRouter>
-      <PermanentDrawerLeft isLoggedIn={isLoggedIn} username={username} handleLogout={handleLogout} token={token} />
+      {/* <PermanentDrawerLeft isLoggedIn={isLoggedIn} username={username} handleLogout={handleLogout} token={token} /> */}
       <Routes>
         <Route path="/" element={<Landing setAuth={setAuth}
           isLoggedIn={isLoggedIn}
           handleLogout={handleLogout} />}></Route>
-        {/* <Route path="/sidebar" element={
-          <PermanentDrawerLeft isLoggedIn={isLoggedIn} username={username} handleLogout={handleLogout} />}></Route> */}
+        <Route path="/sidebar" element={
+          <PermanentDrawerLeft isLoggedIn={isLoggedIn} username={username} handleLogout={handleLogout} />}></Route>
         <Route path="/profile" element={
           <Profile isLoggedIn={isLoggedIn} username={username} token={token} />}>
         </Route>
@@ -66,7 +66,7 @@ function App() {
         </Route> */}
         <Route path="/signup" element={<SignUp isLoggedIn={isLoggedIn} />}></Route>
         <Route path="/rack" element={<Rack isLoggedIn={isLoggedIn} username={username} token={token} />}></Route>
-        <Route path="/mixcreate" element={<MixCreate isLoggedIn={isLoggedIn} username={username} token={token} />}></Route>
+        <Route path="/mixcreate" element={<MixCreate isLoggedIn={isLoggedIn} setAuth={setAuth} username={username} token={token} />}></Route>
       </Routes>
     </BrowserRouter>
   );

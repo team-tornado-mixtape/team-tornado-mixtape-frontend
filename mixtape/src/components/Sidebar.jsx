@@ -52,7 +52,7 @@ export default function PermanentDrawerLeft({ handleLogout, isLoggedIn, username
           ) : (
             <>
               <Typography>you are logged in as @{username}</Typography>
-              <Button variant="contained" component={Link} onClick={handleLogout} to="/">Log out</Button>
+              <Button variant="contained" onClick={handleLogout}>Log out</Button>
             </>
           )}
         </Stack>
