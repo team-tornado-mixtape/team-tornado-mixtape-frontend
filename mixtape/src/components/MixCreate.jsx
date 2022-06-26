@@ -23,7 +23,7 @@ export default function MixCreate({ isLoggedIn, token, username }) {
   function handleSearch() {
     axios
       .get(
-        `https://team-tornado-mixtape.herokuapp.com/api/search?track=yellow`,
+        `https://team-tornado-mixtape.herokuapp.com/api/search?track=yellow/`,
         {},
         {
           headers: { Authorization: `token ${token}` },
