@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 import PropTypes from "prop-types";
 import Stack from "@mui/material/Stack";
 
-export default function MixCreate({ isLoggedIn, token, username }) {
+export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
   const [mixtapeTitle, setMixtapeTitle] = useState('')
   const [mixtapeDescription, setMixtapeDescription] = useState('')
   const [searchResults, setSearchResults] = useState([])
@@ -23,23 +23,24 @@ export default function MixCreate({ isLoggedIn, token, username }) {
   function handleSearch() {
     axios
       .get(
-        `https://team-tornado-mixtape.herokuapp.com/api/search?track=yellow/`,
+        `https://team-tornado-mixtape.herokuapp.com/api/search?track=yellow`,
         {},
         {
-          headers: { Authorization: `token ${token}` },
+          headers: { Authorization: `Token ${token}` },
         }
       )
       .then((res) => {
         console.log(res.status)
       })
       .catch((e) => {
-        e.message === 'Request failed with status code 400'
-          ? setError(
-            'This request is invalid.'
-          )
-          : setError(
-            'An unknown error occured. Please try again.'
-          )
+        setError(e.message)
+        // e.message === 'Request failed with status code 400'
+        //   ? setError(
+        //     'This request is invalid.'
+        //   )
+        //   : setError(
+        //     'An unknown error occured. Please try again.'
+        //   )
       })
     console.log(error)
   }
