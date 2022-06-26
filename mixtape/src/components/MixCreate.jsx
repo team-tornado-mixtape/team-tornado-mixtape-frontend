@@ -25,11 +25,11 @@ import Divider from "@mui/material/Divider";
 import { IndeterminateCheckBoxSharp } from "@mui/icons-material";
 
 function not(a, b) {
-  return a.filter((value) => b.indexOf(value) === -1);
+  return a.filter((index) => b.indexOf(index) === -1);
 }
 
 function intersection(a, b) {
-  return a.filter((value) => b.indexOf(value) !== -1);
+  return a.filter((index) => b.indexOf(index) !== -1);
 }
 
 function union(a, b) {
@@ -77,12 +77,12 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
     console.log(error)
   }
 
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
+  const handleToggle = (index) => () => {
+    const currentIndex = checked.indexOf(index);
     const newChecked = [...checked];
 
     if (currentIndex === -1) {
-      newChecked.push(value);
+      newChecked.push(index);
     } else {
       newChecked.splice(currentIndex, 1);
     }
@@ -109,6 +109,7 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
   const handleCheckedResult = () => {
     setAllResults(allResults.concat(trackChecked));
     setTrackList(not(trackList, trackChecked));
+    // setTrackList(not(trackChecked));
     setChecked(not(checked, trackChecked));
   };
 
@@ -180,7 +181,7 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
                   }}
                 />
               </ListItemIcon>
-              {/* <ListItemText id={index} primary={`List item ${index + 1}`} /> */}
+              {/* <ListItemText id={value} primary={`List item ${value + 1}`} /> */}
               <ListItemText id={index}>{ResultTitle}</ListItemText>
               <ListItemText id={index}>{ResultAlbum}</ListItemText>
             </ListItem>
