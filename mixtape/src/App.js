@@ -45,13 +45,13 @@ function App() {
 
   return (
     <BrowserRouter>
-      <PermanentDrawerLeft isLoggedIn={isLoggedIn} username={username} handleLogout={handleLogout} token={token} />
+      {/* <PermanentDrawerLeft isLoggedIn={isLoggedIn} username={username} handleLogout={handleLogout} token={token} /> */}
       <Routes>
         <Route path="/" element={<Landing setAuth={setAuth}
           isLoggedIn={isLoggedIn}
           handleLogout={handleLogout} />}></Route>
-        {/* <Route path="/sidebar" element={
-          <PermanentDrawerLeft isLoggedIn={isLoggedIn} username={username} handleLogout={handleLogout} />}></Route> */}
+        <Route path="/sidebar" element={
+          <PermanentDrawerLeft isLoggedIn={isLoggedIn} username={username} handleLogout={handleLogout} />}></Route>
         <Route path="/profile" element={
           <Profile isLoggedIn={isLoggedIn} username={username} token={token} />}>
         </Route>
