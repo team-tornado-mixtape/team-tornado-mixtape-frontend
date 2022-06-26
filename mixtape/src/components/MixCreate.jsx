@@ -15,16 +15,20 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
   const [searchResults, setSearchResults] = useState([])
   const [trackList, setTrackList] = useState([])
   const [error, setError] = useState('')
+  const [searchTerm, setSearchTerm] = useState('')
 
   if (!isLoggedIn) {
     return <Navigate to="/" replace={true} />
   }
 
+  const handleChange = (e) => {
+    setSearchTerm(e.target.value)
+  }
+
   function handleSearch() {
     axios
       .get(
-        `https://team-tornado-mixtape.herokuapp.com/api/search?track=yellow`,
-        {},
+        `https://team-tornado-mixtape.herokuapp.com/api/search?track=${searchTerm}`,
         {
           headers: { Authorization: `Token ${token}` },
         }
@@ -57,6 +61,8 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
         id="outlined-basic"
         variant="outlined"
         label="search songs/artists"
+        onChange={handleChange}
+        value={searchTerm}
       />
       <br></br>
       <Typography variant="p">Customization</Typography>

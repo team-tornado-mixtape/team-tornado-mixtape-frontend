@@ -61,7 +61,7 @@ export default function SignIn({ setAuth, isLoggedIn, handleLogout }) {
     }
 
     if (isLoggedIn) {
-        return <Navigate to="/profile" replace={true} />
+        return <Navigate to="/rack" replace={true} />
     }
 
     return (
