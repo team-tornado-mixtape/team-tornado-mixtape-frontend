@@ -161,7 +161,7 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
         {allResults.map((eachResult, index, value) => {
           const labelId = `transfer-list-all-item-${index}-label`;
           const ResultTitle = eachResult.title
-          const ResultArtist = eachResult.album
+          const ResultAlbum = eachResult.album
 
           return (
             <ListItem
@@ -180,8 +180,9 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
                   }}
                 />
               </ListItemIcon>
-              <ListItemText id={index} primary={`List item ${index + 1}`} />
+              {/* <ListItemText id={index} primary={`List item ${index + 1}`} /> */}
               <ListItemText id={index}>{ResultTitle}</ListItemText>
+              <ListItemText id={index}>{ResultAlbum}</ListItemText>
             </ListItem>
           );
         })
