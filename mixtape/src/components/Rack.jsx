@@ -9,6 +9,8 @@ import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
+import { Link } from "react-router-dom";
+
 function EachRackView(props) {
   const { children, value, index } = props;
 
@@ -43,8 +45,10 @@ export default function Rack() {
   };
   return (
     <>
+      <Box>
+        <Button component={Link} to="/mixcreate" variant="outlined">Create new mixtape</Button>
+      </Box>
       <Typography variant="h2">The Rack</Typography>
-
       <TextField
         id="outlined-basic"
         variant="outlined"
