@@ -13,6 +13,7 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import Rack from "./components/Rack";
 import MixCreate from "./components/MixCreate";
+import MixTitle from "./components/MixTitle";
 
 
 function App() {
@@ -66,6 +67,7 @@ function App() {
         </Route> */}
         <Route path="/signup" element={<SignUp isLoggedIn={isLoggedIn} />}></Route>
         <Route path="/rack" element={<Rack isLoggedIn={isLoggedIn} username={username} token={token} />}></Route>
+        <Route path="/mixtitle" element={<MixTitle isLoggedIn={isLoggedIn} username={username} token={token} setAuth={setAuth} />}></Route>
         <Route path="/mixcreate" element={<MixCreate isLoggedIn={isLoggedIn} setAuth={setAuth} username={username} token={token} />}></Route>
       </Routes>
     </BrowserRouter>
