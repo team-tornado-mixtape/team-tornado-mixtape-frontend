@@ -52,7 +52,7 @@ export default function Profile() {
                     }}
                 >
                     <br></br>
-                    <Typography variant="h3" style={NormalText}>Profile</Typography>
+                    <Typography variant="h4" style={NormalText}>Account Info</Typography>
                     <br></br>
                     <TableContainer component={Paper} sx={{ width: 404, border: "2px solid #E2E2DF" }}>
                         <Table component="form" sx={{ width: 400 }}>
@@ -63,17 +63,6 @@ export default function Profile() {
                                 {editingMode === 'false' ? (
                                     <>
                                         {/* set background color of first tablerow based on avi  */}
-                                        <TableRow sx={{ backgroundColor: "#8F4F6A" }}>
-                                            <TableCell align="left">
-                                                <Avatar sx={{ width: 70, height: 70, border: "2.5px solid #E2E2DF" }} alt="Avatar Aang" src="https://sportshub.cbsistatic.com/i/2022/03/01/fdf9fb59-929a-42c1-aa1e-4af3d16f2339/avatar-aang-cosplay.jpg" />
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                <Stack spacing={1} direction="column">
-                                                    <Typography variant="h3" style={NormalText}>Aang</Typography>
-                                                    <Typography variant="h6" style={NormalText}>@avataraang</Typography>
-                                                </Stack>
-                                            </TableCell>
-                                        </TableRow>
                                         <TableRow>
                                             <TableCell align="left">
                                                 <Typography variant="p" style={InfoText}>username</Typography>
@@ -169,7 +158,50 @@ export default function Profile() {
                         justifyContent: "center",
                         flexDirection: "column",
                     }}
-                >hey</Box>
+                >
+                    <br></br>
+                    <Typography variant="h4" style={NormalText}>Profile</Typography>
+                    <Typography variant="p" style={NormalText}>Visible to other users</Typography>
+                    <br></br>
+                    <TableContainer component={Paper} sx={{ width: 404, border: "2px solid #E2E2DF" }}>
+                        <Table component="form" sx={{ width: 400 }}>
+                            <TableBody>
+                                <TableRow sx={{ backgroundColor: "#8F4F6A" }}>
+                                    <TableCell align="left">
+                                        <Avatar sx={{ width: 70, height: 70, border: "2.5px solid #E2E2DF" }} alt="Avatar Aang" src="https://sportshub.cbsistatic.com/i/2022/03/01/fdf9fb59-929a-42c1-aa1e-4af3d16f2339/avatar-aang-cosplay.jpg" />
+                                    </TableCell>
+                                    <TableCell colSpan={2} align="right">
+                                        <Stack spacing={1} direction="column">
+                                            <Typography variant="h3" style={NormalText}>Aang</Typography>
+                                            <Typography variant="h6" style={NormalText}>@avataraang</Typography>
+                                        </Stack>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell align="center">
+                                        <Stack spacing={0} direction="column">
+                                            <Typography variant="h4" style={NormalText}>15</Typography>
+                                            <Typography variant="p" style={NormalText}>Mixtapes</Typography>
+                                        </Stack>
+                                    </TableCell>
+                                    <TableCell align="center">
+                                        <Stack spacing={0} direction="column">
+                                            <Typography variant="h4" style={NormalText}>10</Typography>
+                                            <Typography variant="p" style={NormalText}>Followers</Typography>
+                                        </Stack>
+                                    </TableCell>
+                                    <TableCell align="center">
+                                        <Stack spacing={0} direction="column">
+                                            <Typography variant="h4" style={NormalText}>15</Typography>
+                                            <Typography variant="p" style={NormalText}>Following</Typography>
+                                        </Stack>
+                                    </TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    <br></br>
+                </Box>
             </Box>
         </>
     );
