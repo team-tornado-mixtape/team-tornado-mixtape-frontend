@@ -27,7 +27,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Chip from '@mui/material/Chip';
 
 
-export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
+export default function MixCreate({ setAuth, isLoggedIn, token, username, selectedArtist }) {
   const [mixtapeTitle, setMixtapeTitle] = useState('')
   const [mixtapeDescription, setMixtapeDescription] = useState('')
   const [allResults, setAllResults] = useState([])
@@ -54,14 +54,18 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
     e.preventDefault();
     // console.log(e.target.attributes.getNamedItem("test-item"))
     // console.log(e.currentTarget.getAttribute("test-item"))
-    const selectedArtist = e.currentTarget.getAttribute("test-item")
-    // setArtistRefiner(selectedArtist)
-    // console.log(artistRefiner)
+    var selectedArtist = e.currentTarget.getAttribute("artist")
     console.log(selectedArtist)
     handleRefinedSearch(selectedArtist)
-    // setArtistRefiner('')
+    setArtistRefiner(selectedArtist)
     // console.log('Refined search executed. The artistRefiner should be cleared.')
     // console.log(`The artistRefiner is: ${artistRefiner}`)
+  }
+
+  const handleUndoRefinedSearch = (e) => {
+    e.preventDefault();
+    setArtistRefiner('')
+    handleSearch()
   }
 
   function handleSearch() {
@@ -87,8 +91,6 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
   }
 
   function handleRefinedSearch(selectedArtist) {
-    // setArtistRefiner(e.label)
-    // console.log(artistRefiner)
     console.log(`https://team-tornado-mixtape.herokuapp.com/api/search?track=${searchTerm}&artist=${selectedArtist}`)
     setIsLoading(true)
     axios
@@ -103,9 +105,12 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
         console.log(res.data)
         setAllResults(res.data)
         setIsLoading(false)
+        console.log(`SUCCESS! selectedArtist is: ${selectedArtist}`)
       })
       .catch((e) => {
         setError(e.message)
+        var selectedArtist = ''
+        console.log(`ERROR! Error line here. this should only happen during an error. the selectedArtist should be reset to nothing. proof: ${selectedArtist}. There should be no selectedArtist before this sentence.`)
       })
     console.log(error)
   }
@@ -144,17 +149,28 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
           </Button>
           <Typography variant="p">Refine search</Typography>
           <Stack spacing={2} direction="row">
-            {allResults.map((eachResult, index) => {
-              const eachArtist = eachResult.artist
-              return (
-                <>
-                  <Stack spacing={1} direction="column">
-                    <Chip key={index} label={eachArtist} test-item={eachArtist} variant="outlined" onClick={handleSetRefinedSearch} />
-                    {/* <Button key={index} variant="outlined" onClick={handleSetRefinedSearch}>{eachArtist}</Button> */}
-                  </Stack>
-                </>
-              )
-            })}
+            {artistRefiner !== '' ? (
+              <Stack spacing={2} direction="row">
+                <Chip
+                  label={artistRefiner} variant="outlined"
+                  onDelete={handleUndoRefinedSearch} />
+              </Stack>
+            ) : (
+              <>
+                {
+                  allResults.map((eachResult, index) => {
+                    const eachArtist = eachResult.artist
+                    return (
+                      <>
+                        <Stack spacing={1} direction="column">
+                          <Chip key={index} label={eachArtist} artist={eachArtist} variant="outlined" onClick={handleSetRefinedSearch} />
+                        </Stack>
+                      </>
+                    )
+                  })
+                }
+              </>
+            )}
           </Stack>
         </Stack>
         <Stack spacing={10} direction="row">
@@ -164,9 +180,6 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
               <Box><CircularProgress></CircularProgress></Box>
             ) : (
               <>
-                <Stack spacing={2} direction="row">
-                  <Chip label="refined option here" />
-                </Stack>
                 <TableContainer component={Paper} sx={{ width: "45vw", border: "2px solid #E2E2DF" }}>
                   <Table component="form">
                     <TableBody>
