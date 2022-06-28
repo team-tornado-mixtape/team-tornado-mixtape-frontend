@@ -11,23 +11,65 @@ import Stack from "@mui/material/Stack";
 
 import { Link } from "react-router-dom";
 
-export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import IconButton from '@mui/material/IconButton';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import PauseCircleIcon from '@mui/icons-material/PauseCircle';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import CircularProgress from '@mui/material/CircularProgress';
+import Chip from '@mui/material/Chip';
+
+
+export default function MixCreate({ setAuth, isLoggedIn, token, username, selectedArtist }) {
   const [mixtapeTitle, setMixtapeTitle] = useState('')
   const [mixtapeDescription, setMixtapeDescription] = useState('')
   const [allResults, setAllResults] = useState([])
   // const [trackList, setTrackList] = useState([])
   const [error, setError] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
+  const [artistRefiner, setArtistRefiner] = useState('')
+
+  const [isLoading, setIsLoading] = useState(false)
+
+  const NormalText = {
+    userSelect: "none",
+  }
 
   if (!isLoggedIn) {
     return <Navigate to="/" replace={true} />
   }
 
-  const handleChange = (e) => {
+  const handleSetSearch = (e) => {
     setSearchTerm(e.target.value)
   }
 
+  const handleSetRefinedSearch = (e) => {
+    e.preventDefault();
+    // console.log(e.target.attributes.getNamedItem("test-item"))
+    // console.log(e.currentTarget.getAttribute("test-item"))
+    var selectedArtist = e.currentTarget.getAttribute("artist")
+    console.log(selectedArtist)
+    handleRefinedSearch(selectedArtist)
+    setArtistRefiner(selectedArtist)
+    // console.log('Refined search executed. The artistRefiner should be cleared.')
+    // console.log(`The artistRefiner is: ${artistRefiner}`)
+  }
+
+  const handleUndoRefinedSearch = (e) => {
+    e.preventDefault();
+    setArtistRefiner('')
+    handleSearch()
+  }
+
   function handleSearch() {
+    setIsLoading(true)
     axios
       .get(
         `https://team-tornado-mixtape.herokuapp.com/api/search?track=${searchTerm}`,
@@ -39,16 +81,42 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
         console.log(res.status)
         console.log(res.data)
         setAllResults(res.data)
+        setIsLoading(false)
       })
       .catch((e) => {
         setError(e.message)
+        // setIsLoading(false)
+      })
+    console.log(error)
+  }
+
+  function handleRefinedSearch(selectedArtist) {
+    console.log(`https://team-tornado-mixtape.herokuapp.com/api/search?track=${searchTerm}&artist=${selectedArtist}`)
+    setIsLoading(true)
+    axios
+      .get(
+        `https://team-tornado-mixtape.herokuapp.com/api/search?track=${searchTerm}&artist=${selectedArtist}`,
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.status)
+        console.log(res.data)
+        setAllResults(res.data)
+        setIsLoading(false)
+        console.log(`SUCCESS! selectedArtist is: ${selectedArtist}`)
+      })
+      .catch((e) => {
+        setError(e.message)
+        var selectedArtist = ''
+        console.log(`ERROR! Error line here. this should only happen during an error. the selectedArtist should be reset to nothing. proof: ${selectedArtist}. There should be no selectedArtist before this sentence.`)
       })
     console.log(error)
   }
 
   return (
     <>
-      <Typography variant="p" color="secondary">By the time this page has been rendered, the POST request for creating a mixtape (POST /mixtapes/) has been called and we have recieved a response that the mixtape was created. We could construct a new GET request (GET /mixtapes/id/) to display the newly created mixtape information on this page. (How will we know the mixtape ID after the initial POST? Can this be given to us in the response from the initial POST?)</Typography>
       <Box sx={{ textAlign: "center", justifyContent: "center", border: "1px solid white" }}>
         <Stack spacing={2} direction="column">
           <TextField
@@ -67,45 +135,139 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
           />
         </Stack>
       </Box>
-      <Typography variant="p" color="secondary">The fields above are populated with default values the user may now change. Any changes they make would be kept in state until the user presses 'save mixtape.'</Typography>
-      <Box sx={{ textAlign: "left", justifyContent: "center", border: "1px solid white" }}>
+      <Box sx={{ textAlign: "left", justifyContent: "center" }}>
         <Stack spacing={10} direction="row">
           <TextField
             id="outlined-basic"
             variant="outlined"
             label="search by track name"
-            onChange={handleChange}
+            onChange={handleSetSearch}
             value={searchTerm}
           />
           <Button onClick={handleSearch} variant="contained">
             Search
           </Button>
+          <Typography variant="p">Refine search</Typography>
+          <Stack spacing={2} direction="row">
+            {artistRefiner !== '' ? (
+              <Stack spacing={2} direction="row">
+                <Chip
+                  label={artistRefiner} variant="outlined"
+                  onDelete={handleUndoRefinedSearch} />
+              </Stack>
+            ) : (
+              <>
+                {
+
+                  allResults.map((eachResult, index) => {
+                    const eachArtist = eachResult.artist
+                    return (
+                      <>
+                        {allResults.length !== 1 ? (
+                          <>
+                            <Stack spacing={1} direction="column">
+                              <Chip key={index} label={eachArtist} artist={eachArtist} variant="outlined" onClick={handleSetRefinedSearch} />
+                            </Stack>
+                          </>
+                        ) : (
+                          <>
+                            single result!
+                            {/* {handleSetRefinedSearch(eachArtist)} */}
+                            {/* what i want to check here is: if there is only 1 result, show nothing and do the search again with the artist appended. additionally, i want to check that if there are multiple results with the same artist, that the search refiner is not shown, and the search is done again with the artist appended. */}
+                            {/* {allResults.length === 2 ? (
+                              <>
+                                <Stack spacing={1} direction="column">
+                                  <Chip key={index} label={eachArtist} artist={eachArtist} variant="outlined" onClick={handleSetRefinedSearch} />
+                                </Stack>
+                              </>
+                            ) : (
+                              <>
+                                <Stack spacing={1} direction="column">
+                                  <Chip key={index} label="only one artist" variant="outlined" />
+                                </Stack>
+                              </>
+                            )} */}
+                          </>
+                        )}
+                      </>
+                    )
+                  })
+                }
+              </>
+            )}
+          </Stack>
         </Stack>
-        <Typography variant="p">Song search results</Typography>
-        <Box
-          sx={{
-            width: "90%",
-            height: 350,
-            border: "1px solid white"
-          }}
-        ><br></br>
-          <Typography variant="p">search results will be in a table here. next to each result will be an add button, which, if clicked, will add the song to the mixtape's tracklist.</Typography></Box>
-      </Box>
+        <Stack spacing={10} direction="row">
+          <Stack spacing={2} direction="column">
+            <Typography variant="p">Song search results</Typography>
+            {isLoading ? (
+              <Box><CircularProgress></CircularProgress></Box>
+            ) : (
+              <>
+                <TableContainer component={Paper} sx={{ width: "45vw", border: "2px solid #E2E2DF" }}>
+                  <Table component="form">
+                    <TableBody>
+                      {allResults.map((eachResult, index) => {
+                        return (
+                          <>
+                            <TableRow key={index}>
+                              <TableCell align="left">
+                                <IconButton href={eachResult.preview_url} sx={{ color: "#FFFFFF" }}>
+                                  <PlayCircleOutlineIcon />
+                                </IconButton>
+                              </TableCell>
+                              <TableCell align="left">
+                                <Typography variant="h5">{eachResult.title}</Typography>
+                              </TableCell>
+                              <TableCell align="left">
+                                <Typography variant="h5">{eachResult.album}</Typography>
+                              </TableCell>
+                              <TableCell align="left">
+                                <Typography variant="h5">{eachResult.artist}</Typography>
+                              </TableCell>
+                              <TableCell align="right">
+                                <IconButton sx={{ color: "#FFFFFF" }}>
+                                  <AddCircleOutlineIcon />
+                                </IconButton>
+                              </TableCell>
+                            </TableRow>
+                          </>
+                        )
+                      })}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </>
+            )}
+          </Stack>
+          <Stack spacing={2} direction="column">
+            <Typography variant="p">Mixtape tracklist</Typography>
+            <TableContainer component={Paper} sx={{ width: 404, border: "2px solid #E2E2DF" }}>
+              <Table component="form" sx={{ width: 400 }}>
+                <TableBody>
+                  <TableRow>
+                    <TableCell align="left">
+                      <IconButton sx={{ color: "#FFFFFF" }}>
+                        <PlayCircleOutlineIcon />
+                      </IconButton>
+                    </TableCell>
+                    <TableCell align="left">
+                      <Typography variant="h5">Song title</Typography>
+                    </TableCell>
+                    <TableCell align="right">
+                      <IconButton sx={{ color: "#FFFFFF" }}>
+                        <AddCircleOutlineIcon />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Stack>
+        </Stack>
+      </Box >
       <br></br>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Stack direction="column">
-          <Typography variant="p">Mixtape Tracklist</Typography>
-          <Box
-            sx={{
-              width: "90%",
-              height: 350,
-              border: "1px solid white"
-            }}>
-            <br></br>
-            <Typography variant="p">results the user has added to their tracklist will be in a table here. next to each track will be a remove button, which, if clicked, will remove the song from the mixtape's tracklist, and out of this table.</Typography>
-          </Box>
-          <Typography variant="p" color="secondary">The 'song search results' view is populated with the results from the search (GET /search?track=track+title). When the user clicks the add buttom from within the 'song search results' view, the selected track is immediately PATCHed (PATCH /mixtapes/id/) with that song added in the request body. The same logic would be used when a user decides to remove a track from their tracklist.</Typography>
-        </Stack>
         <Box>
           <Typography variant="p">Customization</Typography>
           <br></br>
@@ -140,7 +302,6 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
               }}
             ></Box>
             <br></br>
-            <Typography variant="p" color="secondary">Like the track name and description, changes to the theme and the uploading of a photo would be kept in state, until the user presses 'save mixtape'. Then, a PATCH would take place (PATCH /mixtapes/id/) which updates the mixtape's non-song metadata.</Typography>
           </Stack>
         </Box>
       </Box>
