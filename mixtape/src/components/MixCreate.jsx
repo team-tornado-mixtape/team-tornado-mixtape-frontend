@@ -158,13 +158,37 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username, select
             ) : (
               <>
                 {
+
                   allResults.map((eachResult, index) => {
                     const eachArtist = eachResult.artist
                     return (
                       <>
-                        <Stack spacing={1} direction="column">
-                          <Chip key={index} label={eachArtist} artist={eachArtist} variant="outlined" onClick={handleSetRefinedSearch} />
-                        </Stack>
+                        {allResults.length !== 1 ? (
+                          <>
+                            <Stack spacing={1} direction="column">
+                              <Chip key={index} label={eachArtist} artist={eachArtist} variant="outlined" onClick={handleSetRefinedSearch} />
+                            </Stack>
+                          </>
+                        ) : (
+                          <>
+                            single result!
+                            {/* {handleSetRefinedSearch(eachArtist)} */}
+                            {/* what i want to check here is: if there is only 1 result, show nothing and do the search again with the artist appended. additionally, i want to check that if there are multiple results with the same artist, that the search refiner is not shown, and the search is done again with the artist appended. */}
+                            {/* {allResults.length === 2 ? (
+                              <>
+                                <Stack spacing={1} direction="column">
+                                  <Chip key={index} label={eachArtist} artist={eachArtist} variant="outlined" onClick={handleSetRefinedSearch} />
+                                </Stack>
+                              </>
+                            ) : (
+                              <>
+                                <Stack spacing={1} direction="column">
+                                  <Chip key={index} label="only one artist" variant="outlined" />
+                                </Stack>
+                              </>
+                            )} */}
+                          </>
+                        )}
                       </>
                     )
                   })
