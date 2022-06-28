@@ -34,6 +34,7 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
   // const [trackList, setTrackList] = useState([])
   const [error, setError] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
+  const [artistRefiner, setArtistRefiner] = useState('')
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -45,8 +46,22 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
     return <Navigate to="/" replace={true} />
   }
 
-  const handleChange = (e) => {
+  const handleSetSearch = (e) => {
     setSearchTerm(e.target.value)
+  }
+
+  const handleSetRefinedSearch = (e) => {
+    e.preventDefault();
+    // console.log(e.target.attributes.getNamedItem("test-item"))
+    // console.log(e.currentTarget.getAttribute("test-item"))
+    const selectedArtist = e.currentTarget.getAttribute("test-item")
+    // setArtistRefiner(selectedArtist)
+    // console.log(artistRefiner)
+    console.log(selectedArtist)
+    handleRefinedSearch(selectedArtist)
+    // setArtistRefiner('')
+    // console.log('Refined search executed. The artistRefiner should be cleared.')
+    // console.log(`The artistRefiner is: ${artistRefiner}`)
   }
 
   function handleSearch() {
@@ -54,6 +69,31 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
     axios
       .get(
         `https://team-tornado-mixtape.herokuapp.com/api/search?track=${searchTerm}`,
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.status)
+        console.log(res.data)
+        setAllResults(res.data)
+        setIsLoading(false)
+      })
+      .catch((e) => {
+        setError(e.message)
+        // setIsLoading(false)
+      })
+    console.log(error)
+  }
+
+  function handleRefinedSearch(selectedArtist) {
+    // setArtistRefiner(e.label)
+    // console.log(artistRefiner)
+    console.log(`https://team-tornado-mixtape.herokuapp.com/api/search?track=${searchTerm}&artist=${selectedArtist}`)
+    setIsLoading(true)
+    axios
+      .get(
+        `https://team-tornado-mixtape.herokuapp.com/api/search?track=${searchTerm}&artist=${selectedArtist}`,
         {
           headers: { Authorization: `Token ${token}` },
         }
@@ -96,7 +136,7 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
             id="outlined-basic"
             variant="outlined"
             label="search by track name"
-            onChange={handleChange}
+            onChange={handleSetSearch}
             value={searchTerm}
           />
           <Button onClick={handleSearch} variant="contained">
@@ -105,10 +145,12 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
           <Typography variant="p">Refine search</Typography>
           <Stack spacing={2} direction="row">
             {allResults.map((eachResult, index) => {
+              const eachArtist = eachResult.artist
               return (
                 <>
                   <Stack spacing={1} direction="column">
-                    <Chip key={index} label={eachResult.artist} variant="outlined" onClick={handleSearch} />
+                    <Chip key={index} label={eachArtist} test-item={eachArtist} variant="outlined" onClick={handleSetRefinedSearch} />
+                    {/* <Button key={index} variant="outlined" onClick={handleSetRefinedSearch}>{eachArtist}</Button> */}
                   </Stack>
                 </>
               )
