@@ -23,6 +23,8 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import CircularProgress from '@mui/material/CircularProgress';
+import Chip from '@mui/material/Chip';
 
 
 export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
@@ -32,6 +34,8 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
   // const [trackList, setTrackList] = useState([])
   const [error, setError] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
+
+  const [isLoading, setIsLoading] = useState(false)
 
   const NormalText = {
     userSelect: "none",
@@ -46,6 +50,7 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
   }
 
   function handleSearch() {
+    setIsLoading(true)
     axios
       .get(
         `https://team-tornado-mixtape.herokuapp.com/api/search?track=${searchTerm}`,
@@ -57,6 +62,7 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
         console.log(res.status)
         console.log(res.data)
         setAllResults(res.data)
+        setIsLoading(false)
       })
       .catch((e) => {
         setError(e.message)
@@ -84,7 +90,7 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
           />
         </Stack>
       </Box>
-      <Box sx={{ textAlign: "left", justifyContent: "center", border: "1px solid white" }}>
+      <Box sx={{ textAlign: "left", justifyContent: "center" }}>
         <Stack spacing={10} direction="row">
           <TextField
             id="outlined-basic"
@@ -96,38 +102,64 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
           <Button onClick={handleSearch} variant="contained">
             Search
           </Button>
+          <Typography variant="p">Refine search</Typography>
+          <Stack spacing={2} direction="row">
+            {allResults.map((eachResult, index) => {
+              return (
+                <>
+                  <Stack spacing={1} direction="column">
+                    <Chip key={index} label={eachResult.artist} variant="outlined" onClick={handleSearch} />
+                  </Stack>
+                </>
+              )
+            })}
+          </Stack>
         </Stack>
         <Stack spacing={10} direction="row">
           <Stack spacing={2} direction="column">
             <Typography variant="p">Song search results</Typography>
-            <TableContainer component={Paper} sx={{ width: "45vw", border: "2px solid #E2E2DF" }}>
-              <Table component="form">
-                <TableBody>
-                  {allResults.map((eachResult, index) => {
-                    return (
-                      <TableRow key={index}>
-                        <TableCell align="left">
-                          <IconButton href={eachResult.preview_url} sx={{ color: "#FFFFFF" }}>
-                            <PlayCircleOutlineIcon />
-                          </IconButton>
-                        </TableCell>
-                        <TableCell align="left">
-                          <Typography variant="h5">{eachResult.title}</Typography>
-                        </TableCell>
-                        <TableCell align="left">
-                          <Typography variant="h5">{eachResult.artist}</Typography>
-                        </TableCell>
-                        <TableCell align="right">
-                          <IconButton sx={{ color: "#FFFFFF" }}>
-                            <AddCircleOutlineIcon />
-                          </IconButton>
-                        </TableCell>
-                      </TableRow>
-                    )
-                  })}
-                </TableBody>
-              </Table>
-            </TableContainer>
+            {isLoading ? (
+              <Box><CircularProgress></CircularProgress></Box>
+            ) : (
+              <>
+                <Stack spacing={2} direction="row">
+                  <Chip label="refined option here" />
+                </Stack>
+                <TableContainer component={Paper} sx={{ width: "45vw", border: "2px solid #E2E2DF" }}>
+                  <Table component="form">
+                    <TableBody>
+                      {allResults.map((eachResult, index) => {
+                        return (
+                          <>
+                            <TableRow key={index}>
+                              <TableCell align="left">
+                                <IconButton href={eachResult.preview_url} sx={{ color: "#FFFFFF" }}>
+                                  <PlayCircleOutlineIcon />
+                                </IconButton>
+                              </TableCell>
+                              <TableCell align="left">
+                                <Typography variant="h5">{eachResult.title}</Typography>
+                              </TableCell>
+                              <TableCell align="left">
+                                <Typography variant="h5">{eachResult.album}</Typography>
+                              </TableCell>
+                              <TableCell align="left">
+                                <Typography variant="h5">{eachResult.artist}</Typography>
+                              </TableCell>
+                              <TableCell align="right">
+                                <IconButton sx={{ color: "#FFFFFF" }}>
+                                  <AddCircleOutlineIcon />
+                                </IconButton>
+                              </TableCell>
+                            </TableRow>
+                          </>
+                        )
+                      })}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </>
+            )}
           </Stack>
           <Stack spacing={2} direction="column">
             <Typography variant="p">Mixtape tracklist</Typography>
