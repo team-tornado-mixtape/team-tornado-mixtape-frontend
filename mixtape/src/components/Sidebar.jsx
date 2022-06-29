@@ -16,7 +16,7 @@ import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
-import Rack from "./Rack";
+import Rack from "./rack/Rack";
 import MixCreate from "./MixCreate";
 import Player from "./Player";
 import Profile from "./Profile.jsx";
