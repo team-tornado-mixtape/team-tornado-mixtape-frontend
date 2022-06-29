@@ -28,6 +28,8 @@ import Chip from '@mui/material/Chip';
 
 
 export default function MixCreate({ setAuth, isLoggedIn, token, username, selectedArtist }) {
+  const [mixtapeInit, setMixtapeInit] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [mixtapeTitle, setMixtapeTitle] = useState('')
   const [mixtapeDescription, setMixtapeDescription] = useState('')
   const [allResults, setAllResults] = useState([])
@@ -35,8 +37,34 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username, select
   const [error, setError] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const [artistRefiner, setArtistRefiner] = useState('')
+  // createNewMixtape()
 
-  const [isLoading, setIsLoading] = useState(false)
+  // function createNewMixtape() {
+  //   setIsLoading(true)
+  //   axios
+  //     .post(
+  //       `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/`,
+  //       {
+  //         "title": "",
+  //         "creator": username
+  //       },
+  //       {
+  //         headers: { Authorization: `Token ${token}` },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       console.log(res.status)
+  //       console.log(res.data)
+  //       setAllResults(res.data)
+  //       setMixtapeInit(false)
+  //       setIsLoading(false)
+  //     })
+  //     .catch((e) => {
+  //       setError(e.message)
+  //       // setIsLoading(false)
+  //     })
+  //   console.log(error)
+  // }
 
   const NormalText = {
     userSelect: "none",
