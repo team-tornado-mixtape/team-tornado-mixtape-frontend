@@ -13,7 +13,6 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import Rack from "./components/Rack";
 import MixCreate from "./components/MixCreate";
-import MixTitle from "./components/MixTitle";
 import Sidebar from "./components/Sidebar";
 
 function App() {
@@ -46,78 +45,17 @@ function App() {
 
   return (
     <BrowserRouter>
-      <PermanentDrawerLeft
-        isLoggedIn={isLoggedIn}
-        username={username}
-        handleLogout={handleLogout}
-        token={token}
-      />
+      <PermanentDrawerLeft isLoggedIn={isLoggedIn} username={username} handleLogout={handleLogout} token={token} />
       <Routes>
-        <Route
-          path="/landing"
-          element={
-            <Landing
-              setAuth={setAuth}
-              isLoggedIn={isLoggedIn}
-              handleLogout={handleLogout}
-              
-            />
-          }
-        ></Route>
-        <Route
-          path="/profile"
-          element={
-            <Profile
-              isLoggedIn={isLoggedIn}
-              username={username}
-              token={token}
-            />
-          }
-        ></Route>
-        <Route path="/player" element={<Player />}></Route>
+        <Route path="/welcome" element={<Landing setAuth={setAuth} isLoggedIn={isLoggedIn} handleLogout={handleLogout} />}></Route>
+        <Route path="/signin" element={<SignIn setAuth={setAuth} isLoggedIn={isLoggedIn} handleLogout={handleLogout} />}></Route>
+        <Route path="/signup" element={<SignUp isLoggedIn={isLoggedIn} />}></Route>
         <Route path="/passwordreset" element={<PasswordReset />}></Route>
-        <Route
-          path="/resetform"
-          element={<ResetForm isLoggedIn={isLoggedIn} />}
-        ></Route>
-        <Route path="/signin"
-          element={
-            <SignIn setAuth={setAuth}
-              isLoggedIn={isLoggedIn}
-              handleLogout={handleLogout} />}>
-        </Route>
-        <Route
-          path="/signup"
-          element={<SignUp isLoggedIn={isLoggedIn} />}
-        ></Route>
-        <Route
-          path="/rack"
-          element={
-            <Rack isLoggedIn={isLoggedIn} username={username} token={token} />
-          }
-        ></Route>
-        <Route
-          path="/mixtitle"
-          element={
-            <MixTitle
-              isLoggedIn={isLoggedIn}
-              username={username}
-              token={token}
-              setAuth={setAuth}
-            />
-          }
-        ></Route>
-        <Route
-          path="/mixcreate"
-          element={
-            <MixCreate
-              isLoggedIn={isLoggedIn}
-              setAuth={setAuth}
-              username={username}
-              token={token}
-            />
-          }
-        ></Route>
+        <Route path="/resetform" element={<ResetForm isLoggedIn={isLoggedIn} />}></Route>
+        {/* <Route path="/profile" element={<Profile isLoggedIn={isLoggedIn} username={username} token={token}/>}></Route>
+        <Route path="/player" element={<Player />}></Route> */}
+        {/* <Route path="/rack" element={<Rack isLoggedIn={isLoggedIn} username={username} token={token} />}></Route>
+        <Route path="/mixcreate" element={<MixCreate isLoggedIn={isLoggedIn} setAuth={setAuth} username={username} token={token}/>}></Route> */}
       </Routes>
     </BrowserRouter>
   );
