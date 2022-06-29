@@ -27,9 +27,9 @@ export default function PermanentDrawerLeft({
   token,
 }) {
 
-  if (!isLoggedIn) {
-    return <Navigate to="/welcome" replace={true} />
-  }
+  // if (!isLoggedIn) {
+  //   return <Navigate to="/welcome" replace={true} />
+  // }
 
 
   return (
