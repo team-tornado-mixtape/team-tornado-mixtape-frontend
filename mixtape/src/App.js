@@ -46,10 +46,18 @@ function App() {
   return (
     <BrowserRouter>
       {isLoggedIn ? (
-        <PermanentDrawerLeft isLoggedIn={isLoggedIn} username={username} handleLogout={handleLogout} token={token} />
+        <>
+          <PermanentDrawerLeft isLoggedIn={isLoggedIn} username={username} handleLogout={handleLogout} token={token} />
+          {/* <Routes>
+            <Route path="/rack" element={<Rack isLoggedIn={isLoggedIn} username={username} token={token} />}></Route>
+            <Route path="/player" element={<Player />}></Route>
+            <Route path="/mixcreate" element={<MixCreate isLoggedIn={isLoggedIn} username={username} token={token} />}></Route>
+            <Route path="/profile" element={<Profile isLoggedIn={isLoggedIn} username={username} token={token} />}></Route>
+          </Routes> */}
+        </>
       ) : (
         <Routes>
-          <Route path="/welcome" element={<Landing setAuth={setAuth} isLoggedIn={isLoggedIn} handleLogout={handleLogout} />}></Route>
+          <Route path="/" element={<Landing setAuth={setAuth} isLoggedIn={isLoggedIn} handleLogout={handleLogout} />}></Route>
           {/* <Route path="/signin" element={<SignIn setAuth={setAuth} isLoggedIn={isLoggedIn} handleLogout={handleLogout} />}></Route> */}
           <Route path="/signup" element={<SignUp isLoggedIn={isLoggedIn} />}></Route>
           <Route path="/passwordreset" element={<PasswordReset />}></Route>
