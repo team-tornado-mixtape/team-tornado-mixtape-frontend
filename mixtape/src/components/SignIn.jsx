@@ -46,6 +46,7 @@ export default function SignIn({ setAuth, isLoggedIn, handleLogout }) {
                 console.log(res.data)
                 console.log(`this is the token: ${res.data.auth_token}`)
                 setAuth(username, res.data.auth_token);
+                return <Navigate to="/rack" replace={true} />
             })
         // .catch((e) => {
         //     // e.message === 'Request failed with status code 400'
@@ -60,9 +61,9 @@ export default function SignIn({ setAuth, isLoggedIn, handleLogout }) {
         // })
     }
 
-    if (isLoggedIn) {
-        return <Navigate to="/rack" replace={true} />
-    }
+    // if (isLoggedIn) {
+    //     return <Navigate to="/rack" replace={true} />
+    // }
 
     return (
         <>
@@ -105,7 +106,7 @@ export default function SignIn({ setAuth, isLoggedIn, handleLogout }) {
                     <Button size="large" component={Link} to="/signup">Create account</Button>
                 </Box>
                 <Box textAlign="center">
-                    <Button size="large" variant="outlined" type="submit">Sign in</Button>
+                    <Button size="large" variant="outlined" type="submit" onClick={handleLogin}>Sign in</Button>
                 </Box>
             </Box>
         </>

@@ -69,11 +69,11 @@ export default function PermanentDrawerLeft({
               <Icon icon="healthicons:ui-user-profile" />
             </IconButton>
           </Link>
-          <Link to="/welcome">
+          {/* <Link to="/welcome">
             <IconButton aria-label="landing" color="info">
               <Icon icon="tabler:helicopter-landing" />
             </IconButton>
-          </Link>
+          </Link> */}
           <Link to="/welcome">
             <IconButton onClick={handleLogout} color="secondary" endIcon={<Icon icon="tabler:helicopter-landing" />}><Icon icon="tabler:helicopter-landing" /></IconButton>
           </Link>
