@@ -14,6 +14,7 @@ import SignUp from "./components/SignUp";
 import Rack from "./components/Rack";
 import MixCreate from "./components/MixCreate";
 import MixTitle from "./components/MixTitle";
+import Sidebar from "./components/Sidebar";
 
 
 function App() {
@@ -46,14 +47,12 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <PermanentDrawerLeft isLoggedIn={isLoggedIn} username={username} handleLogout={handleLogout} token={token} /> */}
+      <PermanentDrawerLeft isLoggedIn={isLoggedIn} username={username} handleLogout={handleLogout} token={token} />
       <Routes>
         <Route path="/" element={<Landing setAuth={setAuth}
           isLoggedIn={isLoggedIn}
           handleLogout={handleLogout} />}></Route>
-        <Route path="/sidebar" element={
-          <PermanentDrawerLeft isLoggedIn={isLoggedIn} username={username} handleLogout={handleLogout} />}></Route>
-        <Route path="/profile" element={
+      <Route path="/profile" element={
           <Profile isLoggedIn={isLoggedIn} username={username} token={token} />}>
         </Route>
         <Route path="/player" element={<Player />}></Route>
