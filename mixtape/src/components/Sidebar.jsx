@@ -10,6 +10,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { Icon } from "@iconify/react";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import App from "../App";
 
 const drawerWidth = 130;
 
@@ -55,7 +56,15 @@ export default function PermanentDrawerLeft({
             <Icon icon="healthicons:ui-user-profile" />
           </IconButton>
         </Link>
+        <Link to="/landing">
+          <IconButton aria-label="landing" color="info">
+          <Icon icon="tabler:helicopter-landing" />
+          </IconButton>
+        </Link>
       </Drawer>
+    {/* <Box sx={{ display: "flex" }}>
+    <Link to="/app"></Link>
+      </Box> */}
     </Box>
   );
 }
