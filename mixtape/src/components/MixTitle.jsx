@@ -14,7 +14,7 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username }) {
     const [error, setError] = useState('')
 
     if (!isLoggedIn) {
-        return <Navigate to="/" replace={true} />
+        return <Navigate to="/welcome" replace={true} />
     }
 
     const handleChange = (e) => {

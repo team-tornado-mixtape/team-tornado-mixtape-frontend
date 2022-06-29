@@ -61,7 +61,7 @@ export default function SignUp({ setAuth, isLoggedIn }) {
 
   if (isRegistered) {
     console.log("Registered!");
-    return <Navigate to="/" replace={true} />;
+    return <Navigate to="/welcome" replace={true} />;
   }
 
   return (
@@ -126,7 +126,7 @@ export default function SignUp({ setAuth, isLoggedIn }) {
           </Box> */}
           <br></br>
           <Box textAlign="center">
-            <Button size="large" component={Link} to="/">Cancel</Button>
+            <Button size="large" component={Link} to="/welcome">Cancel</Button>
           </Box>
           <Box textAlign="center">
             <Button size="large" variant="outlined" type="submit">Sign up!</Button>

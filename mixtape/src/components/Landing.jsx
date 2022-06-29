@@ -14,7 +14,7 @@ export default function Landing({ setAuth, isLoggedIn, handleLogout }) {
   return (
     <>
       <div>
-        <Button component={Link} to="/" variant="outlined">
+        <Button component={Link} to="/welcome" variant="outlined">
           Landing Page
         </Button>
         <Button component={Link} to="/sidebar" variant="outlined">

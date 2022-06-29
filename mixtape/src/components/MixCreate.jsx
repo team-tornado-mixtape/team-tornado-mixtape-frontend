@@ -43,7 +43,7 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username, select
   }
 
   if (!isLoggedIn) {
-    return <Navigate to="/" replace={true} />
+    return <Navigate to="/welcome" replace={true} />
   }
 
   const handleSetSearch = (e) => {
