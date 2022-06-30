@@ -116,6 +116,7 @@ export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, use
       .patch(
         `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${mixId}/songs/${selectedTrack}`,
         {
+          "title": mixTitle,
           "songs": [
             selectedTrack
           ]
