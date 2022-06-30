@@ -27,11 +27,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Chip from '@mui/material/Chip';
 
 
-export default function Songs({ setAuth, isLoggedIn, token, username, selectedArtist }) {
-  const [mixtapeInit, setMixtapeInit] = useState(false)
+export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, username, selectedArtist }) {
   const [isLoading, setIsLoading] = useState(false)
-  const [mixtapeTitle, setMixtapeTitle] = useState('')
-  const [mixtapeDescription, setMixtapeDescription] = useState('')
   const [allResults, setAllResults] = useState([])
   // const [trackList, setTrackList] = useState([])
   const [error, setError] = useState('')
@@ -109,8 +106,37 @@ export default function Songs({ setAuth, isLoggedIn, token, username, selectedAr
     console.log(error)
   }
 
+  function handleAddToTracklist(trackId) {
+    // setIsLoading(true)
+    axios
+      .patch(
+        `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${mixId}/songs/${trackId}`,
+        {
+          "songs": [
+            trackId
+          ]
+        },
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.status)
+        console.log(res.data)
+        setAllResults(res.data)
+        setIsLoading(false)
+        console.log(`SUCCESS! track with ID of ${trackId} was successfully added to mixtape with ID of ${mixId}`)
+      })
+      .catch((e) => {
+        setError(e.message)
+        console.log('ERROR! This did not work. Please check that the body of the request is formatted properly.')
+      })
+    console.log(error)
+  }
+
   return (
     <>
+      <Typography>{mixTitle}</Typography>
       <Box sx={{ textAlign: "left", justifyContent: "center" }}>
         <Stack spacing={10} direction="row">
           <TextField
@@ -184,6 +210,7 @@ export default function Songs({ setAuth, isLoggedIn, token, username, selectedAr
                   <Table component="form">
                     <TableBody>
                       {allResults.map((eachResult, index) => {
+                        const trackId = eachResult.id
                         return (
                           <>
                             <TableRow key={index}>
@@ -202,7 +229,7 @@ export default function Songs({ setAuth, isLoggedIn, token, username, selectedAr
                                 <Typography variant="h5">{eachResult.artist}</Typography>
                               </TableCell>
                               <TableCell align="right">
-                                <IconButton sx={{ color: "#FFFFFF" }}>
+                                <IconButton sx={{ color: "#FFFFFF" }} value={trackId} onClick={handleAddToTracklist}>
                                   <AddCircleOutlineIcon />
                                 </IconButton>
                               </TableCell>

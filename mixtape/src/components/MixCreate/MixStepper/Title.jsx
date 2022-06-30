@@ -26,9 +26,9 @@ import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import CircularProgress from '@mui/material/CircularProgress';
 import Chip from '@mui/material/Chip';
 
-export default function Title({ setActiveStep, setAuth, isLoggedIn, token, username }) {
+export default function Title({ setActiveStep, setMixTitle, mixTitle, setMixId, setAuth, isLoggedIn, token, username }) {
     const [isLoading, setIsLoading] = useState(false)
-    const [title, setTitle] = useState('')
+    // const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [error, setError] = useState('')
 
@@ -42,7 +42,7 @@ export default function Title({ setActiveStep, setAuth, isLoggedIn, token, usern
             .post(
                 `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/`,
                 {
-                    title: title,
+                    title: mixTitle,
                     description: description
                 },
                 {
@@ -52,6 +52,9 @@ export default function Title({ setActiveStep, setAuth, isLoggedIn, token, usern
             .then((res) => {
                 console.log(res.status)
                 console.log(res.data)
+                // console.log(res.data.id)
+                setMixId(res.data.id)
+                console.log(`The mixID is: ${setMixId}`)
                 setActiveStep(1)
                 setIsLoading(false)
             })
@@ -64,37 +67,64 @@ export default function Title({ setActiveStep, setAuth, isLoggedIn, token, usern
 
     return (
         <>
-            <Box sx={{ textAlign: "center", justifyContent: "center", border: "1px solid white" }}>
-                <Stack spacing={2} direction="column">
-                    <Box component="form" onSubmit={handleMixCreate}>
-                        <Box>
-                            <TextField
-                                id="filled-multiline-static"
-                                label="title"
-                                required
-                                value={title}
-                                margin="normal"
-                                onChange={(e) => setTitle(e.target.value)} />
+            {mixTitle.length === 0 ? (
+                <Box sx={{ textAlign: "center", justifyContent: "center", border: "1px solid white" }}>
+                    <Stack spacing={2} direction="column">
+                        <Box component="form" onSubmit={handleMixCreate}>
+                            <Box>
+                                <TextField
+                                    id="filled-multiline-static"
+                                    label="title"
+                                    value={mixTitle}
+                                    margin="normal"
+                                    onChange={(e) => setMixTitle(e.target.value)} />
+                            </Box>
+                            <Box>
+                                <TextField
+                                    id="filled-multiline-static"
+                                    label="description"
+                                    disabled
+                                    variant="outlined"
+                                    multiline
+                                    rows={4}
+                                />
+                            </Box>
                         </Box>
-                        <Box>
-                            <TextField
-                                id="filled-multiline-static"
-                                label="description"
-                                value={description}
-                                variant="outlined"
-                                multiline
-                                rows={4}
-                                onChange={(e) => setDescription(e.target.value)} />
+                    </Stack>
+                    <Button variant="contained" disabled>Continue</Button>
+                </Box>
+            ) : (
+                <Box sx={{ textAlign: "center", justifyContent: "center", border: "1px solid white" }}>
+                    <Stack spacing={2} direction="column">
+                        <Box component="form" onSubmit={handleMixCreate}>
+                            <Box>
+                                <TextField
+                                    id="filled-multiline-static"
+                                    label="title"
+                                    value={mixTitle}
+                                    margin="normal"
+                                    onChange={(e) => setMixTitle(e.target.value)} />
+                            </Box>
+                            <Box>
+                                <TextField
+                                    id="filled-multiline-static"
+                                    label="description"
+                                    value={description}
+                                    variant="outlined"
+                                    multiline
+                                    rows={4}
+                                    onChange={(e) => setDescription(e.target.value)} />
+                            </Box>
                         </Box>
-                    </Box>
-                </Stack>
-                {!isLoading ? (
-                    <Button variant="contained" type="submit" onClick={(handleMixCreate)}>Continue</Button>
-                    // <Button variant="contained" onClick={() => setActiveStep(1)}>Continue</Button>
-                ) : (
-                    <CircularProgress />
-                )}
-            </Box>
+                    </Stack>
+                    {!isLoading ? (
+                        <Button variant="contained" type="submit" onClick={(handleMixCreate)}>Continue</Button>
+                        // <Button variant="contained" onClick={() => setActiveStep(1)}>Continue</Button>
+                    ) : (
+                        <CircularProgress />
+                    )}
+                </Box>
+            )}
         </>
     )
 }
