@@ -27,9 +27,9 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Chip from '@mui/material/Chip';
 
 export default function Title({ setActiveStep, setAuth, isLoggedIn, token, username }) {
-    const [mixtapeInit, setMixtapeInit] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-    const [mixtapeTitle, setMixtapeTitle] = useState('')
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
     const [error, setError] = useState('')
 
     const NormalText = {
@@ -42,8 +42,8 @@ export default function Title({ setActiveStep, setAuth, isLoggedIn, token, usern
             .post(
                 `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/`,
                 {
-                    title: "test title",
-                    description: "test description"
+                    title: title,
+                    description: description
                 },
                 {
                     headers: { Authorization: `Token ${token}` },
@@ -66,28 +66,35 @@ export default function Title({ setActiveStep, setAuth, isLoggedIn, token, usern
         <>
             <Box sx={{ textAlign: "center", justifyContent: "center", border: "1px solid white" }}>
                 <Stack spacing={2} direction="column">
-                    <TextField
-                        id="filled-multiline-static"
-                        label="title"
-                        defaultValue="My Mixtape"
-                        variant="filled"
-                    />
-                    <TextField
-                        id="filled-multiline-static"
-                        label="description"
-                        multiline
-                        rows={4}
-                        defaultValue="Description for my mixtape"
-                        variant="outlined"
-                    />
+                    <Box component="form" onSubmit={handleMixCreate}>
+                        <Box>
+                            <TextField
+                                id="filled-multiline-static"
+                                label="title"
+                                required
+                                value={title}
+                                margin="normal"
+                                onChange={(e) => setTitle(e.target.value)} />
+                        </Box>
+                        <Box>
+                            <TextField
+                                id="filled-multiline-static"
+                                label="description"
+                                value={description}
+                                variant="outlined"
+                                multiline
+                                rows={4}
+                                onChange={(e) => setDescription(e.target.value)} />
+                        </Box>
+                    </Box>
                 </Stack>
+                {!isLoading ? (
+                    <Button variant="contained" type="submit" onClick={(handleMixCreate)}>Continue</Button>
+                    // <Button variant="contained" onClick={() => setActiveStep(1)}>Continue</Button>
+                ) : (
+                    <CircularProgress />
+                )}
             </Box>
-            {!isLoading ? (
-                <Button variant="contained" onClick={(handleMixCreate)}>Continue</Button>
-                // <Button variant="contained" onClick={() => setActiveStep(1)}>Continue</Button>
-            ) : (
-                <CircularProgress />
-            )}
         </>
     )
 }
