@@ -34,6 +34,7 @@ export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, use
   const [error, setError] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const [artistRefiner, setArtistRefiner] = useState('')
+  console.log(`Here is the mix ID: ${mixId}`)
 
 
   const NormalText = {
@@ -106,14 +107,17 @@ export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, use
     console.log(error)
   }
 
-  function handleAddToTracklist(trackId) {
+  function handleAddToTracklist(e) {
+    e.preventDefault();
+    var selectedTrack = e.currentTarget.getAttribute("value")
+    console.log(`Here is what is SUPPOSED to happen. A patch request is made on the mixtape with the ID of ${mixId}. At the end of the slug should be the trackId. The trackId is ${selectedTrack}.`)
     // setIsLoading(true)
     axios
       .patch(
-        `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${mixId}/songs/${trackId}`,
+        `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${mixId}/songs/${selectedTrack}`,
         {
           "songs": [
-            trackId
+            selectedTrack
           ]
         },
         {
@@ -123,9 +127,9 @@ export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, use
       .then((res) => {
         console.log(res.status)
         console.log(res.data)
-        setAllResults(res.data)
-        setIsLoading(false)
-        console.log(`SUCCESS! track with ID of ${trackId} was successfully added to mixtape with ID of ${mixId}`)
+        // setAllResults(res.data)
+        // setIsLoading(false)
+        console.log(`SUCCESS! track with ID of ${selectedTrack} was successfully added to mixtape with ID of ${mixId}`)
       })
       .catch((e) => {
         setError(e.message)
