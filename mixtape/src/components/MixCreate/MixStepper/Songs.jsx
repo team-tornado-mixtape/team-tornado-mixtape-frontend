@@ -73,6 +73,7 @@ export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, use
         console.log(res.status)
         console.log(res.data)
         setAllResults(res.data)
+        console.log(`This is the output: ${res.data}`)
         setIsLoading(false)
       })
       .catch((e) => {
