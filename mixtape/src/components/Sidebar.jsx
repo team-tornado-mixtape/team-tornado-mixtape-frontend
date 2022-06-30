@@ -16,8 +16,8 @@ import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
-import Rack from "./rack/Rack";
-import MixCreate from "./MixCreate";
+import Rack from "./Rack";
+import MixStepper from "./MixCreate/MixStepper.jsx";
 import Player from "./Player";
 import Profile from "./Profile.jsx";
 // import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -162,7 +162,7 @@ export default function PermanentDrawerLeft({
             <Player />
           </EachRackView>
           <EachRackView value={value} index={2}>
-            <MixCreate />
+            <MixStepper isLoggedIn={isLoggedIn} token={token} />
           </EachRackView>
           <EachRackView value={value} index={3}>
             <Profile />

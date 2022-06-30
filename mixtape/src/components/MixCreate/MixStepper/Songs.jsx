@@ -27,11 +27,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Chip from '@mui/material/Chip';
 
 
-export default function MixCreate({ setAuth, isLoggedIn, token, username, selectedArtist }) {
-  const [mixtapeInit, setMixtapeInit] = useState(false)
+export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, username, selectedArtist }) {
   const [isLoading, setIsLoading] = useState(false)
-  const [mixtapeTitle, setMixtapeTitle] = useState('')
-  const [mixtapeDescription, setMixtapeDescription] = useState('')
   const [allResults, setAllResults] = useState([])
   // const [trackList, setTrackList] = useState([])
   const [error, setError] = useState('')
@@ -49,14 +46,10 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username, select
 
   const handleSetRefinedSearch = (e) => {
     e.preventDefault();
-    // console.log(e.target.attributes.getNamedItem("test-item"))
-    // console.log(e.currentTarget.getAttribute("test-item"))
     var selectedArtist = e.currentTarget.getAttribute("artist")
     console.log(selectedArtist)
     handleRefinedSearch(selectedArtist)
     setArtistRefiner(selectedArtist)
-    // console.log('Refined search executed. The artistRefiner should be cleared.')
-    // console.log(`The artistRefiner is: ${artistRefiner}`)
   }
 
   const handleUndoRefinedSearch = (e) => {
@@ -67,6 +60,7 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username, select
 
   function handleSearch() {
     setIsLoading(true)
+    console.log(token)
     axios
       .get(
         `https://team-tornado-mixtape.herokuapp.com/api/search?track=${searchTerm}`,
@@ -112,26 +106,37 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username, select
     console.log(error)
   }
 
+  function handleAddToTracklist(trackId) {
+    // setIsLoading(true)
+    axios
+      .patch(
+        `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${mixId}/songs/${trackId}`,
+        {
+          "songs": [
+            trackId
+          ]
+        },
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.status)
+        console.log(res.data)
+        setAllResults(res.data)
+        setIsLoading(false)
+        console.log(`SUCCESS! track with ID of ${trackId} was successfully added to mixtape with ID of ${mixId}`)
+      })
+      .catch((e) => {
+        setError(e.message)
+        console.log('ERROR! This did not work. Please check that the body of the request is formatted properly.')
+      })
+    console.log(error)
+  }
+
   return (
     <>
-      <Box sx={{ textAlign: "center", justifyContent: "center", border: "1px solid white" }}>
-        <Stack spacing={2} direction="column">
-          <TextField
-            id="filled-multiline-static"
-            label="title"
-            defaultValue="My Mixtape"
-            variant="filled"
-          />
-          <TextField
-            id="filled-multiline-static"
-            label="description"
-            multiline
-            rows={4}
-            defaultValue="Description for my mixtape"
-            variant="outlined"
-          />
-        </Stack>
-      </Box>
+      <Typography>{mixTitle}</Typography>
       <Box sx={{ textAlign: "left", justifyContent: "center" }}>
         <Stack spacing={10} direction="row">
           <TextField
@@ -205,6 +210,7 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username, select
                   <Table component="form">
                     <TableBody>
                       {allResults.map((eachResult, index) => {
+                        const trackId = eachResult.id
                         return (
                           <>
                             <TableRow key={index}>
@@ -223,7 +229,7 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username, select
                                 <Typography variant="h5">{eachResult.artist}</Typography>
                               </TableCell>
                               <TableCell align="right">
-                                <IconButton sx={{ color: "#FFFFFF" }}>
+                                <IconButton sx={{ color: "#FFFFFF" }} value={trackId} onClick={handleAddToTracklist}>
                                   <AddCircleOutlineIcon />
                                 </IconButton>
                               </TableCell>
@@ -263,53 +269,6 @@ export default function MixCreate({ setAuth, isLoggedIn, token, username, select
           </Stack>
         </Stack>
       </Box >
-      <br></br>
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Box>
-          <Typography variant="p">Customization</Typography>
-          <br></br>
-          <Stack spacing={2} direction="row">
-            <Button color="info" variant="outlined">
-              Theme 1 (default)
-            </Button>
-            <Button color="info" variant="outlined">
-              Theme 2
-            </Button>
-            <Button color="info" variant="outlined">
-              Theme 3
-            </Button>
-            <Button color="info" variant="outlined">
-              Theme 4
-            </Button>
-            <Button color="info" variant="outlined">
-              Upload Image
-            </Button>
-          </Stack>
-          <Stack direction="column">
-            <Typography variant="p">Mixtape Case Preview</Typography>
-            <Box
-              sx={{
-                width: "40vw",
-                height: 350,
-                backgroundColor: "primary.dark",
-                "&:hover": {
-                  backgroundColor: "primary.main",
-                  opacity: [0.9, 0.8, 0.7],
-                },
-              }}
-            ></Box>
-            <br></br>
-          </Stack>
-        </Box>
-      </Box>
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Stack spacing={"80vw"} direction="row">
-          <Button variant="outlined" color="secondary">Cancel</Button>
-          <Button variant="contained">
-            Save mixtape
-          </Button>
-        </Stack>
-      </Box>
     </>
   )
 }
