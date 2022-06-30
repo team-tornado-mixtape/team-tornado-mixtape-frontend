@@ -12,15 +12,9 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import App from "../App";
 import PropTypes from "prop-types";
-
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Rack from "./rack/Rack";
-
-
-
-import Rack from "./rack/Rack";
-
 import MixStepper from "./MixCreate/MixStepper.jsx";
 import Player from "./Player";
 import Profile from "./Profile.jsx";
