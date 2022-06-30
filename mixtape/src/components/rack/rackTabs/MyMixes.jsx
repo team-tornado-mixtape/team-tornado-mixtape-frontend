@@ -10,6 +10,9 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { Link } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
+// import Card from '@mui/material/Card';
+// import CardActions from '@mui/material/CardActions';
+// import CardContent from '@mui/material/CardContent';
 
 export default function MyMixes({ setAuth, isLoggedIn, token, username }) {
   const [myMixes, setMyMixes] = useState([]);
@@ -28,11 +31,11 @@ export default function MyMixes({ setAuth, isLoggedIn, token, username }) {
         console.log(res.status);
         console.log(res.data);
         setMyMixes(res.data);
-        // setIsLoading(false)
+       
       })
       .catch((e) => {
         setError(e.message);
-        // setIsLoading(false)
+      
       });
     console.log(error);
     // }
@@ -40,9 +43,11 @@ export default function MyMixes({ setAuth, isLoggedIn, token, username }) {
 
   return (
     <>
-      <Box></Box>
+     
       {myMixes.map((eachMix, index) => {
-        return <Box key={index}></Box>;
+        return <Box key={index}>
+          <Typography>{eachMix.title}</Typography>
+        </Box>;
       })}
     </>
   );
