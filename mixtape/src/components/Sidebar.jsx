@@ -17,6 +17,10 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Rack from "./rack/Rack";
 
+
+
+import Rack from "./rack/Rack";
+
 import MixStepper from "./MixCreate/MixStepper.jsx";
 import Player from "./Player";
 import Profile from "./Profile.jsx";
