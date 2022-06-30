@@ -107,11 +107,11 @@ export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, use
   }
 
   function handleAddToTracklist(trackId) {
-    // setIsLoading(true)
     axios
       .patch(
         `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${mixId}/songs/${trackId}`,
         {
+          "title": mixTitle,
           "songs": [
             trackId
           ]
