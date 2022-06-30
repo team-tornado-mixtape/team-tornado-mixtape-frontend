@@ -15,8 +15,8 @@ import PropTypes from "prop-types";
 
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import Rack from "./rack/Rack";
 
-import Rack from "./Rack";
 import MixStepper from "./MixCreate/MixStepper.jsx";
 import Player from "./Player";
 import Profile from "./Profile.jsx";
@@ -34,7 +34,6 @@ import Profile from "./Profile.jsx";
 //   // if (!isLoggedIn) {
 //   //   return <Navigate to="/welcome" replace={true} />
 //   // }
-
 
 //   return (
 //     <Box sx={{ display: "flex", flexDirection: "row" }}>
@@ -100,7 +99,6 @@ import Profile from "./Profile.jsx";
 //   );
 // }
 
-
 function EachRackView(props) {
   const { children, value, index } = props;
 
@@ -144,10 +142,19 @@ export default function PermanentDrawerLeft({
         <Box sx={{ width: "100px" }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Tabs value={value} orientation="vertical" onChange={handleChange}>
-              <Tab {...TabProps(0)} icon={<Icon icon="ant-design:database-twotone" />}></Tab>
+              <Tab
+                {...TabProps(0)}
+                icon={<Icon icon="ant-design:database-twotone" />}
+              ></Tab>
               <Tab {...TabProps(1)} icon={<Icon icon="bi:play-btn" />}></Tab>
-              <Tab {...TabProps(2)} icon={<Icon icon="bxs:message-square-add" />}></Tab>
-              <Tab {...TabProps(3)} icon={<Icon icon="healthicons:ui-user-profile" />}></Tab>
+              <Tab
+                {...TabProps(2)}
+                icon={<Icon icon="bxs:message-square-add" />}
+              ></Tab>
+              <Tab
+                {...TabProps(3)}
+                icon={<Icon icon="healthicons:ui-user-profile" />}
+              ></Tab>
             </Tabs>
             <Typography>Signed in as @{username}</Typography>
             <Button onClick={handleLogout}>Log out</Button>
@@ -168,7 +175,7 @@ export default function PermanentDrawerLeft({
             <Profile />
           </EachRackView>
         </Box>
-      </Box >
+      </Box>
     </>
   );
 }

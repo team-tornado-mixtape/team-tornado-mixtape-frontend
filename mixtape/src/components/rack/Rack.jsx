@@ -8,8 +8,10 @@ import Button from "@mui/material/Button";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-
 import { Link } from "react-router-dom";
+import AllMixes from "./rackTabs/AllMixes.jsx";
+import FavMixes from "./rackTabs/FavMixes.jsx";
+import MyMixes from "./rackTabs/MyMixes.jsx";
 
 function EachRackView(props) {
   const { children, value, index } = props;
@@ -46,7 +48,9 @@ export default function Rack() {
   return (
     <>
       <Box>
-        <Button component={Link} to="/mixcreate" variant="outlined">Create new mixtape</Button>
+        <Button component={Link} to="/mixcreate" variant="outlined">
+          Create new mixtape
+        </Button>
       </Box>
       <Typography variant="h2">The Rack</Typography>
       <TextField
