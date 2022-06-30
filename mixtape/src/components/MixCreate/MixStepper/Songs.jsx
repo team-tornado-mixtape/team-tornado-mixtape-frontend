@@ -30,7 +30,7 @@ import Chip from '@mui/material/Chip';
 export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, username, selectedArtist }) {
   const [isLoading, setIsLoading] = useState(false)
   const [allResults, setAllResults] = useState([])
-  // const [trackList, setTrackList] = useState([])
+  const [tracklist, setTracklist] = useState([])
   const [error, setError] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const [artistRefiner, setArtistRefiner] = useState('')
@@ -82,6 +82,27 @@ export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, use
     console.log(error)
   }
 
+  function displayTracklist() {
+    axios
+      .get(
+        `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${mixId}/`,
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.status)
+        console.log(res.data)
+        // setTracklist(res.data)
+        // setIsLoading(false)
+      })
+      .catch((e) => {
+        setError(e.message)
+        // setIsLoading(false)
+      })
+    console.log(error)
+  }
+
   function handleRefinedSearch(selectedArtist) {
     console.log(`https://team-tornado-mixtape.herokuapp.com/api/search?track=${searchTerm}&artist=${selectedArtist}`)
     setIsLoading(true)
@@ -107,6 +128,39 @@ export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, use
     console.log(error)
   }
 
+  function handleRemoveFromTracklist(e) {
+    e.preventDefault();
+    var selectedTrack = e.currentTarget.getAttribute("value")
+    console.log(`Here is what is SUPPOSED to happen. A patch request is made on the mixtape with the ID of ${mixId}. At the end of the slug should be the trackId. The trackId is ${selectedTrack}.`)
+    // setIsLoading(true)
+    axios
+      .patch(
+        `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${mixId}/songs/${selectedTrack}`,
+        {
+          "title": mixTitle,
+          "songs": [
+          ]
+        },
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.status)
+        console.log(res.data)
+        setTracklist(res.data.songs)
+        // setAllResults(res.data)
+        // setIsLoading(false)
+        console.log(`SUCCESS! track with ID of ${selectedTrack} was successfully removed from mixtape with ID of ${mixId}`)
+        displayTracklist()
+      })
+      .catch((e) => {
+        setError(e.message)
+        console.log('ERROR! This did not work. Please check that the body of the request is formatted properly.')
+      })
+    console.log(error)
+  }
+
   function handleAddToTracklist(e) {
     e.preventDefault();
     var selectedTrack = e.currentTarget.getAttribute("value")
@@ -128,9 +182,11 @@ export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, use
       .then((res) => {
         console.log(res.status)
         console.log(res.data)
+        setTracklist(res.data.songs)
         // setAllResults(res.data)
         // setIsLoading(false)
         console.log(`SUCCESS! track with ID of ${selectedTrack} was successfully added to mixtape with ID of ${mixId}`)
+        displayTracklist()
       })
       .catch((e) => {
         setError(e.message)
@@ -253,21 +309,33 @@ export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, use
             <TableContainer component={Paper} sx={{ width: 404, border: "2px solid #E2E2DF" }}>
               <Table component="form" sx={{ width: 400 }}>
                 <TableBody>
-                  <TableRow>
-                    <TableCell align="left">
-                      <IconButton sx={{ color: "#FFFFFF" }}>
-                        <PlayCircleOutlineIcon />
-                      </IconButton>
-                    </TableCell>
-                    <TableCell align="left">
-                      <Typography variant="h5">Song title</Typography>
-                    </TableCell>
-                    <TableCell align="right">
-                      <IconButton sx={{ color: "#FFFFFF" }}>
-                        <AddCircleOutlineIcon />
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
+                  {tracklist.map((eachTrack, index) => {
+                    return (
+                      <>
+                        <TableRow key={index}>
+                          <TableCell align="left">
+                            {/* <IconButton href={eachTrack.iconButton} sx={{ color: "#FFFFFF" }}>
+                              <PlayCircleOutlineIcon />
+                            </IconButton> */}
+                          </TableCell>
+                          <TableCell align="left">
+                            <Typography variant="h5">{eachTrack}</Typography>
+                          </TableCell>
+                          <TableCell align="left">
+                            <Typography variant="h5">{eachTrack}</Typography>
+                          </TableCell>
+                          <TableCell align="left">
+                            <Typography variant="h5">{eachTrack}</Typography>
+                          </TableCell>
+                          <TableCell align="right">
+                            <IconButton sx={{ color: "#FFFFFF" }} value={eachTrack} onClick={handleRemoveFromTracklist}>
+                              <RemoveCircleOutlineIcon />
+                            </IconButton>
+                          </TableCell>
+                        </TableRow>
+                      </>
+                    )
+                  })}
                 </TableBody>
               </Table>
             </TableContainer>
