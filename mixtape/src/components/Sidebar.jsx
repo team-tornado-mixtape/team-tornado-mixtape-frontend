@@ -161,7 +161,7 @@ export default function PermanentDrawerLeft({
         {/* the value of the clicked tab determines which view is rendered here */}
         <Box sx={{ width: "90vw" }}>
           <EachRackView value={value} index={0}>
-            <Rack />
+            <Rack token={token} />
           </EachRackView>
           <EachRackView value={value} index={1}>
             <Player />

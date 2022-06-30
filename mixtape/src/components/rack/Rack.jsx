@@ -39,7 +39,7 @@ function TabProps(index) {
     id: `rackview-tab-${index}`,
   };
 }
-export default function Rack() {
+export default function Rack({token}) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -72,7 +72,7 @@ export default function Rack() {
         {/* the value of the clicked tab determines which view is rendered here */}
         <EachRackView value={value} index={0}>
           Created by me
-          {/* really should be a component */}
+          <MyMixes token={token}/>
         </EachRackView>
         <EachRackView value={value} index={1}>
           Favorite mixtapes
