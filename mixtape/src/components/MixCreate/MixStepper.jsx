@@ -66,7 +66,7 @@ export default function MixStepper({ token }) {
     function getStepContent(step) {
         switch (step) {
             case 0:
-                return <Title setActiveStep={setActiveStep} />;
+                return <Title token={token} setActiveStep={setActiveStep} />;
             case 1:
                 return <Songs token={token} />;
             case 2:

@@ -42,17 +42,22 @@ export default function Title({ setActiveStep, setAuth, isLoggedIn, token, usern
             .post(
                 `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/`,
                 {
+                    title: "test title",
+                    description: "test description"
+                },
+                {
                     headers: { Authorization: `Token ${token}` },
                 }
             )
             .then((res) => {
                 console.log(res.status)
                 console.log(res.data)
+                setActiveStep(1)
                 setIsLoading(false)
             })
             .catch((e) => {
                 setError(e.message)
-                // setIsLoading(false)
+                setIsLoading(false)
             })
         console.log(error)
     }
@@ -77,7 +82,12 @@ export default function Title({ setActiveStep, setAuth, isLoggedIn, token, usern
                     />
                 </Stack>
             </Box>
-            <Button variant="contained" onClick={() => setActiveStep(1)}>Continue</Button>
+            {!isLoading ? (
+                <Button variant="contained" onClick={(handleMixCreate)}>Continue</Button>
+                // <Button variant="contained" onClick={() => setActiveStep(1)}>Continue</Button>
+            ) : (
+                <CircularProgress />
+            )}
         </>
     )
 }
