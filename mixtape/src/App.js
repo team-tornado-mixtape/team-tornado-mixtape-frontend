@@ -11,7 +11,6 @@ import PasswordReset from "./components/PasswordReset";
 import ResetForm from "./components/ResetForm";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
-import Rack from "./components/Rack";
 import MixCreate from "./components/MixCreate/MixStepper/Songs";
 import Sidebar from "./components/Sidebar";
 
