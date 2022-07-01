@@ -21,7 +21,8 @@ export default function MixStepper({ token }) {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
     const [mixTitle, setMixTitle] = React.useState('')
-    const [mixId, setMixId] = React.useState(null)
+    const [mixId, setMixId] = React.useState('')
+    const [thisMixData, setThisMixData] = React.useState({})
 
     const isStepOptional = (step) => {
         return step === 1;
@@ -70,7 +71,7 @@ export default function MixStepper({ token }) {
             case 0:
                 return <Title token={token} setActiveStep={setActiveStep} setMixTitle={setMixTitle} mixTitle={mixTitle} setMixId={setMixId} />;
             case 1:
-                return <Songs token={token} setActiveStep={setActiveStep} mixTitle={mixTitle} mixId={mixId} />;
+                return <Songs token={token} setActiveStep={setActiveStep} mixTitle={mixTitle} mixId={mixId} setThisMixData={setThisMixData} thisMixData={thisMixData} />;
             case 2:
                 return (
                     <Button variant="outlined">
