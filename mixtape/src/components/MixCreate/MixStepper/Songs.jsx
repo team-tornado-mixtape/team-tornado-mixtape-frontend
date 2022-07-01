@@ -26,16 +26,42 @@ import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import CircularProgress from '@mui/material/CircularProgress';
 import Chip from '@mui/material/Chip';
 
+// import DisplayTracklist from "./DisplayTrackList";
 
-export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, username, selectedArtist }) {
+
+export default function Songs({ setAuth, thisMixData, setThisMixData, mixId, mixTitle, isLoggedIn, token, username, selectedArtist }) {
   const [isLoading, setIsLoading] = useState(false)
   const [allResults, setAllResults] = useState([])
-  // const [trackList, setTrackList] = useState([])
+  // const [mixData, setMixData] = useState([])
   const [error, setError] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const [artistRefiner, setArtistRefiner] = useState('')
   console.log(`Here is the mix ID: ${mixId}`)
 
+  // useEffect(() => {
+  //   function displayTracklist() {
+  //     axios
+  //       .get(
+  //         `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${mixId}/`,
+  //         {
+  //           headers: { Authorization: `Token ${token}` },
+  //         }
+  //       )
+  //       .then((res) => {
+  //         console.log(res.status)
+  //         console.log(`here is the status: ${res.status}`)
+  //         var resData = res.data
+  //         // console.log(resData)
+  //         // console.log(resData.songs)
+  //         setThisMixData(resData.songs)
+  //         console.log(thisMixData)
+  //       })
+  //       .catch((e) => {
+  //         setError(e.message)
+  //       })
+  //     console.log(error)
+  //   }
+  // }, [token, error, mixId, thisMixData, setThisMixData])
 
   const NormalText = {
     userSelect: "none",
@@ -61,7 +87,6 @@ export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, use
 
   function handleSearch() {
     setIsLoading(true)
-    console.log(token)
     axios
       .get(
         `https://team-tornado-mixtape.herokuapp.com/api/search?track=${searchTerm}`,
@@ -70,9 +95,10 @@ export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, use
         }
       )
       .then((res) => {
-        console.log(res.status)
-        console.log(res.data)
+        // console.log(res.status)
+        // console.log(res.data)
         setAllResults(res.data)
+        // console.log(`This is the output: ${res.data}`)
         setIsLoading(false)
       })
       .catch((e) => {
@@ -81,6 +107,30 @@ export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, use
       })
     console.log(error)
   }
+
+  function DisplayTracklist() {
+    axios
+      .get(
+        `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${mixId}/`,
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.status)
+        console.log(`here is the status: ${res.status}`)
+        var resData = res.data
+        // console.log(resData)
+        console.log(resData.songs)
+        setThisMixData(resData.songs)
+        console.log(thisMixData)
+      })
+      .catch((e) => {
+        setError(e.message)
+      })
+    console.log(error)
+  }
+
 
   function handleRefinedSearch(selectedArtist) {
     console.log(`https://team-tornado-mixtape.herokuapp.com/api/search?track=${searchTerm}&artist=${selectedArtist}`)
@@ -93,8 +143,8 @@ export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, use
         }
       )
       .then((res) => {
-        console.log(res.status)
-        console.log(res.data)
+        // console.log(res.status)
+        // console.log(res.data)
         setAllResults(res.data)
         setIsLoading(false)
         console.log(`SUCCESS! selectedArtist is: ${selectedArtist}`)
@@ -107,11 +157,39 @@ export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, use
     console.log(error)
   }
 
+  function handleRemoveFromTracklist(e) {
+    e.preventDefault();
+    var selectedTrack = e.currentTarget.getAttribute("value")
+    // console.log(`Here is what is SUPPOSED to happen. A patch request is made on the mixtape with the ID of ${mixId}. At the end of the slug should be the trackId. The trackId is ${selectedTrack}.`)
+    axios
+      .patch(
+        `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${mixId}/songs/${selectedTrack}`,
+        {
+          "title": mixTitle,
+          "songs": [
+          ]
+        },
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      )
+      .then((res) => {
+        // console.log(res.status)
+        // console.log(res.data)
+        console.log(`SUCCESS! track with ID of ${selectedTrack} was successfully removed from mixtape with ID of ${mixId}`)
+        DisplayTracklist()
+      })
+      .catch((e) => {
+        setError(e.message)
+        console.log('ERROR! This did not work. Please check that the body of the request is formatted properly.')
+      })
+    console.log(error)
+  }
+
   function handleAddToTracklist(e) {
     e.preventDefault();
     var selectedTrack = e.currentTarget.getAttribute("value")
     console.log(`Here is what is SUPPOSED to happen. A patch request is made on the mixtape with the ID of ${mixId}. At the end of the slug should be the trackId. The trackId is ${selectedTrack}.`)
-    // setIsLoading(true)
     axios
       .patch(
         `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${mixId}/songs/${selectedTrack}`,
@@ -126,11 +204,10 @@ export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, use
         }
       )
       .then((res) => {
-        console.log(res.status)
-        console.log(res.data)
-        // setAllResults(res.data)
-        // setIsLoading(false)
+        // console.log(res.status)
+        // console.log(res.data)
         console.log(`SUCCESS! track with ID of ${selectedTrack} was successfully added to mixtape with ID of ${mixId}`)
+        DisplayTracklist()
       })
       .catch((e) => {
         setError(e.message)
@@ -250,30 +327,44 @@ export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, use
           </Stack>
           <Stack spacing={2} direction="column">
             <Typography variant="p">Mixtape tracklist</Typography>
-            <TableContainer component={Paper} sx={{ width: 404, border: "2px solid #E2E2DF" }}>
-              <Table component="form" sx={{ width: 400 }}>
+            <TableContainer component={Paper} sx={{ width: "45vw", border: "2px solid #E2E2DF" }}>
+              <Table>
                 <TableBody>
-                  <TableRow>
-                    <TableCell align="left">
-                      <IconButton sx={{ color: "#FFFFFF" }}>
-                        <PlayCircleOutlineIcon />
-                      </IconButton>
-                    </TableCell>
-                    <TableCell align="left">
-                      <Typography variant="h5">Song title</Typography>
-                    </TableCell>
-                    <TableCell align="right">
-                      <IconButton sx={{ color: "#FFFFFF" }}>
-                        <AddCircleOutlineIcon />
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
+                  {/* how to get this code working: copy lines 294-326 from above, paste it from lines 334-361. go to where this component is in the app. in lines 334-361, change all instances allResults and eachResult to thisMixData and eachTrack. this will continue to work until you leave this component. */}
+                  {allResults.map((eachResult, index) => {
+                    const trackId = eachResult.id
+                    return (
+                      <>
+                        <TableRow key={index}>
+                          <TableCell align="left">
+                            <IconButton href={eachResult.preview_url} sx={{ color: "#FFFFFF" }}>
+                              <PlayCircleOutlineIcon />
+                            </IconButton>
+                          </TableCell>
+                          <TableCell align="left">
+                            <Typography variant="h5">{eachResult.title}</Typography>
+                          </TableCell>
+                          <TableCell align="left">
+                            <Typography variant="h5">{eachResult.album}</Typography>
+                          </TableCell>
+                          <TableCell align="left">
+                            <Typography variant="h5">{eachResult.artist}</Typography>
+                          </TableCell>
+                          <TableCell align="right">
+                            <IconButton sx={{ color: "#FFFFFF" }} value={trackId} onClick={handleAddToTracklist}>
+                              <AddCircleOutlineIcon />
+                            </IconButton>
+                          </TableCell>
+                        </TableRow>
+                      </>
+                    )
+                  })}
                 </TableBody>
               </Table>
             </TableContainer>
           </Stack>
         </Stack>
-      </Box >
+      </Box>
     </>
   )
 }

@@ -52,11 +52,9 @@ export default function Title({ setActiveStep, setMixTitle, mixTitle, setMixId, 
             .then((res) => {
                 console.log(res.status)
                 console.log(res.data)
-                // console.log(res.data.id)
-                setMixId(res.data.id)
-                console.log(`The mixID is: ${setMixId}`)
                 setActiveStep(1)
                 setIsLoading(false)
+                setMixId(res.data.id)
             })
             .catch((e) => {
                 setError(e.message)
