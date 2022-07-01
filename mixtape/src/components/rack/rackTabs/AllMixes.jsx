@@ -11,6 +11,7 @@ import Tab from "@mui/material/Tab";
 import { Link } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 
+
 export default function AllMixes({ setAuth, isLoggedIn, token, username }) {
   const [allMixes, setAllMixes] = useState([]);
   const [error, setError] = useState("");
