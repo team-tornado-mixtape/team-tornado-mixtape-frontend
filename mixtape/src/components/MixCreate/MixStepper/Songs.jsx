@@ -26,7 +26,7 @@ import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import CircularProgress from '@mui/material/CircularProgress';
 import Chip from '@mui/material/Chip';
 
-import DisplayTracklist from "./DisplayTrackList";
+// import DisplayTracklist from "./DisplayTrackList";
 
 
 export default function Songs({ setAuth, thisMixData, setThisMixData, mixId, mixTitle, isLoggedIn, token, username, selectedArtist }) {
@@ -108,28 +108,28 @@ export default function Songs({ setAuth, thisMixData, setThisMixData, mixId, mix
     console.log(error)
   }
 
-  // function DisplayTracklist() {
-  //   axios
-  //     .get(
-  //       `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${mixId}/`,
-  //       {
-  //         headers: { Authorization: `Token ${token}` },
-  //       }
-  //     )
-  //     .then((res) => {
-  //       console.log(res.status)
-  //       console.log(`here is the status: ${res.status}`)
-  //       var resData = res.data
-  //       // console.log(resData)
-  //       console.log(resData.songs)
-  //       setThisMixData(resData.songs)
-  //       console.log(thisMixData)
-  //     })
-  //     .catch((e) => {
-  //       setError(e.message)
-  //     })
-  //   console.log(error)
-  // }
+  function DisplayTracklist() {
+    axios
+      .get(
+        `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${mixId}/`,
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.status)
+        console.log(`here is the status: ${res.status}`)
+        var resData = res.data
+        // console.log(resData)
+        console.log(resData.songs)
+        setThisMixData(resData.songs)
+        console.log(thisMixData)
+      })
+      .catch((e) => {
+        setError(e.message)
+      })
+    console.log(error)
+  }
 
 
   function handleRefinedSearch(selectedArtist) {
@@ -325,7 +325,44 @@ export default function Songs({ setAuth, thisMixData, setThisMixData, mixId, mix
               </>
             )}
           </Stack>
-          <DisplayTracklist token={token} mixId={mixId} setThisMixData={setThisMixData} thisMixData={thisMixData} />
+          <Stack spacing={2} direction="column">
+            <Typography variant="p">Mixtape tracklist</Typography>
+            <TableContainer component={Paper} sx={{ width: "45vw", border: "2px solid #E2E2DF" }}>
+              <Table>
+                <TableBody>
+                  {/* how to get this code working: copy lines 294-326 from above, paste it from lines 334-361. go to where this component is in the app. in lines 334-361, change all instances allResults and eachResult to thisMixData and eachTrack. this will continue to work until you leave this component. */}
+                  {allResults.map((eachResult, index) => {
+                    const trackId = eachResult.id
+                    return (
+                      <>
+                        <TableRow key={index}>
+                          <TableCell align="left">
+                            <IconButton href={eachResult.preview_url} sx={{ color: "#FFFFFF" }}>
+                              <PlayCircleOutlineIcon />
+                            </IconButton>
+                          </TableCell>
+                          <TableCell align="left">
+                            <Typography variant="h5">{eachResult.title}</Typography>
+                          </TableCell>
+                          <TableCell align="left">
+                            <Typography variant="h5">{eachResult.album}</Typography>
+                          </TableCell>
+                          <TableCell align="left">
+                            <Typography variant="h5">{eachResult.artist}</Typography>
+                          </TableCell>
+                          <TableCell align="right">
+                            <IconButton sx={{ color: "#FFFFFF" }} value={trackId} onClick={handleAddToTracklist}>
+                              <AddCircleOutlineIcon />
+                            </IconButton>
+                          </TableCell>
+                        </TableRow>
+                      </>
+                    )
+                  })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Stack>
         </Stack>
       </Box>
     </>
