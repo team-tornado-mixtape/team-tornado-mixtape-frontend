@@ -10,7 +10,13 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
-export default function EachMixtape({ eachMix, index, token }) {
+export default function EachMixtape({
+  eachMix,
+  index,
+  token,
+  favoriteClicked,
+  setFavoriteClicked,
+}) {
   // here are some consts to get you set up:
   const id = eachMix.id;
   const createDate = eachMix.created_at;
@@ -36,6 +42,7 @@ export default function EachMixtape({ eachMix, index, token }) {
   //     }
   //   )
   function handleFavorite(e) {
+    setFavoriteClicked(false);
     e.preventDefault();
     console.log(
       `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${id}/favorites`
@@ -54,6 +61,7 @@ export default function EachMixtape({ eachMix, index, token }) {
       .then((res) => {
         console.log(res.status);
         console.log(res.data);
+        setFavoriteClicked(true);
       })
       .catch((e) => {
         console.log(e.message);

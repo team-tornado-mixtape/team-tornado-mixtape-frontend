@@ -21,7 +21,7 @@ export default function Rack({ token }) {
   const [allMixtapesIsSelected, setAllMixtapesIsSelected] = useState(false);
   const [allMixtapesDisplayed, setAllMixtapesDisplayed] = useState([]);
   const [error, setError] = useState("");
-
+  const [favoriteClicked, setFavoriteClicked] = useState(false);
   // what needs doing:
   // - use lodash to add delay to showing if set is loading (api is working a bit too well...)
   // - wrap each of these in a column and arrange them side by side
@@ -31,6 +31,7 @@ export default function Rack({ token }) {
     setMyFavoritesDidLoad(true);
     setAllMixtapesDidLoad(true);
     setMyMixtapesIsSelected(true);
+
     axios
       .get(`https://team-tornado-mixtape.herokuapp.com/api/my/mixtapes/`, {
         headers: { Authorization: `Token ${token}` },
@@ -46,7 +47,7 @@ export default function Rack({ token }) {
         setError(e.message);
       });
     console.log(error);
-  }, [token, error]);
+  }, [token, error, favoriteClicked]);
 
   function ShowMyMixtapes(e) {
     e.preventDefault();
@@ -200,6 +201,8 @@ export default function Rack({ token }) {
                         return (
                           <EachMixtape
                             eachMix={eachMix}
+                            favoriteClicked={favoriteClicked}
+                            setFavoriteClicked={setFavoriteClicked}
                             index={index}
                             token={token}
                           />
@@ -226,6 +229,8 @@ export default function Rack({ token }) {
                           return (
                             <EachMixtape
                               eachMix={eachMix}
+                              favoriteClicked={favoriteClicked}
+                              setFavoriteClicked={setFavoriteClicked}
                               index={index}
                               token={token}
                             />
@@ -252,6 +257,8 @@ export default function Rack({ token }) {
                         return (
                           <EachMixtape
                             eachMix={eachMix}
+                            favoriteClicked={favoriteClicked}
+                            setFavoriteClicked={setFavoriteClicked}
                             index={index}
                             token={token}
                           />
