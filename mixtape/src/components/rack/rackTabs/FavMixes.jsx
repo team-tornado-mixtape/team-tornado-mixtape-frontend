@@ -21,7 +21,7 @@ export default function FavMixes({ setAuth, isLoggedIn, token, username }) {
   useEffect(() => {
     axios
 
-      .get(`https://team-tornado-mixtape.herokuapp.com/api/GET/my/favorites/`, {
+      .get(`https://team-tornado-mixtape.herokuapp.com/api/my/favorites/`, {
         headers: { Authorization: `Token ${token}` },
       })
       .then((res) => {

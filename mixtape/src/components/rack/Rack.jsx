@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
+import Chip from '@mui/material/Chip';
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -9,77 +11,110 @@ import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { Link } from "react-router-dom";
-import AllMixes from "./rackTabs/AllMixes.jsx";
-import FavMixes from "./rackTabs/FavMixes.jsx";
-import MyMixes from "./rackTabs/MyMixes.jsx";
+import CircularProgress from "@mui/material/CircularProgress";
 
-function EachRackView(props) {
-  const { children, value, index } = props;
-
-  return (
-    <Box hidden={value !== index} id={`eachrackview-${index}`}>
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          {/* THIS is where the child views of the tabs are called! */}
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </Box>
-  );
-}
-
-EachRackView.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-function TabProps(index) {
-  return {
-    id: `rackview-tab-${index}`,
-  };
-}
 export default function Rack({ token }) {
-  const [value, setValue] = React.useState(0);
+  const [pageDidLoad, setPageDidLoad] = useState(false)
+  const [displayedMixes, setDisplayedMixes] = useState([]);
+  const [error, setError] = useState("");
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  useEffect(() => {
+    setPageDidLoad(true)
+    axios
+      .get(`https://team-tornado-mixtape.herokuapp.com/api/my/mixtapes/`, {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then((res) => {
+        console.log(res.status);
+        console.log(res.data);
+        setDisplayedMixes(res.data);
+      })
+      .catch((e) => {
+        setError(e.message);
+      });
+    console.log(error);
+  }, [token, error]);
+
+
+  function ShowMyMixtapes(e) {
+    e.preventDefault();
+    axios
+      .get(
+        `https://team-tornado-mixtape.herokuapp.com/api/my/mixtapes/`,
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      )
+      .then((res) => {
+        setDisplayedMixes(res.data)
+      })
+      .catch((e) => {
+        setError(e.message)
+        console.log('ERROR! This did not work. Please check that the body of the request is formatted properly.')
+      })
+    console.log(error)
+  }
+
+  function ShowMyFavoriteMixtapes(e) {
+    e.preventDefault();
+    axios
+      .get(
+        `https://team-tornado-mixtape.herokuapp.com/api/my/favorites/`,
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      )
+      .then((res) => {
+        setDisplayedMixes(res.data)
+      })
+      .catch((e) => {
+        setError(e.message)
+        console.log('ERROR! This did not work. Please check that the body of the request is formatted properly.')
+      })
+    console.log(error)
+  }
+
+  function ShowAllMixtapes(e) {
+    e.preventDefault();
+    axios
+      .get(
+        `https://team-tornado-mixtape.herokuapp.com/api/my/mixtapes/`,
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      )
+      .then((res) => {
+        setDisplayedMixes(res.data)
+      })
+      .catch((e) => {
+        setError(e.message)
+        console.log('ERROR! This did not work. Please check that the body of the request is formatted properly.')
+      })
+    console.log(error)
+  }
+
   return (
     <>
-      <Box>
-        {/* <Button component={Link} to="/mixcreate" variant="outlined">
-          Create new mixtape
-        </Button> */}
-      </Box>
-      <Typography variant="h2">The Rack</Typography>
-      <TextField
-        id="outlined-basic"
-        variant="outlined"
-        label="search mixtapes"
-      />
-      <Button color="secondary" variant="contained">
-        Search
-      </Button>
-      <Box sx={{ width: "100%" }}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs value={value} onChange={handleChange}>
-            <Tab label="Created by me" {...TabProps(0)} />
-            <Tab label="Favorite mixtapes" {...TabProps(1)} />
-            <Tab label="All mixtapes" {...TabProps(2)} />
-          </Tabs>
-        </Box>
-        {/* the value of the clicked tab determines which view is rendered here */}
-        <EachRackView value={value} index={0}>
-          <MyMixes token={token} />
-        </EachRackView>
-        <EachRackView value={value} index={1}>
-          <FavMixes token={token} />
-        </EachRackView>
-        <EachRackView value={value} index={2}>
-          <AllMixes token={token} />
-        </EachRackView>
-      </Box>
+      <Stack spacing={2} direction="column">
+        <Typography variant="h2">The Rack</Typography>
+        <Stack spacing={2} direction="row">
+          <Chip
+            label="Created by me" variant="outlined"
+            onClick={ShowMyMixtapes} />
+          <Chip
+            label="My favorites" variant="outlined"
+            onClick={ShowMyFavoriteMixtapes} />
+          <Chip
+            label="All mixtapes" variant="outlined"
+            onClick={ShowAllMixtapes} />
+        </Stack>
+        <br></br>
+      </Stack>
+      {displayedMixes.map((eachMix, index) => {
+        return <Box key={index}>
+          <Typography>{eachMix.title} @{eachMix.creator}</Typography>
+        </Box>;
+      })}
     </>
-  );
+  )
 }

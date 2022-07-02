@@ -31,11 +31,11 @@ export default function MyMixes({ setAuth, isLoggedIn, token, username }) {
         console.log(res.status);
         console.log(res.data);
         setMyMixes(res.data);
-       
+
       })
       .catch((e) => {
         setError(e.message);
-      
+
       });
     console.log(error);
     // }
@@ -43,7 +43,7 @@ export default function MyMixes({ setAuth, isLoggedIn, token, username }) {
 
   return (
     <>
-     
+
       {myMixes.map((eachMix, index) => {
         return <Box key={index}>
           <Typography>{eachMix.title}</Typography>
