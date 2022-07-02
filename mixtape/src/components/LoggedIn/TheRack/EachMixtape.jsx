@@ -16,6 +16,10 @@ export default function EachMixtape({
   token,
   favoriteClicked,
   setFavoriteClicked,
+  setEditClicked,
+  editClicked,
+  deleteClicked,
+  setDeleteClicked,
 }) {
   // here are some consts to get you set up:
   const id = eachMix.id;
@@ -30,6 +34,7 @@ export default function EachMixtape({
   // isPublic is a boolean
   const description = eachMix.description;
   const modifyDate = eachMix.modified_at;
+  const deleteMix = eachMix.detail;
   // const favorites = eachMix.favorited_by;
   // it looks like favorites is an array of users by user id. either that, or the array is just the no. of favorites, though that would be a little extra
 
@@ -68,18 +73,52 @@ export default function EachMixtape({
       });
   }
 
+  function handleDelete(e) {
+    setDeleteClicked(false);
+    e.preventDefault();
+    console.log(
+      `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${id}`
+    );
+    console.log(token);
+    axios
+      .delete(
+        `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${id}`,
+        {
+          detail: deleteMix,
+        },
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.status);
+        console.log(res.data);
+        setDeleteClicked(true);
+      })
+      .catch((e) => {
+        console.log(e.message);
+      });
+  }
   return (
     <Box key={index}>
-      <Card sx={{ width: "28vw" }} variant="outlined">
+      <Card
+        sx={{ width: "28vw", variant: "outlined", border: "2px solid #E2E2DF" }}
+      >
         <CardContent>
           <Typography>
             {mixTitle} @{creator}
+            <Button size="small">Play</Button>
+            {/* <Button onClick={handleEdit} size="small">
+              Edit
+            </Button> */}
             <Button onClick={handleFavorite} size="small">
               Favorite
             </Button>
+            <Button onClick={handleDelete} size="small">
+              Delete
+            </Button>
           </Typography>
         </CardContent>
-        {/* <CardActions></CardActions> */}
       </Card>
     </Box>
   );

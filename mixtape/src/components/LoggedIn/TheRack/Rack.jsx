@@ -6,8 +6,11 @@ import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 
 import EachMixtape from "./EachMixtape";
+import { flexbox } from "@mui/system";
 
 export default function Rack({ token }) {
   const [pageDidLoad, setPageDidLoad] = useState(false);
@@ -22,6 +25,7 @@ export default function Rack({ token }) {
   const [allMixtapesDisplayed, setAllMixtapesDisplayed] = useState([]);
   const [error, setError] = useState("");
   const [favoriteClicked, setFavoriteClicked] = useState(false);
+  const [deleteClicked, setDeleteClicked] = useState(false);
   // what needs doing:
   // - use lodash to add delay to showing if set is loading (api is working a bit too well...)
   // - wrap each of these in a column and arrange them side by side
@@ -137,9 +141,23 @@ export default function Rack({ token }) {
   }
 
   return (
-    <>
+    <Box sx={{ display: "flexbox", alignContent: "center" }}>
       <Stack spacing={2} direction="column">
-        <Typography variant="h2">The Rack</Typography>
+        <Card
+          sx={{
+            display: "flex",
+            width: "28vw",
+            alignContent: "center",
+            backgroundColor: "#8F4F6A",
+            border: "2px solid #E2E2DF",
+          }}
+          variant="outlined"
+        >
+          <CardContent>
+            <Typography variant="h3">The Rack</Typography>
+          </CardContent>
+        </Card>
+        <br></br>
         <Stack spacing={2} direction="row">
           {myMixtapesIsSelected ? (
             <Chip
@@ -157,7 +175,7 @@ export default function Rack({ token }) {
           {myFavoritesIsSelected ? (
             <Chip
               label="My favorites"
-              color="secondary"
+              color="primary"
               onClick={HideMyFavoriteMixtapes}
             />
           ) : (
@@ -195,7 +213,7 @@ export default function Rack({ token }) {
             ) : (
               <>
                 {myMixtapesDisplayed ? (
-                  <Stack spacing={3} direction="column">
+                  <Stack spacing={1} direction="column">
                     <>
                       {myMixtapesDisplayed.map((eachMix, index) => {
                         return (
@@ -203,6 +221,8 @@ export default function Rack({ token }) {
                             eachMix={eachMix}
                             favoriteClicked={favoriteClicked}
                             setFavoriteClicked={setFavoriteClicked}
+                            deleteClicked={deleteClicked}
+                            setDeleteClicked={setDeleteClicked}
                             index={index}
                             token={token}
                           />
@@ -222,7 +242,7 @@ export default function Rack({ token }) {
             ) : (
               <>
                 {myFavoritesDisplayed ? (
-                  <Stack spacing={3} direction="column">
+                  <Stack spacing={1} direction="column">
                     <>
                       <>
                         {myFavoritesDisplayed.map((eachMix, index) => {
@@ -231,6 +251,8 @@ export default function Rack({ token }) {
                               eachMix={eachMix}
                               favoriteClicked={favoriteClicked}
                               setFavoriteClicked={setFavoriteClicked}
+                              deleteClicked={deleteClicked}
+                              setDeleteClicked={setDeleteClicked}
                               index={index}
                               token={token}
                             />
@@ -251,7 +273,7 @@ export default function Rack({ token }) {
             ) : (
               <>
                 {allMixtapesDisplayed ? (
-                  <Stack spacing={3} direction="column">
+                  <Stack spacing={1} direction="column">
                     <>
                       {allMixtapesDisplayed.map((eachMix, index) => {
                         return (
@@ -259,6 +281,8 @@ export default function Rack({ token }) {
                             eachMix={eachMix}
                             favoriteClicked={favoriteClicked}
                             setFavoriteClicked={setFavoriteClicked}
+                            deleteClicked={deleteClicked}
+                            setDeleteClicked={setDeleteClicked}
                             index={index}
                             token={token}
                           />
@@ -274,6 +298,6 @@ export default function Rack({ token }) {
           </>
         )}
       </Stack>
-    </>
+    </Box>
   );
 }
