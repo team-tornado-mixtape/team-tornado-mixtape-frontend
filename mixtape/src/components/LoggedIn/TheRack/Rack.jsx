@@ -5,17 +5,12 @@ import Box from "@mui/material/Box";
 import Chip from '@mui/material/Chip';
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import PropTypes from "prop-types";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import { Link } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
+
+import EachMixtape from "./EachMixtape"
 
 export default function Rack({ token }) {
   const [pageDidLoad, setPageDidLoad] = useState(false)
-  // const [displayedMixes, setDisplayedMixes] = useState([]);
   const [myMixtapesIsSelected, setMyMixtapesIsSelected] = useState(false)
   const [myMixtapesDisplayed, setMyMixtapesDisplayed] = useState([])
   const [myFavoritesIsSelected, setMyFavoritesIsSelected] = useState(false)
@@ -69,6 +64,17 @@ export default function Rack({ token }) {
     console.log(error)
   }
 
+  function HideMyMixtapes(e) {
+    e.preventDefault();
+    myFavoritesIsSelected === false && allMixtapesIsSelected === false ? (
+      setError('You must have at least one view selected.')
+    ) : (
+      setMyMixtapesDisplayed([])
+        (setMyMixtapesIsSelected(false)
+        )
+    )
+  }
+
   function ShowMyFavoriteMixtapes(e) {
     e.preventDefault();
     axios
@@ -88,6 +94,17 @@ export default function Rack({ token }) {
         console.log('ERROR! This did not work. Please check that the body of the request is formatted properly.')
       })
     console.log(error)
+  }
+
+  function HideMyFavoriteMixtapes(e) {
+    e.preventDefault();
+    myMixtapesIsSelected === false && allMixtapesIsSelected === false ? (
+      setError('You must have at least one view selected.')
+    ) : (
+      setMyFavoritesDisplayed([])
+        (setMyFavoritesIsSelected(false)
+        )
+    )
   }
 
   function ShowAllMixtapes(e) {
@@ -111,6 +128,17 @@ export default function Rack({ token }) {
     console.log(error)
   }
 
+  function HideAllMixtapes(e) {
+    e.preventDefault();
+    myMixtapesIsSelected === false && myFavoritesIsSelected === false ? (
+      setError('You must have at least one view selected.')
+    ) : (
+      setAllMixtapesDisplayed([])
+        (setAllMixtapesIsSelected(false)
+        )
+    )
+  }
+
   return (
     <>
       <Stack spacing={2} direction="column">
@@ -119,7 +147,7 @@ export default function Rack({ token }) {
           {myMixtapesIsSelected ? (
             <Chip
               label="Created by me" color="secondary"
-              onClick={ShowMyMixtapes} />
+              onClick={HideMyMixtapes} />
           ) : (
             <Chip
               label="Created by me" variant="outlined"
@@ -128,7 +156,7 @@ export default function Rack({ token }) {
           {myFavoritesIsSelected ? (
             <Chip
               label="My favorites" color="secondary"
-              onClick={ShowMyFavoriteMixtapes} />
+              onClick={HideMyFavoriteMixtapes} />
           ) : (
             <Chip
               label="My favorites" variant="outlined"
@@ -137,7 +165,7 @@ export default function Rack({ token }) {
           {allMixtapesIsSelected ? (
             <Chip
               label="All mixtapes" color="secondary"
-              onClick={ShowAllMixtapes} />
+              onClick={HideAllMixtapes} />
           ) : (
             <Chip
               label="All mixtapes" variant="outlined"
@@ -146,44 +174,41 @@ export default function Rack({ token }) {
         </Stack>
         <br></br>
       </Stack>
-      {myMixtapesDisplayed ? (
-        <>
-          {myMixtapesDisplayed.map((eachMix, index) => {
-            return <Box key={index}>
-              <Typography>{eachMix.title} @{eachMix.creator}</Typography>
-            </Box>;
-          })}
-        </>
-      ) : (
-        <Box></Box>
-      )}
-      {myFavoritesDisplayed ? (
-        <>
-          {myFavoritesDisplayed.map((eachMix, index) => {
-            return <Box key={index}>
-              <Typography>{eachMix.title} @{eachMix.creator}</Typography>
-            </Box>;
-          })}
-        </>
-      ) : (
-        <Box></Box>
-      )}
-      {allMixtapesDisplayed ? (
-        <>
-          {allMixtapesDisplayed.map((eachMix, index) => {
-            return <Box key={index}>
-              <Typography>{eachMix.title} @{eachMix.creator}</Typography>
-            </Box>;
-          })}
-        </>
-      ) : (
-        <Box></Box>
-      )}
-      {/* {displayedMixes.map((eachMix, index) => {
-        return <Box key={index}>
-          <Typography>{eachMix.title} @{eachMix.creator}</Typography>
-        </Box>;
-      })} */}
+      <Stack spacing={2} direction="row">
+        {myMixtapesDisplayed ? (
+          <Stack spacing={3} direction="column">
+            <>
+              {myMixtapesDisplayed.map((eachMix, index) => {
+                return <EachMixtape eachMix={eachMix} index={index} />
+              })}
+            </>
+          </Stack>
+        ) : (
+          <Box></Box>
+        )}
+        {myFavoritesDisplayed ? (
+          <Stack spacing={3} direction="column">
+            <>
+              {myFavoritesDisplayed.map((eachMix, index) => {
+                return <EachMixtape eachMix={eachMix} index={index} />;
+              })}
+            </>
+          </Stack>
+        ) : (
+          <Box></Box>
+        )}
+        {allMixtapesDisplayed ? (
+          <Stack spacing={3} direction="column">
+            <>
+              {allMixtapesDisplayed.map((eachMix, index) => {
+                return <EachMixtape eachMix={eachMix} index={index} />;
+              })}
+            </>
+          </Stack>
+        ) : (
+          <Box></Box>
+        )}
+      </Stack>
     </>
   )
 }

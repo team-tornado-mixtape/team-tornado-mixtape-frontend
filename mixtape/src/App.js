@@ -2,17 +2,16 @@ import "./App.css";
 import React from "react";
 import useLocalStorageState from "use-local-storage-state";
 import axios from "axios";
-import Landing from "./components/Landing";
-import PermanentDrawerLeft from "./components/Sidebar.jsx";
-import Profile from "./components/Profile.jsx";
+import Landing from "./components/NotLoggedIn/Landing/Landing";
+import Profile from "./components/LoggedIn/Profile/Profile.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Player from "./components/Player";
-import PasswordReset from "./components/PasswordReset";
-import ResetForm from "./components/ResetForm";
-import SignIn from "./components/SignIn";
-import SignUp from "./components/SignUp";
-import MixCreate from "./components/MixCreate/MixStepper/Songs";
-import Sidebar from "./components/Sidebar";
+import Player from "./components/LoggedIn/Player/Player";
+import PasswordReset from "./components/NotLoggedIn/Landing/PasswordReset";
+import ResetForm from "./components/NotLoggedIn/Landing/ResetForm";
+import SignIn from "./components/NotLoggedIn/Landing/SignIn";
+import SignUp from "./components/NotLoggedIn/Landing/SignUp";
+import MixCreate from "./components/LoggedIn/NewMixtape/Wizard/Songs";
+import Sidebar from "./components/LoggedIn/Sidebar";
 
 function App() {
   const [token, setToken] = useLocalStorageState("reactMixtapeToken", "");
@@ -46,7 +45,7 @@ function App() {
     <BrowserRouter>
       {isLoggedIn ? (
         <>
-          <PermanentDrawerLeft isLoggedIn={isLoggedIn} username={username} handleLogout={handleLogout} token={token} />
+          <Sidebar isLoggedIn={isLoggedIn} username={username} handleLogout={handleLogout} token={token} />
         </>
       ) : (
         <Routes>
