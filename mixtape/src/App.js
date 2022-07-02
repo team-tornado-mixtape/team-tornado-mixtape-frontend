@@ -10,7 +10,7 @@ import PasswordReset from "./components/NotLoggedIn/Landing/PasswordReset";
 import ResetForm from "./components/NotLoggedIn/Landing/ResetForm";
 import SignIn from "./components/NotLoggedIn/Landing/SignIn";
 import SignUp from "./components/NotLoggedIn/Landing/SignUp";
-import MixCreate from "./components/LoggedIn/NewMixtape/Wizard/Songs";
+import MixCreate from "./components/LoggedIn/NewMixtape/Wizard/SongSearch";
 import Sidebar from "./components/LoggedIn/Sidebar";
 
 function App() {
