@@ -7,9 +7,9 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-import Title from "./MixStepper/Title.jsx"
-import Songs from "./MixStepper/Songs.jsx"
-import Customization from "./MixStepper/Customization.jsx"
+import Title from "./Wizard/Title.jsx"
+import Songs from "./Wizard/Songs.jsx"
+import Customization from "./Wizard/Customization.jsx"
 
 const steps = [
     "Set mixtape title",
