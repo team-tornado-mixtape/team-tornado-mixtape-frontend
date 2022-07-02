@@ -46,6 +46,7 @@ export default function Rack({ token }) {
         }
       )
       .then((res) => {
+        console.log(`here is the res.data my mixtapes ${res.data}`)
         setDisplayedMixes(res.data)
       })
       .catch((e) => {
@@ -65,6 +66,7 @@ export default function Rack({ token }) {
         }
       )
       .then((res) => {
+        console.log(`here is the res.data for favorites ${res.data}`)
         setDisplayedMixes(res.data)
       })
       .catch((e) => {
@@ -78,12 +80,13 @@ export default function Rack({ token }) {
     e.preventDefault();
     axios
       .get(
-        `https://team-tornado-mixtape.herokuapp.com/api/my/mixtapes/`,
+        `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/`,
         {
           headers: { Authorization: `Token ${token}` },
         }
       )
       .then((res) => {
+        console.log(`here is the res.data all mixtapes ${res.data}`)
         setDisplayedMixes(res.data)
       })
       .catch((e) => {
