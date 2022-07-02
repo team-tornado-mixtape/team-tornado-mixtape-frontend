@@ -144,7 +144,7 @@ export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, use
       <Typography>Add songs to {mixTitle}</Typography>
       <br></br>
       <Box sx={{ textAlign: "left", justifyContent: "center" }}>
-        <Stack spacing={10} direction="row">
+        <Stack spacing={2} direction="row">
           <TextField
             id="outlined-basic"
             variant="outlined"
@@ -209,7 +209,19 @@ export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, use
           <Stack spacing={2} direction="column">
             <Typography variant="p">Song search results</Typography>
             {isLoading ? (
-              <Box><CircularProgress></CircularProgress></Box>
+              <>
+                <TableContainer component={Paper} sx={{ width: "45vw", border: "2px solid #E2E2DF" }}>
+                  <Table>
+                    <TableBody>
+                      <TableRow sx={{ width: "45vw", border: "2px solid #E2E2DF" }}>
+                        <TableCell align="center" sx={{ width: "45vw", border: "2px solid #E2E2DF" }}>
+                          <CircularProgress></CircularProgress>
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </>
             ) : (
               <>
                 <TableContainer component={Paper} sx={{ width: "45vw", border: "2px solid #E2E2DF" }}>

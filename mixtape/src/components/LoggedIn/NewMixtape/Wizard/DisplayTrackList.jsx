@@ -44,6 +44,7 @@ export default function DisplayTracklist({ token, mixId, AddRemoveTrack, mixTitl
                 console.log(res.data);
                 const tracklist = res.data.songs
                 setTrackData(tracklist)
+                console.log(`here is the track data: ${trackData}`)
                 setPageDidLoad(true)
             })
             .catch((e) => {
@@ -51,7 +52,6 @@ export default function DisplayTracklist({ token, mixId, AddRemoveTrack, mixTitl
             });
         console.log(error);
     }, [token, error, mixId, trackAdded]);
-
 
     function ReloadTracklist(e) {
         axios
@@ -106,7 +106,7 @@ export default function DisplayTracklist({ token, mixId, AddRemoveTrack, mixTitl
                         <CircularProgress />
                     ) : (
                         <>
-                            {trackData === [] ? (
+                            {trackData.length === 0 ? (
                                 <TableBody>
                                     <TableRow>
                                         <TableCell align="center">
