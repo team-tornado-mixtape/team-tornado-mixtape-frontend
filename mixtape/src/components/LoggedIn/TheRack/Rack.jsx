@@ -28,6 +28,8 @@ export default function Rack({ token }) {
   // - create a mixtape spine component that displays this data nicely :) 
 
   useEffect(() => {
+    setMyFavoritesDidLoad(true)
+    setAllMixtapesDidLoad(true)
     setMyMixtapesIsSelected(true)
     axios
       .get(`https://team-tornado-mixtape.herokuapp.com/api/my/mixtapes/`, {
