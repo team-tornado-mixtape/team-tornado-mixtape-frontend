@@ -15,7 +15,13 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Rack({ token }) {
   const [pageDidLoad, setPageDidLoad] = useState(false)
-  const [displayedMixes, setDisplayedMixes] = useState([]);
+  // const [displayedMixes, setDisplayedMixes] = useState([]);
+  const [myMixtapesIsSelected, setMyMixtapesIsSelected] = useState(false)
+  const [myMixtapesDisplayed, setMyMixtapesDisplayed] = useState([])
+  const [myFavoritesIsSelected, setMyFavoritesIsSelected] = useState(false)
+  const [myFavoritesDisplayed, setMyFavoritesDisplayed] = useState([])
+  const [allMixtapesIsSelected, setAllMixtapesIsSelected] = useState(false)
+  const [allMixtapesDisplayed, setAllMixtapesDisplayed] = useState([])
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -27,7 +33,8 @@ export default function Rack({ token }) {
       .then((res) => {
         console.log(res.status);
         console.log(res.data);
-        setDisplayedMixes(res.data);
+        setMyMixtapesDisplayed(res.data);
+        setMyMixtapesIsSelected(true)
       })
       .catch((e) => {
         setError(e.message);
@@ -47,7 +54,8 @@ export default function Rack({ token }) {
       )
       .then((res) => {
         console.log(`here is the res.data my mixtapes ${res.data}`)
-        setDisplayedMixes(res.data)
+        setMyMixtapesDisplayed(res.data)
+        setMyMixtapesIsSelected(true)
       })
       .catch((e) => {
         setError(e.message)
@@ -67,7 +75,8 @@ export default function Rack({ token }) {
       )
       .then((res) => {
         console.log(`here is the res.data for favorites ${res.data}`)
-        setDisplayedMixes(res.data)
+        setMyFavoritesDisplayed(res.data)
+        setMyFavoritesIsSelected(true)
       })
       .catch((e) => {
         setError(e.message)
@@ -87,7 +96,8 @@ export default function Rack({ token }) {
       )
       .then((res) => {
         console.log(`here is the res.data all mixtapes ${res.data}`)
-        setDisplayedMixes(res.data)
+        setAllMixtapesDisplayed(res.data)
+        setAllMixtapesIsSelected(true)
       })
       .catch((e) => {
         setError(e.message)
@@ -101,23 +111,74 @@ export default function Rack({ token }) {
       <Stack spacing={2} direction="column">
         <Typography variant="h2">The Rack</Typography>
         <Stack spacing={2} direction="row">
-          <Chip
-            label="Created by me" variant="outlined"
-            onClick={ShowMyMixtapes} />
-          <Chip
-            label="My favorites" variant="outlined"
-            onClick={ShowMyFavoriteMixtapes} />
-          <Chip
-            label="All mixtapes" variant="outlined"
-            onClick={ShowAllMixtapes} />
+          {myMixtapesIsSelected ? (
+            <Chip
+              label="Created by me" color="secondary"
+              onClick={ShowMyMixtapes} />
+          ) : (
+            <Chip
+              label="Created by me" variant="outlined"
+              onClick={ShowMyMixtapes} />
+          )}
+          {myFavoritesIsSelected ? (
+            <Chip
+              label="My favorites" color="secondary"
+              onClick={ShowMyFavoriteMixtapes} />
+          ) : (
+            <Chip
+              label="My favorites" variant="outlined"
+              onClick={ShowMyFavoriteMixtapes} />
+          )}
+          {allMixtapesIsSelected ? (
+            <Chip
+              label="All mixtapes" color="secondary"
+              onClick={ShowAllMixtapes} />
+          ) : (
+            <Chip
+              label="All mixtapes" variant="outlined"
+              onClick={ShowAllMixtapes} />
+          )}
         </Stack>
         <br></br>
       </Stack>
-      {displayedMixes.map((eachMix, index) => {
+      {myMixtapesDisplayed ? (
+        <>
+          {myMixtapesDisplayed.map((eachMix, index) => {
+            return <Box key={index}>
+              <Typography>{eachMix.title} @{eachMix.creator}</Typography>
+            </Box>;
+          })}
+        </>
+      ) : (
+        <Box></Box>
+      )}
+      {myFavoritesDisplayed ? (
+        <>
+          {myFavoritesDisplayed.map((eachMix, index) => {
+            return <Box key={index}>
+              <Typography>{eachMix.title} @{eachMix.creator}</Typography>
+            </Box>;
+          })}
+        </>
+      ) : (
+        <Box></Box>
+      )}
+      {allMixtapesDisplayed ? (
+        <>
+          {allMixtapesDisplayed.map((eachMix, index) => {
+            return <Box key={index}>
+              <Typography>{eachMix.title} @{eachMix.creator}</Typography>
+            </Box>;
+          })}
+        </>
+      ) : (
+        <Box></Box>
+      )}
+      {/* {displayedMixes.map((eachMix, index) => {
         return <Box key={index}>
           <Typography>{eachMix.title} @{eachMix.creator}</Typography>
         </Box>;
-      })}
+      })} */}
     </>
   )
 }
