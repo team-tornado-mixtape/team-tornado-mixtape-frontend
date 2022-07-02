@@ -30,17 +30,9 @@ export default function EachMixtape({
   // isPublic is a boolean
   const description = eachMix.description;
   const modifyDate = eachMix.modified_at;
-  // const favorites = eachMix.favorited_by;
+  const favorites = eachMix.favorited_by;
   // it looks like favorites is an array of users by user id. either that, or the array is just the no. of favorites, though that would be a little extra
 
-  // const favorites =  eachMix.favorited_by
-  // axios
-  //   .patch(
-  //     `https://team-tornado-mixtape.herokuapp.com/api//mixtapes/{eachMix.id}/favorite/`,
-  //     {
-  //       headers: { Authorization: `Token ${token}` },
-  //     }
-  //   )
   function handleFavorite(e) {
     setFavoriteClicked(false);
     e.preventDefault();
