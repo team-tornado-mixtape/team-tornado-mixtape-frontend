@@ -29,13 +29,14 @@ import Chip from '@mui/material/Chip';
 import DisplayTracklist from "./DisplayTrackList";
 
 
-export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, username, selectedArtist }) {
+export default function Songs({ setAuth, mixId, mixTitle, setActiveStep, isLoggedIn, token, username, selectedArtist }) {
   const [isLoading, setIsLoading] = useState(false)
   const [allResults, setAllResults] = useState([])
   // const [mixData, setMixData] = useState([])
   const [error, setError] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const [artistRefiner, setArtistRefiner] = useState('')
+  const [deleteIsProcessing, setDeleteIsProcessing] = useState(false)
 
   const [trackAdded, setTrackAdded] = useState(false)
 
@@ -139,6 +140,33 @@ export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, use
       })
   }
 
+  function handleCustomization(e) {
+    e.preventDefault();
+    setActiveStep(2)
+  }
+
+  function handleDelete(e) {
+    e.preventDefault();
+    setDeleteIsProcessing(true)
+    axios
+      .delete(
+        `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${mixId}/`,
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.status)
+        console.log(res.data)
+        setActiveStep(0)
+        setDeleteIsProcessing(false)
+      })
+      .catch((e) => {
+        setError(e.message)
+      })
+    console.log(error)
+  }
+
   return (
     <>
       <Typography>Add songs to {mixTitle}</Typography>
@@ -225,7 +253,7 @@ export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, use
             ) : (
               <>
                 <TableContainer component={Paper} sx={{ width: "45vw", border: "2px solid #E2E2DF" }}>
-                  <Table component="form">
+                  <Table>
                     <TableBody>
                       {allResults.map((eachResult, index) => {
                         const trackId = eachResult.id
@@ -265,6 +293,12 @@ export default function Songs({ setAuth, mixId, mixTitle, isLoggedIn, token, use
           <DisplayTracklist token={token} mixId={mixId} mixTitle={mixTitle} trackAdded={trackAdded} setTrackAdded={setTrackAdded} />
         </Stack>
       </Box>
+      {deleteIsProcessing ? (
+        <CircularProgress />
+      ) : (
+        <Button variant="outlined" color="secondary" onClick={handleDelete}>Cancel</Button>
+      )}
+      <Button variant="contained" color="primary" onClick={handleCustomization}>Continue</Button>
     </>
   )
 }
