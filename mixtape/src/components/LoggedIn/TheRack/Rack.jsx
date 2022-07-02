@@ -11,6 +11,9 @@ import EachMixtape from "./EachMixtape"
 
 export default function Rack({ token }) {
   const [pageDidLoad, setPageDidLoad] = useState(false)
+  const [myMixtapesDidLoad, setMyMixtapesDidLoad] = useState(false)
+  const [myFavoritesDidLoad, setMyFavoritesDidLoad] = useState(false)
+  const [allMixtapesDidLoad, setAllMixtapesDidLoad] = useState(false)
   const [myMixtapesIsSelected, setMyMixtapesIsSelected] = useState(false)
   const [myMixtapesDisplayed, setMyMixtapesDisplayed] = useState([])
   const [myFavoritesIsSelected, setMyFavoritesIsSelected] = useState(false)
@@ -20,12 +23,12 @@ export default function Rack({ token }) {
   const [error, setError] = useState("");
 
   // what needs doing:
-  // - create a state for deselecting a chip and a function that changes each 'displayed' state to an empty array (just like the default states for these)
+  // - use lodash to add delay to showing if set is loading (api is working a bit too well...)
   // - wrap each of these in a column and arrange them side by side
   // - create a mixtape spine component that displays this data nicely :) 
 
   useEffect(() => {
-    setPageDidLoad(true)
+    setMyMixtapesIsSelected(true)
     axios
       .get(`https://team-tornado-mixtape.herokuapp.com/api/my/mixtapes/`, {
         headers: { Authorization: `Token ${token}` },
@@ -33,8 +36,9 @@ export default function Rack({ token }) {
       .then((res) => {
         console.log(res.status);
         console.log(res.data);
+        setPageDidLoad(true)
+        setMyMixtapesDidLoad(true)
         setMyMixtapesDisplayed(res.data);
-        setMyMixtapesIsSelected(true)
       })
       .catch((e) => {
         setError(e.message);
@@ -45,6 +49,8 @@ export default function Rack({ token }) {
 
   function ShowMyMixtapes(e) {
     e.preventDefault();
+    setMyMixtapesIsSelected(true)
+    setMyMixtapesDidLoad(false)
     axios
       .get(
         `https://team-tornado-mixtape.herokuapp.com/api/my/mixtapes/`,
@@ -54,8 +60,8 @@ export default function Rack({ token }) {
       )
       .then((res) => {
         console.log(`here is the res.data my mixtapes ${res.data}`)
+        setMyMixtapesDidLoad(true)
         setMyMixtapesDisplayed(res.data)
-        setMyMixtapesIsSelected(true)
       })
       .catch((e) => {
         setError(e.message)
@@ -77,6 +83,8 @@ export default function Rack({ token }) {
 
   function ShowMyFavoriteMixtapes(e) {
     e.preventDefault();
+    setMyFavoritesIsSelected(true)
+    setMyFavoritesDidLoad(false)
     axios
       .get(
         `https://team-tornado-mixtape.herokuapp.com/api/my/favorites/`,
@@ -86,8 +94,8 @@ export default function Rack({ token }) {
       )
       .then((res) => {
         console.log(`here is the res.data for favorites ${res.data}`)
+        setMyFavoritesDidLoad(true)
         setMyFavoritesDisplayed(res.data)
-        setMyFavoritesIsSelected(true)
       })
       .catch((e) => {
         setError(e.message)
@@ -109,6 +117,8 @@ export default function Rack({ token }) {
 
   function ShowAllMixtapes(e) {
     e.preventDefault();
+    setAllMixtapesIsSelected(true)
+    setAllMixtapesDidLoad(false)
     axios
       .get(
         `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/`,
@@ -118,8 +128,8 @@ export default function Rack({ token }) {
       )
       .then((res) => {
         console.log(`here is the res.data all mixtapes ${res.data}`)
+        setAllMixtapesDidLoad(true)
         setAllMixtapesDisplayed(res.data)
-        setAllMixtapesIsSelected(true)
       })
       .catch((e) => {
         setError(e.message)
@@ -175,38 +185,70 @@ export default function Rack({ token }) {
         <br></br>
       </Stack>
       <Stack spacing={2} direction="row">
-        {myMixtapesDisplayed ? (
-          <Stack spacing={3} direction="column">
-            <>
-              {myMixtapesDisplayed.map((eachMix, index) => {
-                return <EachMixtape eachMix={eachMix} index={index} />
-              })}
-            </>
-          </Stack>
+        {pageDidLoad === false ? (
+          <CircularProgress />
         ) : (
-          <Box></Box>
-        )}
-        {myFavoritesDisplayed ? (
-          <Stack spacing={3} direction="column">
-            <>
-              {myFavoritesDisplayed.map((eachMix, index) => {
-                return <EachMixtape eachMix={eachMix} index={index} />;
-              })}
-            </>
-          </Stack>
-        ) : (
-          <Box></Box>
-        )}
-        {allMixtapesDisplayed ? (
-          <Stack spacing={3} direction="column">
-            <>
-              {allMixtapesDisplayed.map((eachMix, index) => {
-                return <EachMixtape eachMix={eachMix} index={index} />;
-              })}
-            </>
-          </Stack>
-        ) : (
-          <Box></Box>
+          <>
+            {myMixtapesDidLoad === false ? (
+              <>
+                <CircularProgress />
+              </>
+            ) : (
+              <>
+                {myMixtapesDisplayed ? (
+                  <Stack spacing={3} direction="column">
+                    <>
+                      {myMixtapesDisplayed.map((eachMix, index) => {
+                        return <EachMixtape eachMix={eachMix} index={index} />
+                      })}
+                    </>
+                  </Stack>
+                ) : (
+                  <></>
+                )}
+              </>
+            )}
+            {myFavoritesDidLoad === false ? (
+              <>
+                <CircularProgress />
+              </>
+            ) : (
+              <>
+                {myFavoritesDisplayed ? (
+                  <Stack spacing={3} direction="column">
+                    <>
+                      <>
+                        {myFavoritesDisplayed.map((eachMix, index) => {
+                          return <EachMixtape eachMix={eachMix} index={index} />;
+                        })}
+                      </>
+                    </>
+                  </Stack>
+                ) : (
+                  <></>
+                )}
+              </>
+            )}
+            {allMixtapesDidLoad === false ? (
+              <>
+                <CircularProgress />
+              </>
+            ) : (
+              <>
+                {allMixtapesDisplayed ? (
+                  <Stack spacing={3} direction="column">
+                    <>
+                      {allMixtapesDisplayed.map((eachMix, index) => {
+                        return <EachMixtape eachMix={eachMix} index={index} />;
+                      })}
+                    </>
+                  </Stack>
+                ) : (
+                  <></>
+                )}
+              </>
+            )}
+          </>
         )}
       </Stack>
     </>
