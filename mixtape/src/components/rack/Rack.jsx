@@ -24,6 +24,11 @@ export default function Rack({ token }) {
   const [allMixtapesDisplayed, setAllMixtapesDisplayed] = useState([])
   const [error, setError] = useState("");
 
+  // what needs doing:
+  // - create a state for deselecting a chip and a function that changes each 'displayed' state to an empty array (just like the default states for these)
+  // - wrap each of these in a column and arrange them side by side
+  // - create a mixtape spine component that displays this data nicely :) 
+
   useEffect(() => {
     setPageDidLoad(true)
     axios
