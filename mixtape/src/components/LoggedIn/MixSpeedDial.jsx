@@ -1,36 +1,39 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import SpeedDial from '@mui/material/SpeedDial';
-import SpeedDialIcon from '@mui/material/SpeedDialIcon';
-import SpeedDialAction from '@mui/material/SpeedDialAction';
-import FileCopyIcon from '@mui/icons-material/FileCopyOutlined';
-import SaveIcon from '@mui/icons-material/Save';
-import PrintIcon from '@mui/icons-material/Print';
-import ShareIcon from '@mui/icons-material/Share';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import SpeedDial from "@mui/material/SpeedDial";
+import SpeedDialIcon from "@mui/material/SpeedDialIcon";
+import SpeedDialAction from "@mui/material/SpeedDialAction";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import DeleteIcon from "@mui/icons-material/Delete";
+import StarIcon from "@mui/icons-material/Star";
+import PlayCircleIcon from "@mui/icons-material/PlayCircle";
+import EditIcon from "@mui/icons-material/Edit";
+
 
 const actions = [
-    { icon: <FileCopyIcon />, name: 'Copy' },
-    { icon: <SaveIcon />, name: 'Save' },
-    { icon: <PrintIcon />, name: 'Print' },
-    { icon: <ShareIcon />, name: 'Share' },
+  { icon: <ContentCopyIcon />, name: "Copy link" },
+  { icon: <StarIcon />, name: "Favorite" },
+  { icon: <PlayCircleIcon />, name: "Play" },
+  { icon: <EditIcon />, name: "Edit" },
+  { icon: <DeleteIcon />, name: "Delete" },
 ];
 
 export default function MixSpeedDial() {
-    return (
-        <Box sx={{ height: 320, transform: 'translateZ(0px)', flexGrow: 1 }}>
-            <SpeedDial
-                ariaLabel="SpeedDial basic example"
-                sx={{ position: 'absolute', bottom: 16, right: 16 }}
-                icon={<SpeedDialIcon />}
-            >
-                {actions.map((action) => (
-                    <SpeedDialAction
-                        key={action.name}
-                        icon={action.icon}
-                        tooltipTitle={action.name}
-                    />
-                ))}
-            </SpeedDial>
-        </Box>
-    );
+  return (
+    <Box sx={{ height: 320, transform: "translateZ(0px)", flexGrow: 1 }}>
+      <SpeedDial
+        ariaLabel="SpeedDial basic example"
+        sx={{ position: "absolute", bottom: 16, right: 16 }}
+        icon={<SpeedDialIcon />}
+      >
+        {actions.map((action) => (
+          <SpeedDialAction
+            key={action.name}
+            icon={action.icon}
+            tooltipTitle={action.name}
+          />
+        ))}
+      </SpeedDial>
+    </Box>
+  );
 }

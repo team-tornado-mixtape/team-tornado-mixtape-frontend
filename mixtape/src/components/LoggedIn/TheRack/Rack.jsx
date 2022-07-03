@@ -8,9 +8,9 @@ import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-
 import EachMixtape from "./EachMixtape";
 import { flexbox } from "@mui/system";
+
 
 export default function Rack({ token }) {
   const [pageDidLoad, setPageDidLoad] = useState(false);
@@ -219,10 +219,12 @@ export default function Rack({ token }) {
                         return (
                           <EachMixtape
                             eachMix={eachMix}
+
                             favoriteClicked={favoriteClicked}
                             setFavoriteClicked={setFavoriteClicked}
                             deleteClicked={deleteClicked}
                             setDeleteClicked={setDeleteClicked}
+
                             index={index}
                             token={token}
                           />
