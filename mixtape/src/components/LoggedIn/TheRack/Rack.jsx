@@ -12,11 +12,11 @@ import EachMixtape from "./EachMixtape";
 import { flexbox } from "@mui/system";
 
 import AddMixtapeButton from "./AddMixtape";
-import Wizard from "../NewMixtape/Wizard.jsx"
+import WizardContainer from "../NewMixtape/WizardContainer.jsx"
 
 export default function Rack({ token }) {
 
-  const [state, setState] = useState('start')
+  const [addMixtapeButtonClicked, setAddMixtapeButtonClicked] = useState(false)
 
   const [pageDidLoad, setPageDidLoad] = useState(false);
   const [myMixtapesDidLoad, setMyMixtapesDidLoad] = useState(false);
@@ -148,11 +148,10 @@ export default function Rack({ token }) {
   return (
     <>
       <div>
-        {state === 'start' && (
-          <AddMixtapeButton addMixtape={() => setState('add-mixtape')} />
+        {addMixtapeButtonClicked === false && (
+          <AddMixtapeButton addMixtape={() => setAddMixtapeButtonClicked(true)} />
         )}
-
-        {state === 'add-mixtape' && <Wizard />}
+        {addMixtapeButtonClicked === true && <WizardContainer addMixtapeButtonClicked={addMixtapeButtonClicked} setAddMixtapeButtonClicked={setAddMixtapeButtonClicked} />}
       </div>
       <Box sx={{ display: "flexbox", alignContent: "center" }}>
         <Stack spacing={2} direction="column">
