@@ -10,13 +10,13 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Grid from '@mui/material/Grid';
+import useLocalStorageState from "use-local-storage-state";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
 })
 
-export default function SignUp({ setAuth, isLoggedIn }) {
-  const [username, setUsername] = useState('')
+export default function SignUp({ isLoggedIn }) {
   const [password, setPassword] = useState('')
   const [password_again, setPassword_again] = useState('')
   const [isRegistered, setIsRegistered] = useState(false);
@@ -25,7 +25,18 @@ export default function SignUp({ setAuth, isLoggedIn }) {
   const [error, setError] = useState('')
   const [open, setOpen] = React.useState(false)
   const [signUpSignInComplete, setSignUpSignInComplete] = useState(false)
-  const [token, setToken] = useState('')
+  const [issuedToken, setIssuedToken] = useState('')
+
+  const [token, setToken] = useLocalStorageState("reactMixtapeToken", "");
+  const [username, setUsername] = useLocalStorageState(
+    "reactMixtapeUsername",
+    ""
+  );
+
+  const setAuth = (username, token) => {
+    setToken(token);
+    setUsername(username);
+  };
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -71,8 +82,10 @@ export default function SignUp({ setAuth, isLoggedIn }) {
       .then((res) => {
         console.log(res.data)
         console.log(`this is the token: ${res.data.auth_token}`)
-        setAuth(username, res.data.auth_token)
-        setToken(res.data.auth_token);
+        // setAuth(username, res.data.auth_token)
+        setAuth(username, token)
+        setIssuedToken(res.data.auth_token);
+        RegisterSpotifyAccount()
       })
       .catch((e) => {
         setError(e.message)
@@ -81,30 +94,27 @@ export default function SignUp({ setAuth, isLoggedIn }) {
 
   function RegisterSpotifyAccount() {
     console.log('you got to this step!')
-    setError('')
-    spotifyUser !== null ? (
-      axios
-        .post(
-          'https://team-tornado-mixtape.herokuapp.com/api/profiles/',
-          {
-            spotify_username: spotifyUser,
-          },
-          {
-            headers: { Authorization: `Token ${token}` },
-          }
-        )
-        .then((res) => {
-          console.log(res)
-          setSpotifyIsRegistered(true)
-          console.log('Profile registered with spotify')
-        })
-        .catch((e) => {
-          setError(e.message)
-        })
-    ) : (
-      <></>
-    )
-    setSignUpSignInComplete(true)
+    console.log(token)
+    // setError('')
+    axios
+      .post(
+        'https://team-tornado-mixtape.herokuapp.com/api/profiles/',
+        {
+          spotify_username: spotifyUser,
+        },
+        {
+          headers: { Authorization: `Token ${token}` },
+        }
+      )
+      .then((res) => {
+        console.log(res)
+        // setSpotifyIsRegistered(true)
+        console.log('Profile registered with spotify')
+        setSignUpSignInComplete(true)
+      })
+      .catch((e) => {
+        setError(e.message)
+      })
   }
 
   // if (isLoggedIn) {
