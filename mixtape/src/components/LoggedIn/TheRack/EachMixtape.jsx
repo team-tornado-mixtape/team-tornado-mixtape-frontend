@@ -98,27 +98,26 @@ export default function EachMixtape({
   return (
     <Box key={index}>
       <Card
-        sx={{ width: "28vw", variant: "outlined", border: "2px solid #E2E2DF" }}
+        sx={{ width: "28vw",  variant: "outlined", border: "2px solid #E2E2DF" }}
       >
-        <Stack direction="row">
-        <CardContent>
-          <Typography>
-            {mixTitle} @{creator}
-            {/* <Button size="small">Play</Button> */}
-            {/* <Button onClick={handleEdit} size="small">
+        <Stack sx={{ direction: "row"}}>
+          <CardContent>
+            <Typography>
+              {mixTitle} @{creator}
+              {/* <Button size="small">Play</Button> */}
+              {/* <Button onClick={handleEdit} size="small">
               Edit
             </Button> */}
-            {/* <Button onClick={handleFavorite} size="small">
+              {/* <Button onClick={handleFavorite} size="small">
               Favorite
             </Button>
             <Button onClick={handleDelete} size="small">
               Delete
             </Button> */}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <MixSpeedDial />
-        </CardActions>
+            </Typography>
+          <MixSpeedDial id={id} />
+          </CardContent>
+          <CardActions></CardActions>
         </Stack>
       </Card>
     </Box>

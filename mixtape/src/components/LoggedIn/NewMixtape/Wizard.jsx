@@ -17,7 +17,7 @@ const steps = [
     "Customize"
 ];
 
-export default function MixStepper({ token }) {
+export default function Wizard({ token }) {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
     const [mixTitle, setMixTitle] = React.useState('')
