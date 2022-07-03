@@ -66,7 +66,7 @@ export default function Title({ setActiveStep, setMixTitle, mixTitle, setMixId, 
     return (
         <>
             {mixTitle.length === 0 ? (
-                <Box sx={{ textAlign: "center", justifyContent: "center", border: "1px solid white" }}>
+                <Box sx={{ textAlign: "left", justifyContent: "left" }}>
                     <Stack spacing={2} direction="column">
                         <Box component="form" onSubmit={handleMixCreate}>
                             <Box>
