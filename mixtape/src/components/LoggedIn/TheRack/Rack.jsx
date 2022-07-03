@@ -11,9 +11,13 @@ import CardContent from "@mui/material/CardContent";
 import EachMixtape from "./EachMixtape";
 import { flexbox } from "@mui/system";
 
-import AddMixtape from "./AddMixtape";
+import AddMixtapeButton from "./AddMixtape";
+import Wizard from "../NewMixtape/Wizard.jsx"
 
 export default function Rack({ token }) {
+
+  const [state, setState] = useState('start')
+
   const [pageDidLoad, setPageDidLoad] = useState(false);
   const [myMixtapesDidLoad, setMyMixtapesDidLoad] = useState(false);
   const [myFavoritesDidLoad, setMyFavoritesDidLoad] = useState(false);
@@ -143,7 +147,13 @@ export default function Rack({ token }) {
 
   return (
     <>
-      <AddMixtape token={token} />
+      <div>
+        {state === 'start' && (
+          <AddMixtapeButton addMixtape={() => setState('add-mixtape')} />
+        )}
+
+        {state === 'add-mixtape' && <Wizard />}
+      </div>
       <Box sx={{ display: "flexbox", alignContent: "center" }}>
         <Stack spacing={2} direction="column">
           <Card
