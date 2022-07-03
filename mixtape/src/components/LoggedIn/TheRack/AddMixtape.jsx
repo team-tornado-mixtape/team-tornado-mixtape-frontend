@@ -30,7 +30,10 @@ const AddMixtapeButton = (props) => {
     position: 'fixed',
   };
 
-  return <Fab variant="extended" color="primary" style={buttonStyle} onClick={props.addMixtape}>Add Mixtape</Fab>
+  return <Fab variant="extended" color="primary" style={buttonStyle} onClick={props.addMixtape}>
+    <AddCircleIcon sx={{ mr: 1 }} />
+    Add Mixtape
+  </Fab>
 }
 
 export default AddMixtapeButton
