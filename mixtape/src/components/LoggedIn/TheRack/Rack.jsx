@@ -11,6 +11,7 @@ import CardContent from "@mui/material/CardContent";
 import EachMixtape from "./EachMixtape";
 import { flexbox } from "@mui/system";
 
+import AddMixtape from "./AddMixtape";
 
 export default function Rack({ token }) {
   const [pageDidLoad, setPageDidLoad] = useState(false);
@@ -141,113 +142,83 @@ export default function Rack({ token }) {
   }
 
   return (
-    <Box sx={{ display: "flexbox", alignContent: "center" }}>
-      <Stack spacing={2} direction="column">
-        <Card
-          sx={{
-            display: "flex",
-            width: "28vw",
-            alignContent: "center",
-            backgroundColor: "#8F4F6A",
-            border: "2px solid #E2E2DF",
-          }}
-          variant="outlined"
-        >
-          <CardContent>
-            <Typography variant="h3">The Rack</Typography>
-          </CardContent>
-        </Card>
-        <br></br>
-        <Stack spacing={2} direction="row">
-          {myMixtapesIsSelected ? (
-            <Chip
-              label="Created by me"
-              color="secondary"
-              onClick={HideMyMixtapes}
-            />
-          ) : (
-            <Chip
-              label="Created by me"
-              variant="outlined"
-              onClick={ShowMyMixtapes}
-            />
-          )}
-          {myFavoritesIsSelected ? (
-            <Chip
-              label="My favorites"
-              color="primary"
-              onClick={HideMyFavoriteMixtapes}
-            />
-          ) : (
-            <Chip
-              label="My favorites"
-              variant="outlined"
-              onClick={ShowMyFavoriteMixtapes}
-            />
-          )}
-          {allMixtapesIsSelected ? (
-            <Chip
-              label="All mixtapes"
-              color="secondary"
-              onClick={HideAllMixtapes}
-            />
-          ) : (
-            <Chip
-              label="All mixtapes"
-              variant="outlined"
-              onClick={ShowAllMixtapes}
-            />
-          )}
-        </Stack>
-        <br></br>
-      </Stack>
-      <Stack spacing={2} direction="row">
-        {pageDidLoad === false ? (
-          <CircularProgress />
-        ) : (
-          <>
-            {myMixtapesDidLoad === false ? (
-              <>
-                <CircularProgress />
-              </>
+    <>
+      <AddMixtape token={token} />
+      <Box sx={{ display: "flexbox", alignContent: "center" }}>
+        <Stack spacing={2} direction="column">
+          <Card
+            sx={{
+              display: "flex",
+              width: "28vw",
+              alignContent: "center",
+              backgroundColor: "#8F4F6A",
+              border: "2px solid #E2E2DF",
+            }}
+            variant="outlined"
+          >
+            <CardContent>
+              <Typography variant="h3">The Rack</Typography>
+            </CardContent>
+          </Card>
+          <br></br>
+          <Stack spacing={2} direction="row">
+            {myMixtapesIsSelected ? (
+              <Chip
+                label="Created by me"
+                color="secondary"
+                onClick={HideMyMixtapes}
+              />
             ) : (
-              <>
-                {myMixtapesDisplayed ? (
-                  <Stack spacing={1} direction="column">
-                    <>
-                      {myMixtapesDisplayed.map((eachMix, index) => {
-                        return (
-                          <EachMixtape
-                            eachMix={eachMix}
-
-                            favoriteClicked={favoriteClicked}
-                            setFavoriteClicked={setFavoriteClicked}
-                            deleteClicked={deleteClicked}
-                            setDeleteClicked={setDeleteClicked}
-
-                            index={index}
-                            token={token}
-                          />
-                        );
-                      })}
-                    </>
-                  </Stack>
-                ) : (
-                  <></>
-                )}
-              </>
+              <Chip
+                label="Created by me"
+                variant="outlined"
+                onClick={ShowMyMixtapes}
+              />
             )}
-            {myFavoritesDidLoad === false ? (
-              <>
-                <CircularProgress />
-              </>
+            {myFavoritesIsSelected ? (
+              <Chip
+                label="My favorites"
+                color="primary"
+                onClick={HideMyFavoriteMixtapes}
+              />
             ) : (
-              <>
-                {myFavoritesDisplayed ? (
-                  <Stack spacing={1} direction="column">
-                    <>
+              <Chip
+                label="My favorites"
+                variant="outlined"
+                onClick={ShowMyFavoriteMixtapes}
+              />
+            )}
+            {allMixtapesIsSelected ? (
+              <Chip
+                label="All mixtapes"
+                color="secondary"
+                onClick={HideAllMixtapes}
+              />
+            ) : (
+              <Chip
+                label="All mixtapes"
+                variant="outlined"
+                onClick={ShowAllMixtapes}
+              />
+            )}
+          </Stack>
+          <br></br>
+        </Stack>
+        <Stack spacing={2} direction="row">
+          {pageDidLoad === false ? (
+            <CircularProgress />
+          ) : (
+            <>
+              {myMixtapesDidLoad === false ? (
+                <>
+                  <CircularProgress />
+                </>
+              ) : (
+                <>
+                  {myMixtapesDisplayed ? (
+                    <Stack spacing={1} direction="column">
                       <>
-                        {myFavoritesDisplayed.map((eachMix, index) => {
+                        {myMixtapesDisplayed.map((eachMix, index) => {
                           return (
                             <EachMixtape
                               eachMix={eachMix}
@@ -261,45 +232,76 @@ export default function Rack({ token }) {
                           );
                         })}
                       </>
-                    </>
-                  </Stack>
-                ) : (
-                  <></>
-                )}
-              </>
-            )}
-            {allMixtapesDidLoad === false ? (
-              <>
-                <CircularProgress />
-              </>
-            ) : (
-              <>
-                {allMixtapesDisplayed ? (
-                  <Stack spacing={1} direction="column">
-                    <>
-                      {allMixtapesDisplayed.map((eachMix, index) => {
-                        return (
-                          <EachMixtape
-                            eachMix={eachMix}
-                            favoriteClicked={favoriteClicked}
-                            setFavoriteClicked={setFavoriteClicked}
-                            deleteClicked={deleteClicked}
-                            setDeleteClicked={setDeleteClicked}
-                            index={index}
-                            token={token}
-                          />
-                        );
-                      })}
-                    </>
-                  </Stack>
-                ) : (
-                  <></>
-                )}
-              </>
-            )}
-          </>
-        )}
-      </Stack>
-    </Box>
+                    </Stack>
+                  ) : (
+                    <></>
+                  )}
+                </>
+              )}
+              {myFavoritesDidLoad === false ? (
+                <>
+                  <CircularProgress />
+                </>
+              ) : (
+                <>
+                  {myFavoritesDisplayed ? (
+                    <Stack spacing={1} direction="column">
+                      <>
+                        <>
+                          {myFavoritesDisplayed.map((eachMix, index) => {
+                            return (
+                              <EachMixtape
+                                eachMix={eachMix}
+                                favoriteClicked={favoriteClicked}
+                                setFavoriteClicked={setFavoriteClicked}
+                                deleteClicked={deleteClicked}
+                                setDeleteClicked={setDeleteClicked}
+                                index={index}
+                                token={token}
+                              />
+                            );
+                          })}
+                        </>
+                      </>
+                    </Stack>
+                  ) : (
+                    <></>
+                  )}
+                </>
+              )}
+              {allMixtapesDidLoad === false ? (
+                <>
+                  <CircularProgress />
+                </>
+              ) : (
+                <>
+                  {allMixtapesDisplayed ? (
+                    <Stack spacing={1} direction="column">
+                      <>
+                        {allMixtapesDisplayed.map((eachMix, index) => {
+                          return (
+                            <EachMixtape
+                              eachMix={eachMix}
+                              favoriteClicked={favoriteClicked}
+                              setFavoriteClicked={setFavoriteClicked}
+                              deleteClicked={deleteClicked}
+                              setDeleteClicked={setDeleteClicked}
+                              index={index}
+                              token={token}
+                            />
+                          );
+                        })}
+                      </>
+                    </Stack>
+                  ) : (
+                    <></>
+                  )}
+                </>
+              )}
+            </>
+          )}
+        </Stack>
+      </Box>
+    </>
   );
 }
