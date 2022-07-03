@@ -9,6 +9,8 @@ import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import MixSpeedDial from "../MixSpeedDial";
+import { Stack } from "@mui/material";
 
 export default function EachMixtape({
   eachMix,
@@ -35,6 +37,7 @@ export default function EachMixtape({
   const description = eachMix.description;
   const modifyDate = eachMix.modified_at;
   const deleteMix = eachMix.detail;
+
   // const favorites = eachMix.favorited_by;
   // it looks like favorites is an array of users by user id. either that, or the array is just the no. of favorites, though that would be a little extra
 
@@ -91,26 +94,32 @@ export default function EachMixtape({
         console.log(e.message);
       });
   }
+
   return (
     <Box key={index}>
       <Card
         sx={{ width: "28vw", variant: "outlined", border: "2px solid #E2E2DF" }}
       >
+        <Stack direction="row">
         <CardContent>
           <Typography>
             {mixTitle} @{creator}
-            <Button size="small">Play</Button>
+            {/* <Button size="small">Play</Button> */}
             {/* <Button onClick={handleEdit} size="small">
               Edit
             </Button> */}
-            <Button onClick={handleFavorite} size="small">
+            {/* <Button onClick={handleFavorite} size="small">
               Favorite
             </Button>
             <Button onClick={handleDelete} size="small">
               Delete
-            </Button>
+            </Button> */}
           </Typography>
         </CardContent>
+        <CardActions>
+          <MixSpeedDial />
+        </CardActions>
+        </Stack>
       </Card>
     </Box>
   );
