@@ -18,10 +18,14 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 export default function SignUp({ setAuth, isLoggedIn }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [password_again, setPassword_again] = useState('')
   const [isRegistered, setIsRegistered] = useState(false);
-  const [email, setEmail] = useState('')
+  const [spotifyUser, setSpotifyUser] = useState(null)
+  const [spotifyIsRegistered, setSpotifyIsRegistered] = useState(false)
   const [error, setError] = useState('')
   const [open, setOpen] = React.useState(false)
+  const [signUpSignInComplete, setSignUpSignInComplete] = useState(false)
+  const [token, setToken] = useState('')
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -31,7 +35,7 @@ export default function SignUp({ setAuth, isLoggedIn }) {
     setOpen(false)
   }
 
-  const handleLogin = (event) => {
+  const handleSignUp = (event) => {
     event.preventDefault()
     console.log(event)
     setError('')
@@ -41,39 +45,80 @@ export default function SignUp({ setAuth, isLoggedIn }) {
         {
           username: username,
           password: password,
-          re_password: password,
+          re_password: password_again,
         }
       )
       .then((res) => {
         console.log(res.data)
         setIsRegistered(true)
-        setAuth(username, res.data.auth_token)
+        HandleLogin()
       })
       .catch((e) => {
-        setError(e.response.data.password[0])
-        setOpen(true)
+        setError(e.message)
       })
   }
 
-  if (isLoggedIn) {
-    return <Navigate to="/" replace={true} />
+  function HandleLogin() {
+    setError('')
+    axios
+      .post(
+        'https://team-tornado-mixtape.herokuapp.com/api/auth/token/login',
+        {
+          username: username,
+          password: password,
+        }
+      )
+      .then((res) => {
+        console.log(res.data)
+        console.log(`this is the token: ${res.data.auth_token}`)
+        setAuth(username, res.data.auth_token)
+        setToken(res.data.auth_token);
+      })
+      .catch((e) => {
+        setError(e.message)
+      })
   }
 
-  if (isRegistered) {
-    console.log("Registered!");
+  function RegisterSpotifyAccount() {
+    console.log('you got to this step!')
+    setError('')
+    spotifyUser !== null ? (
+      axios
+        .post(
+          'https://team-tornado-mixtape.herokuapp.com/api/profiles/',
+          {
+            spotify_username: spotifyUser,
+          },
+          {
+            headers: { Authorization: `Token ${token}` },
+          }
+        )
+        .then((res) => {
+          console.log(res)
+          setSpotifyIsRegistered(true)
+          console.log('Profile registered with spotify')
+        })
+        .catch((e) => {
+          setError(e.message)
+        })
+    ) : (
+      <></>
+    )
+    setSignUpSignInComplete(true)
+  }
+
+  // if (isLoggedIn) {
+  //   return <Navigate to="/" replace={true} />
+  // }
+
+  if (signUpSignInComplete) {
+    console.log("Signed up and signed in!");
     return <Navigate to="/" replace={true} />;
   }
 
   return (
     <>
-      <Grid
-        container
-        spacing={10}
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-        style={{ minHeight: '75vh' }}
-      >
+      <Box sx={{ width: "90%", textAlign: "center" }}>
         {error && (
           <Snackbar
             open={open}
@@ -90,7 +135,7 @@ export default function SignUp({ setAuth, isLoggedIn }) {
             </Alert>
           </Snackbar>
         )}
-        <Box component="form" onSubmit={handleLogin}>
+        <Box component="form" onSubmit={handleSignUp}>
           <Typography variant="h3">Sign up</Typography>
           <br></br>
           <Typography variant="p">Choose a username</Typography>
@@ -113,26 +158,40 @@ export default function SignUp({ setAuth, isLoggedIn }) {
               value={password}
               onChange={(e) => setPassword(e.target.value)} />
           </Box>
-          {/* <br></br> */}
-          {/* <Typography variant="p">Re-enter your password</Typography>
+          <br></br>
+          <Typography variant="p">Re-enter your password</Typography>
           <br></br>
           <Box>
             <TextField
               label="password"
               type="password"
               variant="outlined"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)} />
-          </Box> */}
+              value={password_again}
+              onChange={(e) => setPassword_again(e.target.value)} />
+          </Box>
           <br></br>
           <Box textAlign="center">
             <Button size="large" component={Link} to="/">Cancel</Button>
           </Box>
           <Box textAlign="center">
-            <Button size="large" variant="outlined" type="submit">Sign up!</Button>
+            <Button size="large" variant="outlined" onClick={handleSignUp}>Continue</Button>
+          </Box>
+          <br></br>
+          <Typography variant="p">If you are a Spotify user, enter your username. Adding your username allows you to save Mixtapes to your Spotify library.</Typography>
+          <br></br>
+          <Box>
+            <TextField label="your spotify username"
+              variant="outlined"
+              value={spotifyUser}
+              onChange={(e) => setSpotifyUser(e.target.value)}>
+            </TextField>
+          </Box>
+          <br></br>
+          <Box textAlign="center">
+            <Button size="large" variant="outlined" onClick={RegisterSpotifyAccount}>Complete sign up</Button>
           </Box>
         </Box>
-      </Grid>
+      </Box>
     </>
   );
 }

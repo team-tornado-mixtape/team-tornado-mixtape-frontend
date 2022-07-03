@@ -48,22 +48,10 @@ export default function SignIn({ setAuth, isLoggedIn, handleLogout }) {
                 setAuth(username, res.data.auth_token);
                 return <Navigate to="/" replace={true} />
             })
-        // .catch((e) => {
-        //     // e.message === 'Request failed with status code 400'
-        //     //     ? setError(
-        //     //         'Your username or password is incorrect. Please try again.'
-        //     //     )
-        //     //     : setError(
-        //     //         setError(e.response.data.password[0])
-        //     //     )
-        //     setError(e.response.data.password[0])
-        //     setOpen(true)
-        // })
+            .catch((e) => {
+                setError(e.message)
+            })
     }
-
-    // if (isLoggedIn) {
-    //     return <Navigate to="/rack" replace={true} />
-    // }
 
     return (
         <>
