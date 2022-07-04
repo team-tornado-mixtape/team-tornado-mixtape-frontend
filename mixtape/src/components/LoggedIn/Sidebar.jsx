@@ -19,6 +19,8 @@ import MixStepper from "./NewMixtape/Wizard.jsx";
 import Player from "./Player/Player";
 import Profile from "./Profile/Profile.jsx";
 
+import PlayerContainer from "./Player/PlayerContainer"
+
 function EachSidebarView(props) {
   const { children, value, index } = props;
 
@@ -67,12 +69,12 @@ export default function PermanentDrawerLeft({
                 icon={<Icon icon="ant-design:database-twotone" />}
               ></Tab>
               <Tab {...TabProps(1)} icon={<Icon icon="bi:play-btn" />}></Tab>
-              <Tab
+              {/* <Tab
                 {...TabProps(2)}
                 icon={<Icon icon="bxs:message-square-add" />}
-              ></Tab>
+              ></Tab> */}
               <Tab
-                {...TabProps(3)}
+                {...TabProps(2)}
                 icon={<Icon icon="healthicons:ui-user-profile" />}
               ></Tab>
             </Tabs>
@@ -86,12 +88,12 @@ export default function PermanentDrawerLeft({
             <Rack token={token} />
           </EachSidebarView>
           <EachSidebarView value={value} index={1}>
-            <Player />
+            <PlayerContainer />
           </EachSidebarView>
-          <EachSidebarView value={value} index={2}>
+          {/* <EachSidebarView value={value} index={2}>
             <MixStepper isLoggedIn={isLoggedIn} token={token} />
-          </EachSidebarView>
-          <EachSidebarView value={value} index={3}>
+          </EachSidebarView> */}
+          <EachSidebarView value={value} index={2}>
             <Profile />
           </EachSidebarView>
         </Box>
