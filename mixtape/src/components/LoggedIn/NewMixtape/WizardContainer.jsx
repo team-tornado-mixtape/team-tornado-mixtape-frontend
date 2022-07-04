@@ -40,14 +40,24 @@ const Puller = styled(Box)(({ theme }) => ({
 export default function WizardContainer({ addMixtapeButtonClicked, setAddMixtapeButtonClicked, token }) {
     const [open, setOpen] = useState(true);
 
-    const toggleDrawer = (newOpen) => () => {
-        setOpen(newOpen);
-        open === false ? (
-            setAddMixtapeButtonClicked(false)
-        ) : (
-            <></>
-        )
+    const handleClose = (e) => {
+        setOpen(false)
+        setAddMixtapeButtonClicked(false)
+        console.log(addMixtapeButtonClicked)
     }
+
+    const handleOpen = (e) => {
+        setOpen(true)
+    }
+
+    // const toggleDrawer = (newOpen) => () => {
+    //     setOpen(newOpen);
+    //     // open === false ? (
+    //     //     setAddMixtapeButtonClicked(false)
+    //     // ) : (
+    //     //     <></>
+    //     // )
+    // }
 
     // This is used only for the example
     // const container =
@@ -73,8 +83,8 @@ export default function WizardContainer({ addMixtapeButtonClicked, setAddMixtape
                 // container={container}
                 anchor="bottom"
                 open={open}
-                onClose={toggleDrawer(false)}
-                onOpen={toggleDrawer(true)}
+                onClose={handleClose}
+                onOpen={handleOpen}
                 swipeAreaWidth={drawerBleeding}
                 disableSwipeToOpen={false}
             // ModalProps={{

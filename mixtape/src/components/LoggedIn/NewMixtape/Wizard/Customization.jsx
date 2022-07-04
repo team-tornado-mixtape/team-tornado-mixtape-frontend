@@ -34,19 +34,15 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Chip from '@mui/material/Chip';
 
 export default function Customization({ setActiveStep, mixId, setAuth, isLoggedIn, token, username }) {
-    const [isLoading, setIsLoading] = useState(false)
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
+    const [theme, setTheme] = useState('')
     const [error, setError] = useState('')
+    const [deleteIsProcessing, setDeleteIsProcessing] = useState(false)
 
     const NormalText = {
         userSelect: "none",
     }
 
     useEffect(() => {
-        // setMyFavoritesDidLoad(true)
-        // setAllMixtapesDidLoad(true)
-        // setMyMixtapesIsSelected(true)
         axios
             .get(`https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${mixId}/`, {
                 headers: { Authorization: `Token ${token}` },
@@ -54,10 +50,6 @@ export default function Customization({ setActiveStep, mixId, setAuth, isLoggedI
             .then((res) => {
                 console.log(res.status);
                 console.log(res.data);
-                // const tracklist = res.data.songs
-                // setTrackData(tracklist)
-                // console.log(`here is the track data: ${trackData}`)
-                // setPageDidLoad(true)
             })
             .catch((e) => {
                 setError(e.message);
@@ -65,17 +57,50 @@ export default function Customization({ setActiveStep, mixId, setAuth, isLoggedI
         console.log(error);
     }, [token, error, mixId]);
 
+    function handleDelete(e) {
+        e.preventDefault();
+        setDeleteIsProcessing(true)
+        axios
+            .delete(
+                `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${mixId}/`,
+                {
+                    headers: { Authorization: `Token ${token}` },
+                }
+            )
+            .then((res) => {
+                console.log(res.status)
+                console.log(res.data)
+                console.log('mixtape deleted!')
+                setActiveStep(0)
+                setDeleteIsProcessing(false)
+            })
+            .catch((e) => {
+                setError(e.message)
+            })
+        console.log(error)
+    }
+
     return (
         <Stack spacing={0} direction="column" textAlign="center">
             <Typography variant="h2">Choose a theme</Typography>
-            <img src={Default} alt="Default" />
-            <Typography variant="h5">Default</Typography>
-            <img src={Wilmington} alt="Wilmington" />
-            <Typography variant="h5">Wilmington</Typography>
-            <img src={Seattle} alt="Seattle" />
-            <Typography variant="h5">Seattle</Typography>
-            <img src={Momentum} alt="Momentum" />
-            <Typography variant="h5">Momentum</Typography>
+            <Stack spacing={1} direction="column" textAlign="center">
+                <img src={Default} alt="Default" />
+                <Typography variant="h5">Default</Typography>
+                <img src={Wilmington} alt="Wilmington" />
+                <Typography variant="h5">Wilmington</Typography>
+                <img src={Seattle} alt="Seattle" />
+                <Typography variant="h5">Seattle</Typography>
+                <img src={Momentum} alt="Momentum" />
+                <Typography variant="h5">Momentum</Typography>
+            </Stack>
+            <Stack spacing={2} direction="row">
+                {deleteIsProcessing ? (
+                    <CircularProgress />
+                ) : (
+                    <Button variant="outlined" color="secondary" onClick={handleDelete}>Cancel</Button>
+                )}
+                <Button variant="contained" color="primary" onClick={setActiveStep(2)}>Finish</Button>
+            </Stack>
         </Stack>
     )
 }
