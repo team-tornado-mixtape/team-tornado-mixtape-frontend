@@ -9,6 +9,7 @@ import Stack from "@mui/material/Stack";
 import { Link } from "react-router-dom";
 
 export default function Player(token, selectedMix, setSelectedMix) {
+  console.log(`the selected mixID is: ${selectedMix}`)
   return (
     <>
       <Box

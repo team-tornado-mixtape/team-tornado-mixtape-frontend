@@ -23,7 +23,7 @@ export default function Rack({ token }) {
 
   const [addMixtapeButtonClicked, setAddMixtapeButtonClicked] = useState(false)
 
-  const [selectedMix, setSelectedMix] = useState(0)
+  const [selectedMix, setSelectedMix] = useState(null)
 
   const [pageDidLoad, setPageDidLoad] = useState(false);
   const [myMixtapesDidLoad, setMyMixtapesDidLoad] = useState(false);
@@ -153,10 +153,14 @@ export default function Rack({ token }) {
   }
 
   function MixSelect({ mixId }) {
-    const putEachMixInState = mixId
-    console.log(`here is the variable: ${putEachMixInState}`)
-    setSelectedMix(putEachMixInState);
-    console.log(selectedMix)
+    const result = mixId
+    this.setState({ mixId });
+    this.setState({ result });
+
+    // const putEachMixInState = mixId
+    // console.log(`here is the variable: ${putEachMixInState}`)
+    // setSelectedMix(putEachMixInState);
+    // console.log(selectedMix)
   };
 
   return (
@@ -240,13 +244,14 @@ export default function Rack({ token }) {
                 <>
                   {myMixtapesDisplayed ? (
                     <Stack spacing={1} direction="column">
-                      {selectedMix !== 0 ? (
-                        <PlayerContainer selectedMix={selectedMix} setSelectedMix={selectedMix} />
-                      ) : (
-                        <>
-                          {myMixtapesDisplayed.map((eachMix, index) => {
-                            const mixId = eachMix.id
-                            return (
+                      <>
+                        {myMixtapesDisplayed.map((eachMix, index) => {
+                          const mixId = eachMix.id
+                          return (
+                            <>
+                              {/* {selectedMix !== null ? (
+                                <PlayerContainer />
+                              ) : ( */}
                               <>
                                 <Button onClick={() => MixSelect({ mixId })}>Show details for {eachMix.title}</Button>
                                 <EachMixtape
@@ -259,11 +264,11 @@ export default function Rack({ token }) {
                                   token={token}
                                 />
                               </>
-                            );
-                          })}
-                        </>
-                      )}
-
+                              {/* )} */}
+                            </>
+                          );
+                        })}
+                      </>
                     </Stack>
                   ) : (
                     <></>
