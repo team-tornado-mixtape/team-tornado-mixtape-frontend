@@ -151,7 +151,7 @@ export default function Rack({ token }) {
         {addMixtapeButtonClicked === false && (
           <AddMixtapeButton addMixtape={() => setAddMixtapeButtonClicked(true)} />
         )}
-        {addMixtapeButtonClicked === true && <WizardContainer addMixtapeButtonClicked={addMixtapeButtonClicked} setAddMixtapeButtonClicked={setAddMixtapeButtonClicked} />}
+        {addMixtapeButtonClicked === true && <WizardContainer token={token} addMixtapeButtonClicked={addMixtapeButtonClicked} setAddMixtapeButtonClicked={setAddMixtapeButtonClicked} />}
       </div>
       <Box sx={{ display: "flexbox", alignContent: "center" }}>
         <Stack spacing={2} direction="column">

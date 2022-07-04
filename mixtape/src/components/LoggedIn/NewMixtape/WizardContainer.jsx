@@ -37,7 +37,7 @@ const Puller = styled(Box)(({ theme }) => ({
     left: "calc(50% - 15px)"
 }));
 
-export default function WizardContainer({ addMixtapeButtonClicked, setAddMixtapeButtonClicked }) {
+export default function WizardContainer({ addMixtapeButtonClicked, setAddMixtapeButtonClicked, token }) {
     const [open, setOpen] = useState(true);
 
     const toggleDrawer = (newOpen) => () => {
@@ -55,11 +55,13 @@ export default function WizardContainer({ addMixtapeButtonClicked, setAddMixtape
 
     return (
         <Root>
-            <CssBaseline />
+            {/* <CssBaseline /> */}
             <Global
                 styles={{
                     ".MuiDrawer-root > .MuiPaper-root": {
                         height: `calc(90% - ${drawerBleeding}px)`,
+                        width: `calc(100% - 130px)`,
+                        marginLeft: '115px',
                         overflow: "visible"
                     }
                 }}
@@ -103,7 +105,7 @@ export default function WizardContainer({ addMixtapeButtonClicked, setAddMixtape
                         overflow: "auto"
                     }}
                 >
-                    <Wizard />
+                    <Wizard token={token} />
                 </StyledBox>
             </SwipeableDrawer>
         </Root>
