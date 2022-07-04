@@ -7,8 +7,9 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-
+import CardMedia from '@mui/material/CardMedia';
 import { Link, Navigate } from "react-router-dom";
+import TapeImage from "../../../images/TapeImage";
 
 export default function Landing({ setAuth, isLoggedIn, handleLogout }) {
 
@@ -29,7 +30,7 @@ export default function Landing({ setAuth, isLoggedIn, handleLogout }) {
           }}
         >
           <Typography variant="h1">Mixtape</Typography>
-          <Box
+          {/* <Box
             sx={{
               width: "50%",
               height: 350,
@@ -39,7 +40,10 @@ export default function Landing({ setAuth, isLoggedIn, handleLogout }) {
                 opacity: [0.9, 0.8, 0.7],
               },
             }}
-          ></Box>
+          ></Box> */}
+
+          <TapeImage />
+
           <Box sx={{ width: "90%" }}>
             <Typography variant="h5">
               Mixtape is A fun way of gifting friends a curated mixtape,
