@@ -8,10 +8,9 @@ import Stack from "@mui/material/Stack";
 
 import { Link } from "react-router-dom";
 
-export default function Player() {
+export default function Player(token, selectedMix, setSelectedMix) {
   return (
     <>
-    
       <Box
         sx={{
           display: "flex",
@@ -28,7 +27,7 @@ export default function Player() {
             flexDirection: "column",
           }}
         >
-          <Typography variant="h1">My Mixtape Bangs</Typography>
+          <Typography variant="h1">my mix bangs</Typography>
           <Box
             sx={{
               display: "flex",

@@ -38,11 +38,12 @@ const Puller = styled(Box)(({ theme }) => ({
     left: "calc(50% - 15px)"
 }));
 
-export default function PlayerContainer({ mixId, token }) {
+export default function PlayerContainer({ selectedMix, setSelectedMix, token }) {
     const [open, setOpen] = useState(true);
 
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen);
+        // setSelectedMixId('')
     }
 
     // This is used only for the example
@@ -90,7 +91,7 @@ export default function PlayerContainer({ mixId, token }) {
                 >
                     <Puller />
                     <Typography sx={{ p: 2, color: "text.secondary" }}>
-                        Create New Mixtape
+                        {selectedMix.title}
                     </Typography>
                 </StyledBox>
                 <StyledBox
@@ -101,7 +102,7 @@ export default function PlayerContainer({ mixId, token }) {
                         overflow: "auto"
                     }}
                 >
-                    <Player token={token} />
+                    <Player token={token} selectedMix={selectedMix} setSelectedMix={setSelectedMix} />
                 </StyledBox>
             </SwipeableDrawer>
         </Root>

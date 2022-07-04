@@ -25,7 +25,7 @@ import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import CircularProgress from '@mui/material/CircularProgress';
 import Chip from '@mui/material/Chip';
 
-export default function DisplayTracklist({ token, mixId, AddRemoveTrack, mixTitle, trackAdded, setTrackAdded }) {
+export default function Tracklist({ token, mixId, AddRemoveTrack, mixTitle, trackAdded, setTrackAdded }) {
     const [pageDidLoad, setPageDidLoad] = useState(false)
     const [thisMixData, setThisMixData] = useState({})
     const [trackData, setTrackData] = useState([])

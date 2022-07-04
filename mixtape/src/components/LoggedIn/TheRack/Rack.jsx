@@ -11,12 +11,19 @@ import CardContent from "@mui/material/CardContent";
 import EachMixtape from "./EachMixtape";
 import { flexbox } from "@mui/system";
 
+import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
+
 import AddMixtapeButton from "./AddMixtape";
 import WizardContainer from "../NewMixtape/WizardContainer.jsx"
+
+import PlayerContainer from "../Player/PlayerContainer.jsx"
 
 export default function Rack({ token }) {
 
   const [addMixtapeButtonClicked, setAddMixtapeButtonClicked] = useState(false)
+
+  const [selectedMix, setSelectedMix] = useState(0)
 
   const [pageDidLoad, setPageDidLoad] = useState(false);
   const [myMixtapesDidLoad, setMyMixtapesDidLoad] = useState(false);
@@ -145,6 +152,13 @@ export default function Rack({ token }) {
       : setAllMixtapesDisplayed([])(setAllMixtapesIsSelected(false));
   }
 
+  function MixSelect({ mixId }) {
+    const putEachMixInState = mixId
+    console.log(`here is the variable: ${putEachMixInState}`)
+    setSelectedMix(putEachMixInState);
+    console.log(selectedMix)
+  };
+
   return (
     <>
       <div>
@@ -226,21 +240,30 @@ export default function Rack({ token }) {
                 <>
                   {myMixtapesDisplayed ? (
                     <Stack spacing={1} direction="column">
-                      <>
-                        {myMixtapesDisplayed.map((eachMix, index) => {
-                          return (
-                            <EachMixtape
-                              eachMix={eachMix}
-                              favoriteClicked={favoriteClicked}
-                              setFavoriteClicked={setFavoriteClicked}
-                              deleteClicked={deleteClicked}
-                              setDeleteClicked={setDeleteClicked}
-                              index={index}
-                              token={token}
-                            />
-                          );
-                        })}
-                      </>
+                      {selectedMix !== 0 ? (
+                        <PlayerContainer selectedMix={selectedMix} setSelectedMix={selectedMix} />
+                      ) : (
+                        <>
+                          {myMixtapesDisplayed.map((eachMix, index) => {
+                            const mixId = eachMix.id
+                            return (
+                              <>
+                                <Button onClick={() => MixSelect({ mixId })}>Show details for {eachMix.title}</Button>
+                                <EachMixtape
+                                  eachMix={eachMix}
+                                  favoriteClicked={favoriteClicked}
+                                  setFavoriteClicked={setFavoriteClicked}
+                                  deleteClicked={deleteClicked}
+                                  setDeleteClicked={setDeleteClicked}
+                                  index={index}
+                                  token={token}
+                                />
+                              </>
+                            );
+                          })}
+                        </>
+                      )}
+
                     </Stack>
                   ) : (
                     <></>
