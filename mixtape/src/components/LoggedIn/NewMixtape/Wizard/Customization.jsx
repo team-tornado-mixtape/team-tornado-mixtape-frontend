@@ -11,6 +11,13 @@ import Stack from "@mui/material/Stack";
 
 import { Link } from "react-router-dom";
 
+import Default from "../../../../images/cassettes/Default.png"
+import Momentum from "../../../../images/cassettes/Momentum.png"
+import Seattle from "../../../../images/cassettes/Seattle.png"
+import Wilmington from "../../../../images/cassettes/Wilmington.png"
+
+import Grid from '@mui/material/Grid';
+
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -36,92 +43,39 @@ export default function Customization({ setActiveStep, mixId, setAuth, isLoggedI
         userSelect: "none",
     }
 
-    function handleMixCreate() {
-        setIsLoading(true)
+    useEffect(() => {
+        // setMyFavoritesDidLoad(true)
+        // setAllMixtapesDidLoad(true)
+        // setMyMixtapesIsSelected(true)
         axios
-            .post(
-                `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/`,
-                {
-                    title: title,
-                    description: description
-                },
-                {
-                    headers: { Authorization: `Token ${token}` },
-                }
-            )
+            .get(`https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${mixId}/`, {
+                headers: { Authorization: `Token ${token}` },
+            })
             .then((res) => {
-                console.log(res.status)
-                console.log(res.data)
-                setActiveStep(1)
-                setIsLoading(false)
+                console.log(res.status);
+                console.log(res.data);
+                // const tracklist = res.data.songs
+                // setTrackData(tracklist)
+                // console.log(`here is the track data: ${trackData}`)
+                // setPageDidLoad(true)
             })
             .catch((e) => {
-                setError(e.message)
-                setIsLoading(false)
-            })
-        console.log(error)
-    }
+                setError(e.message);
+            });
+        console.log(error);
+    }, [token, error, mixId]);
 
     return (
-        <>
-            {title.length === 0 ? (
-                <Box sx={{ textAlign: "center", justifyContent: "center", border: "1px solid white" }}>
-                    <Stack spacing={2} direction="column">
-                        <Box component="form" onSubmit={handleMixCreate}>
-                            <Box>
-                                <TextField
-                                    id="filled-multiline-static"
-                                    label="title"
-                                    value={title}
-                                    margin="normal"
-                                    onChange={(e) => setTitle(e.target.value)} />
-                            </Box>
-                            <Box>
-                                <TextField
-                                    id="filled-multiline-static"
-                                    label="description"
-                                    disabled
-                                    variant="outlined"
-                                    multiline
-                                    rows={4}
-                                />
-                            </Box>
-                        </Box>
-                    </Stack>
-                    <Button variant="contained" disabled>Continue</Button>
-                </Box>
-            ) : (
-                <Box sx={{ textAlign: "center", justifyContent: "center", border: "1px solid white" }}>
-                    <Stack spacing={2} direction="column">
-                        <Box component="form" onSubmit={handleMixCreate}>
-                            <Box>
-                                <TextField
-                                    id="filled-multiline-static"
-                                    label="title"
-                                    value={title}
-                                    margin="normal"
-                                    onChange={(e) => setTitle(e.target.value)} />
-                            </Box>
-                            <Box>
-                                <TextField
-                                    id="filled-multiline-static"
-                                    label="description"
-                                    value={description}
-                                    variant="outlined"
-                                    multiline
-                                    rows={4}
-                                    onChange={(e) => setDescription(e.target.value)} />
-                            </Box>
-                        </Box>
-                    </Stack>
-                    {!isLoading ? (
-                        <Button variant="contained" type="submit" onClick={(handleMixCreate)}>Continue</Button>
-                        // <Button variant="contained" onClick={() => setActiveStep(1)}>Continue</Button>
-                    ) : (
-                        <CircularProgress />
-                    )}
-                </Box>
-            )}
-        </>
+        <Stack spacing={0} direction="column" textAlign="center">
+            <Typography variant="h2">Choose a theme</Typography>
+            <img src={Default} alt="Default" />
+            <Typography variant="h5">Default</Typography>
+            <img src={Wilmington} alt="Wilmington" />
+            <Typography variant="h5">Wilmington</Typography>
+            <img src={Seattle} alt="Seattle" />
+            <Typography variant="h5">Seattle</Typography>
+            <img src={Momentum} alt="Momentum" />
+            <Typography variant="h5">Momentum</Typography>
+        </Stack>
     )
 }

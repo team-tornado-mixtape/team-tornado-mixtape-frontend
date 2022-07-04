@@ -74,9 +74,7 @@ export default function Wizard({ token }) {
                 return <SongSearch token={token} setActiveStep={setActiveStep} mixTitle={mixTitle} mixId={mixId} />;
             case 2:
                 return (
-                    <Button variant="outlined">
-                        Checking that i can use diff kinds of components
-                    </Button>
+                    <Customization token={token} setActiveStep={setActiveStep} mixTitle={mixTitle} mixId={mixId} />
                 );
             default:
                 return "Unknown step";
