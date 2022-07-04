@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 import Title from "./Wizard/Title.jsx"
-import Songs from "./Wizard/SongSearch.jsx"
+import SongSearch from "./Wizard/SongSearch.jsx"
 import Customization from "./Wizard/Customization.jsx"
 
 const steps = [
@@ -71,7 +71,7 @@ export default function Wizard({ token }) {
             case 0:
                 return <Title token={token} setActiveStep={setActiveStep} setMixTitle={setMixTitle} mixTitle={mixTitle} setMixId={setMixId} />;
             case 1:
-                return <Songs token={token} setActiveStep={setActiveStep} mixTitle={mixTitle} mixId={mixId} />;
+                return <SongSearch token={token} setActiveStep={setActiveStep} mixTitle={mixTitle} mixId={mixId} />;
             case 2:
                 return (
                     <Button variant="outlined">

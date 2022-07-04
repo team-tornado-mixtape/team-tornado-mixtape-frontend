@@ -32,7 +32,7 @@ const AddMixtapeButton = (props) => {
 
   return <Fab variant="extended" color="primary" style={buttonStyle} onClick={props.addMixtape}>
     <AddCircleIcon sx={{ mr: 1 }} />
-    Add Mixtape
+    Create Mixtape
   </Fab>
 }
 

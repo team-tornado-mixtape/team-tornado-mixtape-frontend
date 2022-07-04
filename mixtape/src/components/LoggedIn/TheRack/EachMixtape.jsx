@@ -12,6 +12,8 @@ import Button from "@mui/material/Button";
 import MixSpeedDial from "../MixSpeedDial";
 import { Stack } from "@mui/material";
 
+import Default from "../../../images/spines/Default.png"
+
 export default function EachMixtape({
   eachMix,
   index,
@@ -96,30 +98,21 @@ export default function EachMixtape({
   }
 
   return (
-    <Box key={index}>
-      <Card
-        sx={{ width: "28vw",  variant: "outlined", border: "2px solid #E2E2DF" }}
-      >
-        <Stack sx={{ direction: "row"}}>
+    <>
+      <Box key={index}>
+        <Card
+          sx={{ width: "28vw", variant: "outlined", border: "2px solid #E2E2DF" }}
+        >
           <CardContent>
+            <img src={Default} alt="rackimg"></img>
             <Typography>
-              {mixTitle} @{creator}
-              {/* <Button size="small">Play</Button> */}
-              {/* <Button onClick={handleEdit} size="small">
-              Edit
-            </Button> */}
-              {/* <Button onClick={handleFavorite} size="small">
-              Favorite
-            </Button>
-            <Button onClick={handleDelete} size="small">
-              Delete
-            </Button> */}
+              {mixTitle}
             </Typography>
-          <MixSpeedDial id={id} />
+            {/* <MixSpeedDial id={id} /> */}
           </CardContent>
           <CardActions></CardActions>
-        </Stack>
-      </Card>
-    </Box>
+        </Card>
+      </Box>
+    </>
   );
 }
