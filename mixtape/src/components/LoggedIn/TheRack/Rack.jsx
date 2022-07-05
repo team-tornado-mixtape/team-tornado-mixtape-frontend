@@ -23,7 +23,7 @@ export default function Rack({ token }) {
 
   const [addMixtapeButtonClicked, setAddMixtapeButtonClicked] = useState(false)
 
-  const [selectedMix, setSelectedMix] = useState(null)
+  const [selectedMix, setSelectedMix] = useState('none')
 
   const [pageDidLoad, setPageDidLoad] = useState(false);
   const [myMixtapesDidLoad, setMyMixtapesDidLoad] = useState(false);
@@ -152,16 +152,25 @@ export default function Rack({ token }) {
       : setAllMixtapesDisplayed([])(setAllMixtapesIsSelected(false));
   }
 
-  function MixSelect({ mixId }) {
-    const result = mixId
-    this.setState({ mixId });
-    this.setState({ result });
+  // function MixSelect({ mixId }) {
+  //   const result = mixId
+  //   this.setState({ mixId });
+  //   this.setSelectedMix({ result });
+  //   console.log(selectedMix)
 
-    // const putEachMixInState = mixId
-    // console.log(`here is the variable: ${putEachMixInState}`)
-    // setSelectedMix(putEachMixInState);
-    // console.log(selectedMix)
-  };
+  //   // const putEachMixInState = mixId
+  //   // console.log(`here is the variable: ${putEachMixInState}`)
+  //   // setSelectedMix(putEachMixInState);
+  //   // console.log(selectedMix)
+  // };
+
+  const MixSelect = ({ mixId }) => {
+    // e.preventDefault();
+    const result = mixId
+    console.log(result)
+    setSelectedMix(result)
+    console.log(selectedMix)
+  }
 
   return (
     <>
@@ -249,22 +258,22 @@ export default function Rack({ token }) {
                           const mixId = eachMix.id
                           return (
                             <>
-                              {/* {selectedMix !== null ? (
-                                <PlayerContainer />
-                              ) : ( */}
-                              <>
-                                <Button onClick={() => MixSelect({ mixId })}>Show details for {eachMix.title}</Button>
-                                <EachMixtape
-                                  eachMix={eachMix}
-                                  favoriteClicked={favoriteClicked}
-                                  setFavoriteClicked={setFavoriteClicked}
-                                  deleteClicked={deleteClicked}
-                                  setDeleteClicked={setDeleteClicked}
-                                  index={index}
-                                  token={token}
-                                />
-                              </>
-                              {/* )} */}
+                              {selectedMix !== 'none' ? (
+                                <PlayerContainer token={token} selectedMix={selectedMix} setSelectedMix={setSelectedMix} />
+                              ) : (
+                                <>
+                                  <Button onClick={() => MixSelect({ mixId })}>Show details for {eachMix.title}</Button>
+                                  <EachMixtape
+                                    eachMix={eachMix}
+                                    favoriteClicked={favoriteClicked}
+                                    setFavoriteClicked={setFavoriteClicked}
+                                    deleteClicked={deleteClicked}
+                                    setDeleteClicked={setDeleteClicked}
+                                    index={index}
+                                    token={token}
+                                  />
+                                </>
+                              )}
                             </>
                           );
                         })}
