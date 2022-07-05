@@ -8,12 +8,13 @@ import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
-import Default from "../../../images/spines/Default.png"
-import Wilmington from "../../../images/spines/Wilmington.png"
-import Seattle from "../../../images/spines/Seattle.png"
-import Momentum from "../../../images/spines/Momentum.png"
+import Default from "../../../images/spines/Default.png";
+import Wilmington from "../../../images/spines/Wilmington.png";
+import Seattle from "../../../images/spines/Seattle.png";
+import Momentum from "../../../images/spines/Momentum.png";
 
-import PlayerContainer from "../Player/PlayerContainer.jsx"
+import PlayerContainer from "../Player/PlayerContainer.jsx";
+// import css from "./SpineText.css";
 
 export default function EachMixtape({
   eachMix,
@@ -41,17 +42,24 @@ export default function EachMixtape({
   const modifyDate = eachMix.modified_at;
   const deleteMix = eachMix.detail;
 
-  const [selectedMix, setSelectedMix] = useState(0)
+  const [selectedMix, setSelectedMix] = useState(0);
 
   const MixSelect = (id) => {
     // const result = id
     // console.log(result)
     // even if you comment this back in, it still won't work
-    setSelectedMix(id)
-    console.log(selectedMix)
-  }
+    setSelectedMix(id);
+    console.log(selectedMix);
+  };
 
-  console.log(eachMix.id)
+  console.log(eachMix.id);
+
+  const THEMES = {
+    0: "Default",
+    1: "Wilmington",
+    2: "Seattle",
+    3: "Momentum",
+  };
 
   function handleFavorite(e) {
     setFavoriteClicked(false);
@@ -111,10 +119,17 @@ export default function EachMixtape({
     <>
       <Box key={index}>
         <Card
-          sx={{ width: "28vw", variant: "outlined", border: "2px solid #E2E2DF" }}
+          sx={{
+            width: "28vw",
+            variant: "outlined",
+            border: "2px solid #E2E2DF",
+          }}
         >
           <CardContent>
-            {/* {theme === 0 ? (
+            {/* <img src={THEMES[theme]} alt="Default" /> */}
+
+            <div className="cassette-spine" style={{ position: "relative" }}>
+            {theme === 0 ? (
               <img src={Default} alt="Default"></img>
             ) : theme === 1 ? (
               <img src={Wilmington} alt="Wilmington"></img>
@@ -122,22 +137,33 @@ export default function EachMixtape({
               <img src={Seattle} alt="Seattle"></img>
             ) : theme === 3 ? (
               <img src={Momentum} alt="Momentum"></img>
-            ) : (<></>)
-            } */}
-            {/* get these to overlay properly: */}
-            <Typography variant="eachmix" sx={{ color: "#000000" }}>
-              {mixTitle}
-            </Typography>
-            <img src={Default} alt="Default"></img>
+            ) : (<></>)}
+              <Typography
+                variant="eachmix"
+                sx={{
+                  color: "#000000",
+                  position: "absolute",
+                  top: "13px",
+                  left: "27px",
+                }}
+              >
+                {mixTitle}
+              </Typography>
+            </div>
             {/* ^^^^^ */}
           </CardContent>
           <>
             {selectedMix !== 0 ? (
-              <PlayerContainer token={token} selectedMix={selectedMix} setSelectedMix={setSelectedMix} />
+              <PlayerContainer
+                token={token}
+                selectedMix={selectedMix}
+                setSelectedMix={setSelectedMix}
+              />
             ) : (
               <>
                 <Button onClick={() => MixSelect(eachMix.id)}>
-                  Show details for {mixTitle}</Button>
+                  Show details for {mixTitle}
+                </Button>
                 {/* <Button onClick={() => setSelectedMix(4)}>
                   Show details for {mixTitle}</Button> */}
               </>
