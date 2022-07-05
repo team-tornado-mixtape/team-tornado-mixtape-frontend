@@ -38,7 +38,7 @@ export default function PlayerContainer({ selectedMix, setSelectedMix, token }) 
 
     const handleClose = (e) => {
         setOpen(false)
-        setSelectedMix('none')
+        setSelectedMix(0)
     }
 
     const handleOpen = (e) => {

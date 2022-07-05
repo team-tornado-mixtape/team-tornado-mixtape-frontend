@@ -39,7 +39,7 @@ export default function Tracklist({ token, mixId, AddRemoveTrack, mixTitle, trac
                 setError(e.message);
             });
         console.log(error);
-    }, [token, error, mixId, trackAdded, trackData]);
+    }, [token, error, mixId, trackAdded]);
 
     function ReloadTracklist(e) {
         axios
