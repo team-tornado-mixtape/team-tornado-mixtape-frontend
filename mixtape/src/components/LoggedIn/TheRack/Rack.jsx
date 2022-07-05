@@ -164,13 +164,13 @@ export default function Rack({ token }) {
   //   // console.log(selectedMix)
   // };
 
-  const MixSelect = ({ mixId }) => {
-    // e.preventDefault();
-    const result = mixId
-    console.log(result)
-    setSelectedMix(result)
-    console.log(selectedMix)
-  }
+  // const MixSelect = ({ mixId }) => {
+  //   const result = mixId
+  //   console.log(result)
+  //   // even if you comment this back in, it still won't work
+  //   // setSelectedMix(result)
+  //   console.log(selectedMix)
+  // }
 
   return (
     <>
@@ -258,22 +258,15 @@ export default function Rack({ token }) {
                           const mixId = eachMix.id
                           return (
                             <>
-                              {selectedMix !== 'none' ? (
-                                <PlayerContainer token={token} selectedMix={selectedMix} setSelectedMix={setSelectedMix} />
-                              ) : (
-                                <>
-                                  <Button onClick={() => MixSelect({ mixId })}>Show details for {eachMix.title}</Button>
-                                  <EachMixtape
-                                    eachMix={eachMix}
-                                    favoriteClicked={favoriteClicked}
-                                    setFavoriteClicked={setFavoriteClicked}
-                                    deleteClicked={deleteClicked}
-                                    setDeleteClicked={setDeleteClicked}
-                                    index={index}
-                                    token={token}
-                                  />
-                                </>
-                              )}
+                              <EachMixtape
+                                eachMix={eachMix}
+                                favoriteClicked={favoriteClicked}
+                                setFavoriteClicked={setFavoriteClicked}
+                                deleteClicked={deleteClicked}
+                                setDeleteClicked={setDeleteClicked}
+                                index={index}
+                                token={token}
+                              />
                             </>
                           );
                         })}

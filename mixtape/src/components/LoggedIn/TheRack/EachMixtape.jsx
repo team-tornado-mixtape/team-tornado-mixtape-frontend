@@ -17,6 +17,8 @@ import Wilmington from "../../../images/spines/Wilmington.png"
 import Seattle from "../../../images/spines/Seattle.png"
 import Momentum from "../../../images/spines/Momentum.png"
 
+import PlayerContainer from "../Player/PlayerContainer.jsx"
+
 export default function EachMixtape({
   eachMix,
   index,
@@ -42,6 +44,16 @@ export default function EachMixtape({
   const description = eachMix.description;
   const modifyDate = eachMix.modified_at;
   const deleteMix = eachMix.detail;
+
+  const [selectedMix, setSelectedMix] = useState('none')
+
+  const MixSelect = ({ id }) => {
+    const result = id
+    console.log(result)
+    // even if you comment this back in, it still won't work
+    // setSelectedMix(result)
+    console.log(selectedMix)
+  }
 
   // const favorites = eachMix.favorited_by;
   // it looks like favorites is an array of users by user id. either that, or the array is just the no. of favorites, though that would be a little extra
@@ -128,7 +140,21 @@ export default function EachMixtape({
             </Typography>
             {/* <MixSpeedDial id={id} /> */}
           </CardContent>
-          <CardActions></CardActions>
+          <CardActions>
+            <Button>Details for {mixTitle}</Button>
+          </CardActions>
+          <>
+            {selectedMix !== 'none' ? (
+              <PlayerContainer token={token} selectedMix={selectedMix} setSelectedMix={setSelectedMix} />
+            ) : (
+              <>
+                {/* <Button onClick={() => MixSelect({ id })}>
+                  Show details for {eachMix.title}</Button> */}
+                <Button onClick={() => setSelectedMix(4)}>
+                  Show details for {eachMix.title}</Button>
+              </>
+            )}
+          </>
         </Card>
       </Box>
     </>
