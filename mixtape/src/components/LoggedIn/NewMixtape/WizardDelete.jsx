@@ -1,15 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Navigate } from 'react-router-dom';
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import PropTypes from "prop-types";
-import Stack from "@mui/material/Stack";
-
-import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
@@ -17,7 +9,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 export default function WizardDelete({ deleteConfirmOpen, setDeleteConfirmOpen, mixId, setActiveStep, mixTitle, setAuth, isLoggedIn, token, username }) {
     const [deleteIsProcessing, setDeleteIsProcessing] = useState(false)
-    // const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false)
     const [error, setError] = useState('')
 
     const handleDeleteConfirmOpen = () => {

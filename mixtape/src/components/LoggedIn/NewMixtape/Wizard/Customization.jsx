@@ -1,54 +1,20 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Navigate } from 'react-router-dom';
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import PropTypes from "prop-types";
 import Stack from "@mui/material/Stack";
-
-
-import { Link } from "react-router-dom";
-
 import Default from "../../../../images/cassettes/Default.png"
 import Momentum from "../../../../images/cassettes/Momentum.png"
 import Seattle from "../../../../images/cassettes/Seattle.png"
 import Wilmington from "../../../../images/cassettes/Wilmington.png"
-
-import Grid from '@mui/material/Grid';
-
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import IconButton from '@mui/material/IconButton';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import PauseCircleIcon from '@mui/icons-material/PauseCircle';
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
-import CircularProgress from '@mui/material/CircularProgress';
-import Chip from '@mui/material/Chip';
-import Avatar from '@mui/material/Avatar';
-
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-
 import WizardDelete from '../WizardDelete'
+import Chip from "@mui/material/Chip"
+import Dialog from "@mui/material/Dialog"
 
 export default function Customization({ setActiveStep, mixId, mixTitle, setAuth, isLoggedIn, token, username, deleteConfirmOpen, setDeleteConfirmOpen }) {
     const [theme, setTheme] = useState(0)
     const [error, setError] = useState('')
-    const [deleteIsProcessing, setDeleteIsProcessing] = useState(false)
-    // const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false)
-
 
     const NormalText = {
         userSelect: "none",

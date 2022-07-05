@@ -41,8 +41,6 @@ export default function SignIn({ setAuth, isLoggedIn, handleLogout }) {
                 }
             )
             .then((res) => {
-                // setAuth(username, token)
-                // console.log(setAuth)
                 console.log(res.data)
                 console.log(`this is the token: ${res.data.auth_token}`)
                 setAuth(username, res.data.auth_token);

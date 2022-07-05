@@ -4,13 +4,9 @@ import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import CardActions from "@mui/material/CardActions";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import MixSpeedDial from "../MixSpeedDial";
-import { Stack } from "@mui/material";
 
 import Default from "../../../images/spines/Default.png"
 import Wilmington from "../../../images/spines/Wilmington.png"
@@ -54,9 +50,6 @@ export default function EachMixtape({
     // setSelectedMix(result)
     console.log(selectedMix)
   }
-
-  // const favorites = eachMix.favorited_by;
-  // it looks like favorites is an array of users by user id. either that, or the array is just the no. of favorites, though that would be a little extra
 
   function handleFavorite(e) {
     setFavoriteClicked(false);
@@ -138,20 +131,16 @@ export default function EachMixtape({
             <Typography>
               {mixTitle}
             </Typography>
-            {/* <MixSpeedDial id={id} /> */}
           </CardContent>
-          <CardActions>
-            <Button>Details for {mixTitle}</Button>
-          </CardActions>
           <>
             {selectedMix !== 0 ? (
               <PlayerContainer token={token} selectedMix={selectedMix} setSelectedMix={setSelectedMix} />
             ) : (
               <>
                 {/* <Button onClick={() => MixSelect({ id })}>
-                  Show details for {eachMix.title}</Button> */}
+                  Show details for {mixTitle}</Button> */}
                 <Button onClick={() => setSelectedMix(4)}>
-                  Show details for {eachMix.title}</Button>
+                  Show details for {mixTitle}</Button>
               </>
             )}
           </>

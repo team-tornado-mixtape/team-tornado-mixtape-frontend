@@ -1,15 +1,8 @@
 import react from 'react';
 import { useState, useEffect } from 'react'
 import axios from "axios";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import PropTypes from "prop-types";
 import Stack from "@mui/material/Stack";
-
-import { Link } from "react-router-dom";
-
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -23,18 +16,13 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import CircularProgress from '@mui/material/CircularProgress';
-import Chip from '@mui/material/Chip';
 
 export default function Tracklist({ token, mixId, AddRemoveTrack, mixTitle, trackAdded, setTrackAdded }) {
     const [pageDidLoad, setPageDidLoad] = useState(false)
-    const [thisMixData, setThisMixData] = useState({})
     const [trackData, setTrackData] = useState([])
     const [error, setError] = useState('')
 
     useEffect(() => {
-        // setMyFavoritesDidLoad(true)
-        // setAllMixtapesDidLoad(true)
-        // setMyMixtapesIsSelected(true)
         axios
             .get(`https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${mixId}/`, {
                 headers: { Authorization: `Token ${token}` },
@@ -51,7 +39,7 @@ export default function Tracklist({ token, mixId, AddRemoveTrack, mixTitle, trac
                 setError(e.message);
             });
         console.log(error);
-    }, [token, error, mixId, trackAdded]);
+    }, [token, error, mixId, trackAdded, trackData]);
 
     function ReloadTracklist(e) {
         axios
@@ -86,8 +74,6 @@ export default function Tracklist({ token, mixId, AddRemoveTrack, mixTitle, trac
                 }
             )
             .then((res) => {
-                // console.log(res.status)
-                // console.log(res.data)
                 console.log(`SUCCESS! track with ID of ${selectedTrack} was successfully removed from mixtape with ID of ${mixId}`)
                 ReloadTracklist()
             })
@@ -116,7 +102,6 @@ export default function Tracklist({ token, mixId, AddRemoveTrack, mixTitle, trac
                                 </TableBody>
                             ) : (
                                 <TableBody>
-                                    {/* how to get this code working: copy the block from above, paste it down here. go to where this component is in the app. change allResults and eachResult to thisMixData and eachTrack. this will continue to work until you leave this component. */}
                                     {trackData.map((eachTrack, index) => {
                                         const trackId = eachTrack.id
                                         return (

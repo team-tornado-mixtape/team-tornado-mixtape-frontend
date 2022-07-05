@@ -82,7 +82,6 @@ export default function SignUp({ isLoggedIn }) {
       .then((res) => {
         console.log(res.data)
         console.log(`this is the token: ${res.data.auth_token}`)
-        // setAuth(username, res.data.auth_token)
         setAuth(username, token)
         setIssuedToken(res.data.auth_token);
         RegisterSpotifyAccount()
@@ -95,7 +94,6 @@ export default function SignUp({ isLoggedIn }) {
   function RegisterSpotifyAccount() {
     console.log('you got to this step!')
     console.log(token)
-    // setError('')
     axios
       .post(
         'https://team-tornado-mixtape.herokuapp.com/api/profiles/',
@@ -108,7 +106,6 @@ export default function SignUp({ isLoggedIn }) {
       )
       .then((res) => {
         console.log(res)
-        // setSpotifyIsRegistered(true)
         console.log('Profile registered with spotify')
         setSignUpSignInComplete(true)
       })
@@ -116,10 +113,6 @@ export default function SignUp({ isLoggedIn }) {
         setError(e.message)
       })
   }
-
-  // if (isLoggedIn) {
-  //   return <Navigate to="/" replace={true} />
-  // }
 
   if (signUpSignInComplete) {
     console.log("Signed up and signed in!");

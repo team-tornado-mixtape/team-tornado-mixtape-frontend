@@ -1,16 +1,11 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Navigate } from 'react-router-dom';
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import PropTypes from "prop-types";
 import Stack from "@mui/material/Stack";
-
-import { Link } from "react-router-dom";
-
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -25,19 +20,16 @@ import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import CircularProgress from '@mui/material/CircularProgress';
 import Chip from '@mui/material/Chip';
-
 import Tracklist from "../../TrackList";
 
 
 export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, isLoggedIn, token, username, selectedArtist }) {
   const [isLoading, setIsLoading] = useState(false)
   const [allResults, setAllResults] = useState([])
-  // const [mixData, setMixData] = useState([])
   const [error, setError] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const [artistRefiner, setArtistRefiner] = useState('')
   const [deleteIsProcessing, setDeleteIsProcessing] = useState(false)
-
   const [trackAdded, setTrackAdded] = useState(false)
 
   console.log(`Here is the mix ID: ${mixId}`)
@@ -74,10 +66,7 @@ export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, is
         }
       )
       .then((res) => {
-        // console.log(res.status)
-        // console.log(res.data)
         setAllResults(res.data)
-        // console.log(`This is the output: ${res.data}`)
         setIsLoading(false)
       })
       .catch((e) => {
@@ -97,8 +86,6 @@ export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, is
         }
       )
       .then((res) => {
-        // console.log(res.status)
-        // console.log(res.data)
         setAllResults(res.data)
         setIsLoading(false)
         console.log(`SUCCESS! selectedArtist is: ${selectedArtist}`)
@@ -196,7 +183,6 @@ export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, is
             ) : (
               <>
                 {
-
                   allResults.map((eachResult, index) => {
                     const eachArtist = eachResult.artist
                     return (
@@ -209,22 +195,12 @@ export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, is
                           </>
                         ) : (
                           <>
-                            single result!
-                            {/* {handleSetRefinedSearch(eachArtist)} */}
-                            {/* what i want to check here is: if there is only 1 result, show nothing and do the search again with the artist appended. additionally, i want to check that if there are multiple results with the same artist, that the search refiner is not shown, and the search is done again with the artist appended. */}
-                            {/* {allResults.length === 2 ? (
-                              <>
-                                <Stack spacing={1} direction="column">
-                                  <Chip key={index} label={eachArtist} artist={eachArtist} variant="outlined" onClick={handleSetRefinedSearch} />
-                                </Stack>
-                              </>
                             ) : (
-                              <>
-                                <Stack spacing={1} direction="column">
-                                  <Chip key={index} label="only one artist" variant="outlined" />
-                                </Stack>
-                              </>
-                            )} */}
+                            <>
+                              <Stack spacing={1} direction="column">
+                                <Chip key={index} label="only one artist" variant="outlined" />
+                              </Stack>
+                            </>
                           </>
                         )}
                       </>
@@ -291,7 +267,6 @@ export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, is
               </>
             )}
           </Stack>
-          {/* how to get this code working: copy lines 294-326 from above, paste it from lines 334-361. go to where this component is in the app. in lines 334-361, change all instances allResults and eachResult to thisMixData and eachTrack. this will continue to work until you leave this component. */}
           <Tracklist token={token} mixId={mixId} mixTitle={mixTitle} trackAdded={trackAdded} setTrackAdded={setTrackAdded} />
         </Stack>
       </Box>
