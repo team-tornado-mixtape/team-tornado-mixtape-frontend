@@ -10,6 +10,13 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
 })
@@ -53,26 +60,63 @@ export default function SignIn({ setAuth, isLoggedIn, handleLogout }) {
 
     return (
         <>
+            <Box
+                sx={{
+                    width: "90%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                }}
+            >
+                <TableContainer
+                    component={Paper}
+                    sx={{ width: 430, border: "1.5px solid #E2E2DF" }}>
+                    <Table sx={{ width: 430 }}>
+                        <TableBody>
+                            {/* <TableRow sx={{ backgroundColor: "#8F4F6A" }}> */}
+                            <TableRow>
+                                <TableCell colSpan={2} align="center">
+                                    <Typography variant="h3">Sign In to Continue</Typography>
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell align="center">
+                                    <Box component="form" onSubmit={handleLogin} textAlign="center">
+                                        <TextField
+                                            label="username"
+                                            value={username}
+                                            margin="normal"
+                                            onChange={(e) => setUsername(e.target.value)} />
+                                    </Box>
+                                </TableCell>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <br></br>
+            </Box>
             <Box sx={{ width: "90%", textAlign: "center" }}>
-                <Typography variant="h2">Sign In to Continue</Typography>
             </Box>
             <br></br>
-            {error && (
-                <Snackbar
-                    open={open}
-                    onClose={handleClose}
-                    autoHideDuration={6000}
-                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-                >
-                    <Alert
+            {
+                error && (
+                    <Snackbar
+                        open={open}
                         onClose={handleClose}
-                        severity="warning"
-                        sx={{ width: '100%' }}
+                        autoHideDuration={6000}
+                        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
                     >
-                        {error}
-                    </Alert>
-                </Snackbar>
-            )}
+                        <Alert
+                            onClose={handleClose}
+                            severity="warning"
+                            sx={{ width: '100%' }}
+                        >
+                            {error}
+                        </Alert>
+                    </Snackbar>
+                )
+            }
             <Box component="form" onSubmit={handleLogin} textAlign="center">
                 <Box>
                     <TextField

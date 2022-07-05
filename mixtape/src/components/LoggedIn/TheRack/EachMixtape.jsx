@@ -114,25 +114,22 @@ export default function EachMixtape({
           sx={{ width: "28vw", variant: "outlined", border: "2px solid #E2E2DF" }}
         >
           <CardContent>
-            {theme === 0 ? (
+            {/* {theme === 0 ? (
               <img src={Default} alt="Default"></img>
-            ) : (<></>)
-            }
-            {theme === 1 ? (
+            ) : theme === 1 ? (
               <img src={Wilmington} alt="Wilmington"></img>
-            ) : (<></>)
-            }
-            {theme === 2 ? (
+            ) : theme === 2 ? (
               <img src={Seattle} alt="Seattle"></img>
-            ) : (<></>)
-            }
-            {theme === 3 ? (
+            ) : theme === 3 ? (
               <img src={Momentum} alt="Momentum"></img>
             ) : (<></>)
-            }
+            } */}
+            {/* get these to overlay properly: */}
             <Typography variant="eachmix" sx={{ color: "#000000" }}>
               {mixTitle}
             </Typography>
+            <img src={Default} alt="Default"></img>
+            {/* ^^^^^ */}
           </CardContent>
           <>
             {selectedMix !== 0 ? (
