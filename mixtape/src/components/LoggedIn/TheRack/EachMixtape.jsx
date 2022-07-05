@@ -27,7 +27,7 @@ export default function EachMixtape({
   setDeleteClicked,
 }) {
   // here are some consts to get you set up:
-  const id = eachMix.id;
+  // const id = eachMix.id;
   const createDate = eachMix.created_at;
   const creator = eachMix.creator;
   const mixTitle = eachMix.title;
@@ -43,24 +43,26 @@ export default function EachMixtape({
 
   const [selectedMix, setSelectedMix] = useState(0)
 
-  const MixSelect = ({ id }) => {
-    const result = id
-    console.log(result)
+  const MixSelect = (id) => {
+    // const result = id
+    // console.log(result)
     // even if you comment this back in, it still won't work
-    // setSelectedMix(result)
+    setSelectedMix(id)
     console.log(selectedMix)
   }
+
+  console.log(eachMix.id)
 
   function handleFavorite(e) {
     setFavoriteClicked(false);
     e.preventDefault();
     console.log(
-      `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${id}/favorites`
+      `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${eachMix.id}/favorites`
     );
     console.log(token);
     axios
       .patch(
-        `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${id}/favorites`,
+        `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${eachMix.id}/favorites`,
         {
           title: mixTitle,
         },
@@ -82,12 +84,12 @@ export default function EachMixtape({
     setDeleteClicked(false);
     e.preventDefault();
     console.log(
-      `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${id}`
+      `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${eachMix.id}`
     );
     console.log(token);
     axios
       .delete(
-        `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${id}`,
+        `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${eachMix.id}`,
         {
           detail: deleteMix,
         },
@@ -128,7 +130,7 @@ export default function EachMixtape({
               <img src={Momentum} alt="Momentum"></img>
             ) : (<></>)
             }
-            <Typography>
+            <Typography variant="eachmix" sx={{ color: "#000000" }}>
               {mixTitle}
             </Typography>
           </CardContent>
@@ -137,10 +139,10 @@ export default function EachMixtape({
               <PlayerContainer token={token} selectedMix={selectedMix} setSelectedMix={setSelectedMix} />
             ) : (
               <>
-                {/* <Button onClick={() => MixSelect({ id })}>
-                  Show details for {mixTitle}</Button> */}
-                <Button onClick={() => setSelectedMix(4)}>
+                <Button onClick={() => MixSelect(eachMix.id)}>
                   Show details for {mixTitle}</Button>
+                {/* <Button onClick={() => setSelectedMix(4)}>
+                  Show details for {mixTitle}</Button> */}
               </>
             )}
           </>

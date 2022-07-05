@@ -182,7 +182,7 @@ export default function Rack({ token }) {
       </div>
       <Box sx={{ display: "flexbox", alignContent: "center" }}>
         <Stack spacing={2} direction="column">
-          <Card
+          {/* <Card
             sx={{
               display: "flex",
               width: "28vw",
@@ -192,10 +192,10 @@ export default function Rack({ token }) {
             }}
             variant="outlined"
           >
-            <CardContent>
-              <Typography variant="h3">The Rack</Typography>
-            </CardContent>
-          </Card>
+            <CardContent> */}
+          <Typography variant="h2">The Rack</Typography>
+          {/* </CardContent>
+          </Card> */}
           <br></br>
           <Stack spacing={2} direction="row">
             {myMixtapesIsSelected ? (
@@ -208,6 +208,7 @@ export default function Rack({ token }) {
               <Chip
                 label="Created by me"
                 variant="outlined"
+                color="secondary"
                 onClick={ShowMyMixtapes}
               />
             )}
@@ -221,6 +222,7 @@ export default function Rack({ token }) {
               <Chip
                 label="My favorites"
                 variant="outlined"
+                color="primary"
                 onClick={ShowMyFavoriteMixtapes}
               />
             )}
@@ -234,6 +236,7 @@ export default function Rack({ token }) {
               <Chip
                 label="All mixtapes"
                 variant="outlined"
+                color="secondary"
                 onClick={ShowAllMixtapes}
               />
             )}

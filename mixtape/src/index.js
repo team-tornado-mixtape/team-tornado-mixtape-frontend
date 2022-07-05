@@ -6,46 +6,131 @@ import reportWebVitals from './reportWebVitals';
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 
 const theme = createTheme({
+  // palette: {
+  //   type: 'dark',
+  //   primary: {
+  //     main: '#62BCB3',
+  //     contrastText: '#ececeb',
+  //     dark: '#62BCB3',
+  //   },
+  //   secondary: {
+  //     main: '#FC9545',
+  //     contrastText: '#ececeb',
+  //   },
+  //   background: {
+  //     default: '#373433',
+  //     paper: '#55504E',
+  //   },
+  //   error: {
+  //     main: '#F21B18',
+  //     dark: '#F21B18',
+  //     contrastText: '#ececeb',
+  //   },
+  //   text: {
+  //     primary: '#ececeb',
+  //     secondary: '#ececeb',
+  //     disabled: '#4D636D',
+  //     hint: '#8F4F6A',
+  //   },
+  //   warning: {
+  //     main: '#E165B2',
+  //     contrastText: '#ececeb',
+  //   },
+  //   info: {
+  //     main: '#707AFF',
+  //     contrastText: '#ececeb',
+  //   },
+  //   success: {
+  //     main: 'rgb(51, 214, 200)',
+  //     dark: 'rgb(51, 214, 200)',
+  //     contrastText: '#ececeb',
+  //   },
+  //   divider: '#ececeb',
+  // },
+  // typography: {
+  //   fontFamily: 'Poppins',
+  //   h1: {
+  //     fontWeight: 600,
+  //   },
+  //   h2: {
+  //     fontWeight: 600,
+  //   },
+  //   h3: {
+  //     fontWeight: 600,
+  //   },
+  //   h4: {
+  //     fontWeight: 600,
+  //   },
+  //   h5: {
+  //     fontWeight: 600,
+  //   },
+  //   landing: {
+  //     fontWeight: 600,
+  //     fontFamily: 'Permanent Marker',
+  //     fontSize: '12rem',
+  //   },
+  //   subtitle1: {
+  //     fontWeight: 600,
+  //   },
+  //   subtitle2: {
+  //     fontWeight: 500,
+  //     fontFamily: 'Permanent Marker',
+  //   },
+  //   eachmix: {
+  //     fontWeight: 500,
+  //     fontFamily: 'Permanent Marker',
+  //     fontSize: '2rem',
+  //   },
+  //   fontWeightRegular: 600,
+  //   fontWeightLight: 400,
+  //   button: {
+  //     fontWeight: 600,
+  //   },
+  //   body2: {
+  //     fontWeight: 500,
+  //   },
+  // },
+  // shape: {
+  //   borderRadius: 8,
+  // },
   palette: {
     type: 'dark',
     primary: {
       main: '#62BCB3',
-      contrastText: '#E2E2DF',
-      dark: '#62BCB3',
+      contrastText: '#ffffff',
     },
     secondary: {
-      main: '#FC9545',
-      contrastText: '#E2E2DF',
+      main: '#f9b824',
+      contrastText: '#ffffff',
     },
     background: {
       default: '#373433',
       paper: '#55504E',
     },
     error: {
-      main: '#F21B18',
-      dark: '#F21B18',
-      contrastText: '#E2E2DF',
+      main: '#a21e21',
+      contrastText: '#ffffff',
     },
     text: {
-      primary: '#E2E2DF',
-      secondary: '#E2E2DF',
+      primary: '#ececeb',
+      secondary: '#ececeb',
       disabled: '#4D636D',
       hint: '#8F4F6A',
     },
     warning: {
       main: '#E165B2',
-      contrastText: '#E2E2DF',
+      contrastText: '#ffffff',
     },
     info: {
-      main: '#9298E0',
-      contrastText: '#E2E2DF',
+      main: '#435e93',
+      contrastText: '#ffffff',
     },
     success: {
       main: 'rgb(51, 214, 200)',
       dark: 'rgb(51, 214, 200)',
-      contrastText: '#E2E2DF',
+      contrastText: '#ffffff',
     },
-    divider: '#E2E2DF',
+    divider: '#ececeb',
   },
   typography: {
     fontFamily: 'Poppins',
@@ -64,14 +149,18 @@ const theme = createTheme({
     h5: {
       fontWeight: 600,
     },
-    h6: {
+    landing: {
       fontWeight: 600,
+      fontFamily: 'Permanent Marker',
+      fontSize: '8rem',
     },
     subtitle1: {
       fontWeight: 600,
     },
-    subtitle2: {
+    eachmix: {
       fontWeight: 500,
+      fontFamily: 'Permanent Marker',
+      fontSize: '1.5rem',
     },
     fontWeightRegular: 600,
     fontWeightLight: 400,

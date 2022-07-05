@@ -43,9 +43,9 @@ export default function Customization({ setActiveStep, mixId, mixTitle, setAuth,
 
     const handleThemeChange = (e) => {
         e.preventDefault();
-        var selectedTheme = e.currentTarget.getAttribute("themeId")
-        console.log(selectedTheme)
-        setTheme(selectedTheme)
+        console.log(e.currentTarget.getAttribute("themeId"))
+        setTheme(parseInt(e.currentTarget.getAttribute("themeId")))
+        console.log(theme)
     }
 
     function handleFinish(e) {
@@ -75,10 +75,7 @@ export default function Customization({ setActiveStep, mixId, mixTitle, setAuth,
                     </Stack>
                     <img src={Default} alt="Default" />
                 </>
-            ) : (
-                <></>
-            )}
-            {theme === 1 ? (
+            ) : theme === 1 ? (
                 <>
                     <Stack spacing={2} direction="row" sx={{ alignItems: "center", justifyContent: "center" }}>
                         <Chip label="Default" variant="outlined" themeId={0} onClick={handleThemeChange} />
@@ -88,10 +85,7 @@ export default function Customization({ setActiveStep, mixId, mixTitle, setAuth,
                     </Stack>
                     <img src={Wilmington} alt="Wilmington" />
                 </>
-            ) : (
-                <></>
-            )}
-            {theme === 2 ? (
+            ) : theme === 2 ? (
                 <>
                     <Stack spacing={2} direction="row" sx={{ alignItems: "center", justifyContent: "center" }}>
                         <Chip label="Default" variant="outlined" themeId={0} onClick={handleThemeChange} />
@@ -100,12 +94,8 @@ export default function Customization({ setActiveStep, mixId, mixTitle, setAuth,
                         <Chip label="Momentum" variant="outlined" themeId={3} onClick={handleThemeChange} />
                     </Stack>
                     <img src={Seattle} alt="Seattle" />
-                    <img src={Momentum} alt="Momentum" />
                 </>
-            ) : (
-                <></>
-            )}
-            {theme === 3 ? (
+            ) : theme === 3 ? (
                 <>
                     <Stack spacing={2} direction="row" sx={{ alignItems: "center", justifyContent: "center" }}>
                         <Chip label="Default" variant="outlined" themeId={0} onClick={handleThemeChange} />
@@ -116,7 +106,8 @@ export default function Customization({ setActiveStep, mixId, mixTitle, setAuth,
                     <img src={Momentum} alt="Momentum" />
                 </>
             ) : (
-                <></>
+                <>
+                </>
             )}
             <Stack spacing={2} direction="row">
                 <Button variant="outlined" color="secondary" onClick={handleDeleteConfirmOpen}>Cancel</Button>

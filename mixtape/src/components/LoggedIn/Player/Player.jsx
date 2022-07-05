@@ -9,11 +9,11 @@ import Stack from "@mui/material/Stack";
 
 import Tracklist from "../TrackList"
 
-export default function Player(token, selectedMix, setSelectedMix) {
+export default function Player({ token, selectedMix, setSelectedMix }) {
   console.log(`the selected mixID is: ${selectedMix}`)
   return (
     <>
-      <Tracklist mixId={66} token={token} />
+      <Tracklist mixId={selectedMix} token={token} />
     </>
   );
 }
