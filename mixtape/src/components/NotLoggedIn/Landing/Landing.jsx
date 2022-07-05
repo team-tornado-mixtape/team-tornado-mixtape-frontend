@@ -52,15 +52,12 @@ export default function Landing({ setAuth, isLoggedIn, handleLogout }) {
           <TapeImage /> */}
         <Box sx={{ width: "50%" }}>
           <Stack spacing={4} direction="column" textAlign="center">
-            <Typography variant="h1">Mixtape</Typography>
+            <Typography variant="landing">Mixtape</Typography>
             {/* <Box sx={{ width: "90%" }}> */}
             <Typography variant="h5">
-              Mixtape is a fun way of gifting friends a curated mixtape,
-              streaming service agnostically.
+              The best way to find and share songs, regardless of the streaming service you use.
             </Typography>
-            {/* </Box> */}
-            {/* </Box> */}
-            <Box sx={{ width: "50%" }}>
+            <Box sx={{ width: "50%" }} alignContent="center">
               <SignIn setAuth={setAuth}
                 isLoggedIn={isLoggedIn}
                 handleLogout={handleLogout} />

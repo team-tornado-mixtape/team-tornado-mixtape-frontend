@@ -130,7 +130,7 @@ export default function EachMixtape({
               <img src={Momentum} alt="Momentum"></img>
             ) : (<></>)
             }
-            <Typography>
+            <Typography variant="eachmix" sx={{ color: "#000000" }}>
               {mixTitle}
             </Typography>
           </CardContent>
