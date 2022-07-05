@@ -3,7 +3,6 @@ import React from "react";
 import useLocalStorageState from "use-local-storage-state";
 import axios from "axios";
 import Landing from "./components/NotLoggedIn/Landing/Landing";
-import Profile from "./components/LoggedIn/Profile/Profile.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Player from "./components/LoggedIn/Player/Player";
 import PasswordReset from "./components/NotLoggedIn/Landing/PasswordReset";
