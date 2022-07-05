@@ -11,6 +11,8 @@ import CardMedia from '@mui/material/CardMedia';
 import { Link, Navigate } from "react-router-dom";
 import TapeImage from "../../../images/TapeImage";
 
+import WilmingtonHalf from "../../../images/cassettes/WilmingtonHalf.png"
+
 export default function Landing({ setAuth, isLoggedIn, handleLogout }) {
 
   if (isLoggedIn) {
@@ -19,8 +21,12 @@ export default function Landing({ setAuth, isLoggedIn, handleLogout }) {
 
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Box
+      <Stack spacing={2} direction="row">
+        <Box sx={{ width: "50%" }}>
+          <img src={WilmingtonHalf} alt="Landing page" />
+        </Box>
+        {/* <Box sx={{ display: "flex", justifyContent: "center" }}> */}
+        {/* <Box
           sx={{
             width: "90%",
             display: "flex",
@@ -28,9 +34,10 @@ export default function Landing({ setAuth, isLoggedIn, handleLogout }) {
             justifyContent: "center",
             flexDirection: "column",
           }}
-        >
-          <Typography variant="h1">Mixtape</Typography>
-          {/* <Box
+        > */}
+
+        {/* <Typography variant="h1">Mixtape</Typography> */}
+        {/* <Box
             sx={{
               width: "50%",
               height: 350,
@@ -41,22 +48,26 @@ export default function Landing({ setAuth, isLoggedIn, handleLogout }) {
               },
             }}
           ></Box> */}
-
-          <TapeImage />
-
-          <Box sx={{ width: "90%" }}>
+        {/* 
+          <TapeImage /> */}
+        <Box sx={{ width: "50%" }}>
+          <Stack spacing={4} direction="column" textAlign="center">
+            <Typography variant="h1">Mixtape</Typography>
+            {/* <Box sx={{ width: "90%" }}> */}
             <Typography variant="h5">
-              Mixtape is A fun way of gifting friends a curated mixtape,
+              Mixtape is a fun way of gifting friends a curated mixtape,
               streaming service agnostically.
             </Typography>
-          </Box>
+            {/* </Box> */}
+            {/* </Box> */}
+            <Box sx={{ width: "50%" }}>
+              <SignIn setAuth={setAuth}
+                isLoggedIn={isLoggedIn}
+                handleLogout={handleLogout} />
+            </Box>
+          </Stack>
         </Box>
-        <Box sx={{ width: "50%" }}>
-          <SignIn setAuth={setAuth}
-            isLoggedIn={isLoggedIn}
-            handleLogout={handleLogout} />
-        </Box>
-      </Box>
+      </Stack>
     </>
   );
 }

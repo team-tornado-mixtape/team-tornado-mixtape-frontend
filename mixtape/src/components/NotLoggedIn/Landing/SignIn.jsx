@@ -73,7 +73,7 @@ export default function SignIn({ setAuth, isLoggedIn, handleLogout }) {
                     </Alert>
                 </Snackbar>
             )}
-            <Box component="form" onSubmit={handleLogin}>
+            <Box component="form" onSubmit={handleLogin} textAlign="center">
                 <Box>
                     <TextField
                         label="username"
