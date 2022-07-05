@@ -92,7 +92,7 @@ export default function Title({ setActiveStep, setMixTitle, mixTitle, setMixId, 
                     <Button variant="contained" disabled>Continue</Button>
                 </Box>
             ) : (
-                <Box sx={{ textAlign: "center", justifyContent: "center", border: "1px solid white" }}>
+                <Box sx={{ textAlign: "left", justifyContent: "left" }}>
                     <Stack spacing={2} direction="column">
                         <Box component="form" onSubmit={handleMixCreate}>
                             <Box>

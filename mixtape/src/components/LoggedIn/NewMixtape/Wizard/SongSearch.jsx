@@ -169,20 +169,22 @@ export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, is
 
   return (
     <>
-      <Typography>Add songs to {mixTitle}</Typography>
+      <Typography variant="h5">Add tracks to {mixTitle}</Typography>
       <br></br>
       <Box sx={{ textAlign: "left", justifyContent: "center" }}>
-        <Stack spacing={2} direction="row">
-          <TextField
-            id="outlined-basic"
-            variant="outlined"
-            label="search by track name"
-            onChange={handleSetSearch}
-            value={searchTerm}
-          />
-          <Button onClick={handleSearch} variant="contained">
-            Search
-          </Button>
+        <Stack spacing={2} direction="column">
+          <Stack spacing={2} direction="row">
+            <TextField
+              id="outlined-basic"
+              variant="outlined"
+              label="search by track name"
+              onChange={handleSetSearch}
+              value={searchTerm}
+            />
+            <Button onClick={handleSearch} variant="contained">
+              Search
+            </Button>
+          </Stack>
           <Typography variant="p">Refine search</Typography>
           <Stack spacing={2} direction="row">
             {artistRefiner !== '' ? (

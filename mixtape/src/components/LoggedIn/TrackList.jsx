@@ -110,7 +110,7 @@ export default function Tracklist({ token, mixId, AddRemoveTrack, mixTitle, trac
                                 <TableBody>
                                     <TableRow>
                                         <TableCell align="center">
-                                            <Typography>Please add tracks to continue.</Typography>
+                                            <Typography>Add tracks to see them here.</Typography>
                                         </TableCell>
                                     </TableRow>
                                 </TableBody>

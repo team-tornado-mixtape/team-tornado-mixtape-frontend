@@ -14,9 +14,9 @@ import Customization from "./Wizard/Customization.jsx"
 import Stack from "@mui/material/Stack";
 
 const steps = [
-    "Set mixtape title",
+    "Set title",
     "Add songs",
-    "Customize"
+    "Choose theme"
 ];
 
 export default function Wizard({ token }) {

@@ -50,22 +50,8 @@ export default function WizardContainer({ addMixtapeButtonClicked, setAddMixtape
         setOpen(true)
     }
 
-    // const toggleDrawer = (newOpen) => () => {
-    //     setOpen(newOpen);
-    //     // open === false ? (
-    //     //     setAddMixtapeButtonClicked(false)
-    //     // ) : (
-    //     //     <></>
-    //     // )
-    // }
-
-    // This is used only for the example
-    // const container =
-    //     window !== undefined ? () => window().document.body : undefined;
-
     return (
         <Root>
-            {/* <CssBaseline /> */}
             <Global
                 styles={{
                     ".MuiDrawer-root > .MuiPaper-root": {
@@ -76,11 +62,7 @@ export default function WizardContainer({ addMixtapeButtonClicked, setAddMixtape
                     }
                 }}
             />
-            {/* <Box sx={{ textAlign: "center", pt: 1 }}>
-                <Button onClick={toggleDrawer(true)}>Open</Button>
-            </Box> */}
             <SwipeableDrawer
-                // container={container}
                 anchor="bottom"
                 open={open}
                 onClose={handleClose}
@@ -121,13 +103,3 @@ export default function WizardContainer({ addMixtapeButtonClicked, setAddMixtape
         </Root>
     );
 }
-
-// WizardContainer.propTypes = {
-//     /**
-//      * Injected by the documentation to work in an iframe.
-//      * You won't need it on your project.
-//      */
-//     window: PropTypes.func
-// };
-
-// export default WizardContainer;

@@ -13,6 +13,9 @@ import MixSpeedDial from "../MixSpeedDial";
 import { Stack } from "@mui/material";
 
 import Default from "../../../images/spines/Default.png"
+import Wilmington from "../../../images/spines/Wilmington.png"
+import Seattle from "../../../images/spines/Seattle.png"
+import Momentum from "../../../images/spines/Momentum.png"
 
 export default function EachMixtape({
   eachMix,
@@ -104,7 +107,22 @@ export default function EachMixtape({
           sx={{ width: "28vw", variant: "outlined", border: "2px solid #E2E2DF" }}
         >
           <CardContent>
-            <img src={Default} alt="rackimg"></img>
+            {theme === 0 ? (
+              <img src={Default} alt="Default"></img>
+            ) : (<></>)
+            }
+            {theme === 1 ? (
+              <img src={Wilmington} alt="Wilmington"></img>
+            ) : (<></>)
+            }
+            {theme === 2 ? (
+              <img src={Seattle} alt="Seattle"></img>
+            ) : (<></>)
+            }
+            {theme === 3 ? (
+              <img src={Momentum} alt="Momentum"></img>
+            ) : (<></>)
+            }
             <Typography>
               {mixTitle}
             </Typography>
