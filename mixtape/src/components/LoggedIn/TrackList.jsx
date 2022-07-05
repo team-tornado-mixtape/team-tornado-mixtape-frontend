@@ -96,7 +96,7 @@ export default function Tracklist({ token, mixId, AddRemoveTrack, mixTitle, trac
                                 <TableBody>
                                     <TableRow>
                                         <TableCell align="center">
-                                            <Typography>Add tracks to see them here.</Typography>
+                                            <Typography>No tracks in this mixtape (yet).</Typography>
                                         </TableCell>
                                     </TableRow>
                                 </TableBody>
