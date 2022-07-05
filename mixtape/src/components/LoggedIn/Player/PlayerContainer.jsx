@@ -85,7 +85,7 @@ export default function PlayerContainer({ selectedMix, setSelectedMix, token }) 
                 >
                     <Puller />
                     <Typography sx={{ p: 2, color: "text.secondary" }}>
-                        Create New Mixtape
+                        Mix Detail
                     </Typography>
                 </StyledBox>
                 <StyledBox
@@ -96,7 +96,7 @@ export default function PlayerContainer({ selectedMix, setSelectedMix, token }) 
                         overflow: "auto"
                     }}
                 >
-                    <Player selectedMix={selectedMix} token={token} />
+                    <Player token={token} selectedMix={selectedMix} setSelectedMix={setSelectedMix} />
                 </StyledBox>
             </SwipeableDrawer>
         </Root>

@@ -45,7 +45,7 @@ export default function EachMixtape({
   const modifyDate = eachMix.modified_at;
   const deleteMix = eachMix.detail;
 
-  const [selectedMix, setSelectedMix] = useState('none')
+  const [selectedMix, setSelectedMix] = useState(0)
 
   const MixSelect = ({ id }) => {
     const result = id
@@ -144,7 +144,7 @@ export default function EachMixtape({
             <Button>Details for {mixTitle}</Button>
           </CardActions>
           <>
-            {selectedMix !== 'none' ? (
+            {selectedMix !== 0 ? (
               <PlayerContainer token={token} selectedMix={selectedMix} setSelectedMix={setSelectedMix} />
             ) : (
               <>

@@ -68,13 +68,8 @@ export default function PermanentDrawerLeft({
                 {...TabProps(0)}
                 icon={<Icon icon="ant-design:database-twotone" />}
               ></Tab>
-              <Tab {...TabProps(1)} icon={<Icon icon="bi:play-btn" />}></Tab>
-              {/* <Tab
-                {...TabProps(2)}
-                icon={<Icon icon="bxs:message-square-add" />}
-              ></Tab> */}
               <Tab
-                {...TabProps(2)}
+                {...TabProps(1)}
                 icon={<Icon icon="healthicons:ui-user-profile" />}
               ></Tab>
             </Tabs>
@@ -88,12 +83,6 @@ export default function PermanentDrawerLeft({
             <Rack token={token} />
           </EachSidebarView>
           <EachSidebarView value={value} index={1}>
-            <PlayerContainer />
-          </EachSidebarView>
-          {/* <EachSidebarView value={value} index={2}>
-            <MixStepper isLoggedIn={isLoggedIn} token={token} />
-          </EachSidebarView> */}
-          <EachSidebarView value={value} index={2}>
             <Profile />
           </EachSidebarView>
         </Box>
