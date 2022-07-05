@@ -152,7 +152,7 @@ const theme = createTheme({
     landing: {
       fontWeight: 600,
       fontFamily: 'Permanent Marker',
-      fontSize: '5.2rem',
+      fontSize: '8rem',
     },
     subtitle1: {
       fontWeight: 600,
