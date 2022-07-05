@@ -4,15 +4,16 @@ import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import CardActions from "@mui/material/CardActions";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import MixSpeedDial from "../MixSpeedDial";
-import { Stack } from "@mui/material";
 
 import Default from "../../../images/spines/Default.png"
+import Wilmington from "../../../images/spines/Wilmington.png"
+import Seattle from "../../../images/spines/Seattle.png"
+import Momentum from "../../../images/spines/Momentum.png"
+
+import PlayerContainer from "../Player/PlayerContainer.jsx"
 
 export default function EachMixtape({
   eachMix,
@@ -40,8 +41,15 @@ export default function EachMixtape({
   const modifyDate = eachMix.modified_at;
   const deleteMix = eachMix.detail;
 
-  // const favorites = eachMix.favorited_by;
-  // it looks like favorites is an array of users by user id. either that, or the array is just the no. of favorites, though that would be a little extra
+  const [selectedMix, setSelectedMix] = useState(0)
+
+  const MixSelect = ({ id }) => {
+    const result = id
+    console.log(result)
+    // even if you comment this back in, it still won't work
+    // setSelectedMix(result)
+    console.log(selectedMix)
+  }
 
   function handleFavorite(e) {
     setFavoriteClicked(false);
@@ -104,13 +112,38 @@ export default function EachMixtape({
           sx={{ width: "28vw", variant: "outlined", border: "2px solid #E2E2DF" }}
         >
           <CardContent>
-            <img src={Default} alt="rackimg"></img>
+            {theme === 0 ? (
+              <img src={Default} alt="Default"></img>
+            ) : (<></>)
+            }
+            {theme === 1 ? (
+              <img src={Wilmington} alt="Wilmington"></img>
+            ) : (<></>)
+            }
+            {theme === 2 ? (
+              <img src={Seattle} alt="Seattle"></img>
+            ) : (<></>)
+            }
+            {theme === 3 ? (
+              <img src={Momentum} alt="Momentum"></img>
+            ) : (<></>)
+            }
             <Typography>
               {mixTitle}
             </Typography>
-            {/* <MixSpeedDial id={id} /> */}
           </CardContent>
-          <CardActions></CardActions>
+          <>
+            {selectedMix !== 0 ? (
+              <PlayerContainer token={token} selectedMix={selectedMix} setSelectedMix={setSelectedMix} />
+            ) : (
+              <>
+                {/* <Button onClick={() => MixSelect({ id })}>
+                  Show details for {mixTitle}</Button> */}
+                <Button onClick={() => setSelectedMix(4)}>
+                  Show details for {mixTitle}</Button>
+              </>
+            )}
+          </>
         </Card>
       </Box>
     </>

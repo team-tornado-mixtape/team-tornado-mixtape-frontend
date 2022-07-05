@@ -5,9 +5,7 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
-import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -62,12 +60,8 @@ export default function Profile() {
           >
             <Table component="form" sx={{ width: 400 }}>
               <TableBody>
-                {/* conditionally render TextFields to accept updated user input when they select "update profile" */}
-                {/* add toggle for password visibility */}
-                {/* standardize small TextFields across app */}
                 {editingMode === "false" ? (
                   <>
-                    {/* set background color of first tablerow based on avi  */}
                     <TableRow>
                       <TableCell align="left">
                         <Typography variant="p" style={InfoText}>
