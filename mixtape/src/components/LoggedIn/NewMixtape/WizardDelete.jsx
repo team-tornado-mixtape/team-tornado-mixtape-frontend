@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog"
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
@@ -34,7 +35,7 @@ export default function WizardDelete({ deleteConfirmOpen, setDeleteConfirmOpen, 
                 console.log(res.data)
                 console.log('mixtape deleted!')
                 setActiveStep(0)
-                setDeleteIsProcessing(false)
+                setDeleteConfirmOpen(false)
             })
             .catch((e) => {
                 setError(e.message)
@@ -53,7 +54,7 @@ export default function WizardDelete({ deleteConfirmOpen, setDeleteConfirmOpen, 
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button variant="contained" color="primary" onClick={handleDeleteConfirmClose}>Cancel</Button>
+                <Button variant="contained" color="primary" onClick={handleDeleteConfirmClose}>Back</Button>
                 <Button variant="outlined" color="secondary" onClick={handleDelete} autoFocus>
                     Delete
                 </Button>

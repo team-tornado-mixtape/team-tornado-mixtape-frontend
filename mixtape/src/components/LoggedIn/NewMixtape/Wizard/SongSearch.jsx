@@ -21,17 +21,18 @@ import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import CircularProgress from '@mui/material/CircularProgress';
 import Chip from '@mui/material/Chip';
 import Tracklist from "../../TrackList";
-
 import Tooltip from '@mui/material/Tooltip';
+import Dialog from "@mui/material/Dialog"
+import WizardDelete from "../WizardDelete"
 
 
-export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, isLoggedIn, token, username, selectedArtist }) {
+export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, isLoggedIn, token, deleteConfirmOpen, setDeleteConfirmOpen, username, selectedArtist }) {
   const [isLoading, setIsLoading] = useState(false)
   const [allResults, setAllResults] = useState([])
   const [error, setError] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const [artistRefiner, setArtistRefiner] = useState('')
-  const [deleteIsProcessing, setDeleteIsProcessing] = useState(false)
+  // const [deleteIsProcessing, setDeleteIsProcessing] = useState(false)
   const [trackAdded, setTrackAdded] = useState(false)
 
   console.log(`Here is the mix ID: ${mixId}`)
@@ -39,6 +40,15 @@ export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, is
   const NormalText = {
     userSelect: "none",
   }
+
+  function handleAdvance(e) {
+    e.preventDefault();
+    setActiveStep(2)
+  }
+
+  const handleDeleteConfirmOpen = () => {
+    setDeleteConfirmOpen(true);
+  };
 
   const handleSetSearch = (e) => {
     setSearchTerm(e.target.value)
@@ -94,7 +104,7 @@ export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, is
       })
       .catch((e) => {
         setError(e.message)
-        var selectedArtist = ''
+        // var selectedArtist = ''
         console.log(error)
       })
   }
@@ -127,33 +137,6 @@ export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, is
         setError(e.message)
         console.log(error)
       })
-  }
-
-  function handleCustomization(e) {
-    e.preventDefault();
-    setActiveStep(2)
-  }
-
-  function handleDelete(e) {
-    e.preventDefault();
-    setDeleteIsProcessing(true)
-    axios
-      .delete(
-        `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${mixId}/`,
-        {
-          headers: { Authorization: `Token ${token}` },
-        }
-      )
-      .then((res) => {
-        console.log(res.status)
-        console.log(res.data)
-        setActiveStep(0)
-        setDeleteIsProcessing(false)
-      })
-      .catch((e) => {
-        setError(e.message)
-      })
-    console.log(error)
   }
 
   return (
@@ -275,12 +258,17 @@ export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, is
           <Tracklist token={token} mixId={mixId} mixTitle={mixTitle} trackAdded={trackAdded} setTrackAdded={setTrackAdded} />
         </Stack>
       </Box>
-      {deleteIsProcessing ? (
-        <CircularProgress />
+      {deleteConfirmOpen ? (
+        <Dialog open={deleteConfirmOpen}>
+          <WizardDelete mixId={mixId} token={token} setDeleteConfirmOpen={setDeleteConfirmOpen} setActiveStep={setActiveStep} mixTitle={mixTitle} />
+        </Dialog>
       ) : (
-        <Button variant="outlined" color="secondary" onClick={handleDelete}>Cancel</Button>
-      )}
-      <Button variant="contained" color="primary" onClick={handleCustomization}>Continue</Button>
+        <>
+          <Button variant="outlined" color="secondary" onClick={handleDeleteConfirmOpen}>Cancel</Button>
+          <Button variant="contained" color="primary" onClick={handleAdvance}>Next</Button>
+        </>
+      )
+      }
     </>
   )
 }
