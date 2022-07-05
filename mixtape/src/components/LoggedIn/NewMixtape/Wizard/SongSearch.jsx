@@ -22,6 +22,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Chip from '@mui/material/Chip';
 import Tracklist from "../../TrackList";
 
+import Tooltip from '@mui/material/Tooltip';
+
 
 export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, isLoggedIn, token, username, selectedArtist }) {
   const [isLoading, setIsLoading] = useState(false)
@@ -156,7 +158,7 @@ export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, is
 
   return (
     <>
-      <Typography variant="h5">Add tracks to {mixTitle}</Typography>
+      <Typography variant="h5">Add songs to {mixTitle}</Typography>
       <br></br>
       <Box sx={{ textAlign: "left", justifyContent: "center" }}>
         <Stack spacing={2} direction="column">
@@ -164,7 +166,7 @@ export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, is
             <TextField
               id="outlined-basic"
               variant="outlined"
-              label="search by track name"
+              label="search by song name"
               onChange={handleSetSearch}
               value={searchTerm}
             />
@@ -172,13 +174,15 @@ export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, is
               Search
             </Button>
           </Stack>
-          <Typography variant="p">Refine search</Typography>
+          <Typography variant="p">Search results</Typography>
           <Stack spacing={2} direction="row">
             {artistRefiner !== '' ? (
               <Stack spacing={2} direction="row">
-                <Chip
-                  label={artistRefiner} variant="outlined"
-                  onDelete={handleUndoRefinedSearch} />
+                <Tooltip title={`Show all artists for this search`} placement="bottom">
+                  <Chip
+                    label={artistRefiner} variant="outlined"
+                    onDelete={handleUndoRefinedSearch} />
+                </Tooltip>
               </Stack>
             ) : (
               <>
@@ -190,17 +194,18 @@ export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, is
                         {allResults.length !== 1 ? (
                           <>
                             <Stack spacing={1} direction="column">
-                              <Chip key={index} label={eachArtist} artist={eachArtist} variant="outlined" onClick={handleSetRefinedSearch} />
+                              <Tooltip title={`Only show results from ${eachArtist}`} placement="bottom">
+                                <Chip key={index} label={eachArtist} artist={eachArtist} variant="outlined" onClick={handleSetRefinedSearch} />
+                              </Tooltip>
                             </Stack>
                           </>
                         ) : (
                           <>
-                            ) : (
-                            <>
-                              <Stack spacing={1} direction="column">
-                                <Chip key={index} label="only one artist" variant="outlined" />
-                              </Stack>
-                            </>
+                            <Stack spacing={1} direction="column">
+                              <Tooltip title={`${eachArtist}`} placement="bottom">
+                                <Chip key={index} label={eachArtist} artist={eachArtist} variant="outlined" />
+                              </Tooltip>
+                            </Stack>
                           </>
                         )}
                       </>
@@ -213,7 +218,7 @@ export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, is
         </Stack>
         <Stack spacing={10} direction="row">
           <Stack spacing={2} direction="column">
-            <Typography variant="p">Song search results</Typography>
+            <Box sx={{ height: "2vh" }}></Box>
             {isLoading ? (
               <>
                 <TableContainer component={Paper} sx={{ width: "45vw", border: "2px solid #E2E2DF" }}>

@@ -67,7 +67,6 @@ export default function Customization({ setActiveStep, mixId, mixTitle, setAuth,
             <br></br>
             {theme === 0 ? (
                 <>
-                    theme0
                     <Stack spacing={2} direction="row" sx={{ alignItems: "center", justifyContent: "center" }}>
                         <Chip label="Default" color="primary" themeId={0} onClick={handleThemeChange} />
                         <Chip label="Wilmington" variant="outlined" themeId={1} onClick={handleThemeChange} />
@@ -78,7 +77,6 @@ export default function Customization({ setActiveStep, mixId, mixTitle, setAuth,
                 </>
             ) : theme === 1 ? (
                 <>
-                    theme1
                     <Stack spacing={2} direction="row" sx={{ alignItems: "center", justifyContent: "center" }}>
                         <Chip label="Default" variant="outlined" themeId={0} onClick={handleThemeChange} />
                         <Chip label="Wilmington" color="primary" themeId={1} onClick={handleThemeChange} />
@@ -89,7 +87,6 @@ export default function Customization({ setActiveStep, mixId, mixTitle, setAuth,
                 </>
             ) : theme === 2 ? (
                 <>
-                    theme2
                     <Stack spacing={2} direction="row" sx={{ alignItems: "center", justifyContent: "center" }}>
                         <Chip label="Default" variant="outlined" themeId={0} onClick={handleThemeChange} />
                         <Chip label="Wilmington" variant="outlined" themeId={1} onClick={handleThemeChange} />
@@ -100,7 +97,6 @@ export default function Customization({ setActiveStep, mixId, mixTitle, setAuth,
                 </>
             ) : theme === 3 ? (
                 <>
-                    theme3
                     <Stack spacing={2} direction="row" sx={{ alignItems: "center", justifyContent: "center" }}>
                         <Chip label="Default" variant="outlined" themeId={0} onClick={handleThemeChange} />
                         <Chip label="Wilmington" variant="outlined" themeId={1} onClick={handleThemeChange} />
@@ -111,7 +107,6 @@ export default function Customization({ setActiveStep, mixId, mixTitle, setAuth,
                 </>
             ) : (
                 <>
-                    <div>{theme}</div>
                 </>
             )}
             <Stack spacing={2} direction="row">
