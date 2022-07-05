@@ -1,0 +1,12 @@
+#spine-image {
+  position: relative;
+}
+
+#text-overlay {
+  position: absolute;
+  top: 180px;
+  color: black;
+  font-size: 30px;
+  background-color: rgba(255, 255, 255, 0.6);
+  width: 100%;
+}
