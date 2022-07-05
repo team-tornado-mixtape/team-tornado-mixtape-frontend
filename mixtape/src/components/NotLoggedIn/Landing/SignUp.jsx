@@ -16,7 +16,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
 })
 
-export default function SignUp({ isLoggedIn }) {
+export default function SignUp({ isLoggedIn, setAuth }) {
   const [password, setPassword] = useState('')
   const [password_again, setPassword_again] = useState('')
   const [isRegistered, setIsRegistered] = useState(false);
@@ -33,10 +33,10 @@ export default function SignUp({ isLoggedIn }) {
     ""
   );
 
-  const setAuth = (username, token) => {
-    setToken(token);
-    setUsername(username);
-  };
+  // const setAuth = (username, token) => {
+  //   setToken(token);
+  //   setUsername(username);
+  // };
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -82,9 +82,11 @@ export default function SignUp({ isLoggedIn }) {
         console.log(res.data)
         console.log(`this is the token: ${res.data.auth_token}`)
         setToken(res.data.auth_token);
-        setIssuedToken(res.data.auth_token)
+        // setIssuedToken(res.data.auth_token)
+        const token = res.data.auth_token
         setAuth(username, token)
         setIsRegistered(true)
+        // setSignUpSignInComplete(true)
       })
       .catch((e) => {
         setError(e.message)
@@ -101,13 +103,14 @@ export default function SignUp({ isLoggedIn }) {
           spotify_username: spotifyUser,
         },
         {
-          headers: { Authorization: `Token ${issuedToken}` },
+          headers: { Authorization: `Token ${token}` },
         }
       )
       .then((res) => {
         console.log(res)
         console.log('Profile registered with spotify')
-        setSignUpSignInComplete(true)
+        // HandleLogin()
+        // setSignUpSignInComplete(true)
       })
       .catch((e) => {
         setError(e.message)

@@ -50,7 +50,7 @@ function App() {
       ) : (
         <Routes>
           <Route path="/" element={<Landing setAuth={setAuth} isLoggedIn={isLoggedIn} handleLogout={handleLogout} />}></Route>
-          <Route path="/signup" element={<SignUp isLoggedIn={isLoggedIn} />}></Route>
+          <Route path="/signup" element={<SignUp isLoggedIn={isLoggedIn} setAuth={setAuth} />}></Route>
           <Route path="/passwordreset" element={<PasswordReset />}></Route>
           <Route path="/resetform" element={<ResetForm isLoggedIn={isLoggedIn} />}></Route>
         </Routes>
