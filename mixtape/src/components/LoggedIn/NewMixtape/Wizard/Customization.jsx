@@ -8,9 +8,10 @@ import Default from "../../../../images/cassettes/Default.png"
 import Momentum from "../../../../images/cassettes/Momentum.png"
 import Seattle from "../../../../images/cassettes/Seattle.png"
 import Wilmington from "../../../../images/cassettes/Wilmington.png"
-import WizardDelete from '../WizardDelete'
 import Chip from "@mui/material/Chip"
 import Dialog from "@mui/material/Dialog"
+
+import WizardDelete from "../WizardDelete"
 
 export default function Customization({ setActiveStep, mixId, mixTitle, setAuth, isLoggedIn, token, username, deleteConfirmOpen, setDeleteConfirmOpen }) {
     const [theme, setTheme] = useState(0)
@@ -109,13 +110,17 @@ export default function Customization({ setActiveStep, mixId, mixTitle, setAuth,
                 <>
                 </>
             )}
-            <Stack spacing={2} direction="row">
-                <Button variant="outlined" color="secondary" onClick={handleDeleteConfirmOpen}>Cancel</Button>
-                <Button variant="contained" color="primary" onClick={handleFinish}>Finish</Button>
+            {deleteConfirmOpen ? (
                 <Dialog open={deleteConfirmOpen}>
-                    <WizardDelete mixId={mixId} mixTitle={mixTitle} setActiveStep={setActiveStep} deleteConfirmOpen={deleteConfirmOpen} setDeleteConfirmOpen={setDeleteConfirmOpen} token={token} />
+                    <WizardDelete mixId={mixId} token={token} setDeleteConfirmOpen={setDeleteConfirmOpen} setActiveStep={setActiveStep} mixTitle={mixTitle} />
                 </Dialog>
-            </Stack>
-        </Stack>
+            ) : (
+                <>
+                    <Button variant="outlined" color="secondary" onClick={handleDeleteConfirmOpen}>Cancel</Button>
+                    <Button variant="contained" color="primary" onClick={handleFinish}>Finish</Button>
+                </>
+            )
+            }
+        </Stack >
     )
 }

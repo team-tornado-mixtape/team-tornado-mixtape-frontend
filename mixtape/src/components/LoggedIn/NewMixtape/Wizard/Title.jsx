@@ -98,7 +98,7 @@ export default function Title({ setActiveStep, setMixTitle, mixTitle, setMixId, 
                         </Box>
                     </Stack>
                     {!isLoading ? (
-                        <Button variant="contained" type="submit" onClick={(handleMixCreate)}>Continue</Button>
+                        <Button variant="contained" type="submit" onClick={(handleMixCreate)}>Next</Button>
                         // <Button variant="contained" onClick={() => setActiveStep(1)}>Continue</Button>
                     ) : (
                         <CircularProgress />

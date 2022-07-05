@@ -16,7 +16,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
 })
 
-export default function SignUp({ isLoggedIn }) {
+export default function SignUp({ isLoggedIn, setAuth }) {
   const [password, setPassword] = useState('')
   const [password_again, setPassword_again] = useState('')
   const [isRegistered, setIsRegistered] = useState(false);
@@ -33,10 +33,10 @@ export default function SignUp({ isLoggedIn }) {
     ""
   );
 
-  const setAuth = (username, token) => {
-    setToken(token);
-    setUsername(username);
-  };
+  // const setAuth = (username, token) => {
+  //   setToken(token);
+  //   setUsername(username);
+  // };
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -61,7 +61,6 @@ export default function SignUp({ isLoggedIn }) {
       )
       .then((res) => {
         console.log(res.data)
-        setIsRegistered(true)
         HandleLogin()
       })
       .catch((e) => {
@@ -82,9 +81,12 @@ export default function SignUp({ isLoggedIn }) {
       .then((res) => {
         console.log(res.data)
         console.log(`this is the token: ${res.data.auth_token}`)
+        setToken(res.data.auth_token);
+        // setIssuedToken(res.data.auth_token)
+        const token = res.data.auth_token
         setAuth(username, token)
-        setIssuedToken(res.data.auth_token);
-        RegisterSpotifyAccount()
+        setIsRegistered(true)
+        // setSignUpSignInComplete(true)
       })
       .catch((e) => {
         setError(e.message)
@@ -107,7 +109,8 @@ export default function SignUp({ isLoggedIn }) {
       .then((res) => {
         console.log(res)
         console.log('Profile registered with spotify')
-        setSignUpSignInComplete(true)
+        // HandleLogin()
+        // setSignUpSignInComplete(true)
       })
       .catch((e) => {
         setError(e.message)
@@ -120,8 +123,8 @@ export default function SignUp({ isLoggedIn }) {
   }
 
   return (
-    <>
-      <Box sx={{ width: "90%", textAlign: "center" }}>
+    <Box sx={{ width: "90%", textAlign: "center" }}>
+      <>
         {error && (
           <Snackbar
             open={open}
@@ -138,63 +141,73 @@ export default function SignUp({ isLoggedIn }) {
             </Alert>
           </Snackbar>
         )}
-        <Box component="form" onSubmit={handleSignUp}>
-          <Typography variant="h3">Sign up</Typography>
-          <br></br>
-          <Typography variant="p">Choose a username</Typography>
-          <br></br>
-          <Box>
-            <TextField
-              label="username"
-              variant="outlined"
-              value={username}
-              margin="normal"
-              onChange={(e) => setUsername(e.target.value)} />
+      </>
+      {!isRegistered ? (
+        <>
+          <Box component="form" onSubmit={handleSignUp}>
+            <Typography variant="h3">Sign up</Typography>
+            <br></br>
+            <Typography variant="p">Choose a username</Typography>
+            <br></br>
+            <Box>
+              <TextField
+                label="username"
+                variant="outlined"
+                value={username}
+                margin="normal"
+                onChange={(e) => setUsername(e.target.value)} />
+            </Box>
+            <Typography variant="p">Choose a password</Typography>
+            <br></br>
+            <Box>
+              <TextField
+                label="password"
+                type="password"
+                variant="outlined"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)} />
+            </Box>
+            <br></br>
+            <Typography variant="p">Re-enter your password</Typography>
+            <br></br>
+            <Box>
+              <TextField
+                label="password"
+                type="password"
+                variant="outlined"
+                value={password_again}
+                onChange={(e) => setPassword_again(e.target.value)} />
+            </Box>
+            <br></br>
+            <Box textAlign="center">
+              <Button size="large" component={Link} to="/">Cancel</Button>
+            </Box>
+            <Box textAlign="center">
+              <Button size="large" variant="outlined" onClick={handleSignUp}>Continue</Button>
+            </Box>
           </Box>
-          <Typography variant="p">Choose a password</Typography>
+        </>
+      ) : (
+        <>
           <br></br>
-          <Box>
-            <TextField
-              label="password"
-              type="password"
-              variant="outlined"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)} />
+          <Box component="form" onSubmit={RegisterSpotifyAccount}>
+            <Typography variant="p">If you are a Spotify user, enter your Spotify username. Adding your Spotify username allows you to save Mixtapes to your Spotify library.</Typography>
+            <br></br>
+            <Box>
+              <br></br>
+              <TextField label="your spotify username"
+                variant="outlined"
+                value={spotifyUser}
+                onChange={(e) => setSpotifyUser(e.target.value)}>
+              </TextField>
+            </Box>
+            <br></br>
+            <Box textAlign="center">
+              <Button size="large" variant="outlined" onClick={RegisterSpotifyAccount}>Complete sign up</Button>
+            </Box>
           </Box>
-          <br></br>
-          <Typography variant="p">Re-enter your password</Typography>
-          <br></br>
-          <Box>
-            <TextField
-              label="password"
-              type="password"
-              variant="outlined"
-              value={password_again}
-              onChange={(e) => setPassword_again(e.target.value)} />
-          </Box>
-          <br></br>
-          <Box textAlign="center">
-            <Button size="large" component={Link} to="/">Cancel</Button>
-          </Box>
-          <Box textAlign="center">
-            <Button size="large" variant="outlined" onClick={handleSignUp}>Continue</Button>
-          </Box>
-          <br></br>
-          <Typography variant="p">If you are a Spotify user, enter your username. Adding your username allows you to save Mixtapes to your Spotify library.</Typography>
-          <br></br>
-          <Box>
-            <TextField label="your spotify username"
-              variant="outlined"
-              value={spotifyUser}
-              onChange={(e) => setSpotifyUser(e.target.value)}>
-            </TextField>
-          </Box>
-          <br></br>
-          <Box textAlign="center">
-            <Button size="large" variant="outlined" onClick={RegisterSpotifyAccount}>Complete sign up</Button>
-          </Box>
-        </Box>
-      </Box>
-    </>
+        </>
+      )}
+    </Box>
   );
 }

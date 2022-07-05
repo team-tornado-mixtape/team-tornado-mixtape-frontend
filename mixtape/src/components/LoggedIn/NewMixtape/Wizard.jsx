@@ -22,16 +22,17 @@ export default function Wizard({ token }) {
     const [activeStep, setActiveStep] = React.useState(0);
     const [mixTitle, setMixTitle] = React.useState('')
     const [mixId, setMixId] = React.useState('')
+    const [deleteConfirmOpen, setDeleteConfirmOpen] = React.useState(false)
 
     function getStepContent(step) {
         switch (step) {
             case 0:
-                return <Title token={token} setActiveStep={setActiveStep} setMixTitle={setMixTitle} mixTitle={mixTitle} setMixId={setMixId} />;
+                return <Title token={token} setActiveStep={setActiveStep} setMixTitle={setMixTitle} mixTitle={mixTitle} setMixId={setMixId} setDelete />;
             case 1:
-                return <SongSearch token={token} setActiveStep={setActiveStep} mixTitle={mixTitle} mixId={mixId} />;
+                return <SongSearch token={token} setActiveStep={setActiveStep} mixTitle={mixTitle} mixId={mixId} deleteConfirmOpen={deleteConfirmOpen} setDeleteConfirmOpen={setDeleteConfirmOpen} />;
             case 2:
                 return (
-                    <Customization token={token} setActiveStep={setActiveStep} mixTitle={mixTitle} mixId={mixId} />
+                    <Customization token={token} setActiveStep={setActiveStep} mixTitle={mixTitle} mixId={mixId} deleteConfirmOpen={deleteConfirmOpen} setDeleteConfirmOpen={setDeleteConfirmOpen} />
                 );
             default:
                 return "Unknown step";
