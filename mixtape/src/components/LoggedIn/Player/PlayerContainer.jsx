@@ -33,7 +33,7 @@ const Puller = styled(Box)(({ theme }) => ({
     left: "calc(50% - 15px)"
 }));
 
-export default function PlayerContainer({ selectedMix, mixTitle, setSelectedMix, token }) {
+export default function PlayerContainer({ selectedMix, mixTitle, setSelectedMix, token, username }) {
     const [open, setOpen] = useState(true);
 
     const handleClose = (e) => {
@@ -92,7 +92,7 @@ export default function PlayerContainer({ selectedMix, mixTitle, setSelectedMix,
                         overflow: "auto"
                     }}
                 >
-                    <Player token={token} selectedMix={selectedMix} setSelectedMix={setSelectedMix} />
+                    <Player token={token} selectedMix={selectedMix} setSelectedMix={setSelectedMix} username={username} />
                 </StyledBox>
             </SwipeableDrawer>
         </Root>

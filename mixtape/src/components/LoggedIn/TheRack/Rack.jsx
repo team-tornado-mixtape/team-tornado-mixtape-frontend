@@ -19,7 +19,7 @@ import WizardContainer from "../NewMixtape/WizardContainer.jsx"
 
 import PlayerContainer from "../Player/PlayerContainer.jsx"
 
-export default function Rack({ token }) {
+export default function Rack({ token, username }) {
 
   const [addMixtapeButtonClicked, setAddMixtapeButtonClicked] = useState(false)
 
@@ -156,9 +156,9 @@ export default function Rack({ token }) {
     <>
       <div>
         {addMixtapeButtonClicked === false && (
-          <AddMixtapeButton addMixtape={() => setAddMixtapeButtonClicked(true)} />
+          <AddMixtapeButton username={username} addMixtape={() => setAddMixtapeButtonClicked(true)} />
         )}
-        {addMixtapeButtonClicked === true && <WizardContainer token={token} addMixtapeButtonClicked={addMixtapeButtonClicked} setAddMixtapeButtonClicked={setAddMixtapeButtonClicked} />}
+        {addMixtapeButtonClicked === true && <WizardContainer username={username} token={token} addMixtapeButtonClicked={addMixtapeButtonClicked} setAddMixtapeButtonClicked={setAddMixtapeButtonClicked} />}
       </div>
       <Box sx={{ display: "flexbox", alignContent: "center" }}>
         <Stack spacing={2} direction="column">
@@ -243,6 +243,7 @@ export default function Rack({ token }) {
                             <>
                               <EachMixtape
                                 eachMix={eachMix}
+                                username={username}
                                 favoriteClicked={favoriteClicked}
                                 setFavoriteClicked={setFavoriteClicked}
                                 deleteClicked={deleteClicked}
@@ -274,6 +275,7 @@ export default function Rack({ token }) {
                             return (
                               <EachMixtape
                                 eachMix={eachMix}
+                                username={username}
                                 favoriteClicked={favoriteClicked}
                                 setFavoriteClicked={setFavoriteClicked}
                                 deleteClicked={deleteClicked}
@@ -304,6 +306,7 @@ export default function Rack({ token }) {
                           return (
                             <EachMixtape
                               eachMix={eachMix}
+                              username={username}
                               favoriteClicked={favoriteClicked}
                               setFavoriteClicked={setFavoriteClicked}
                               deleteClicked={deleteClicked}

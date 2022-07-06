@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Rack from "./TheRack/Rack";
+import Stack from "@mui/material/Stack";
 
 function EachSidebarView(props) {
   const { children, value, index } = props;
@@ -55,16 +56,16 @@ export default function PermanentDrawerLeft({
                 icon={<Icon icon="ant-design:database-twotone" />}
               ></Tab>
             </Tabs>
-            <Typography>Signed in as @{username}</Typography>
-            <Button onClick={handleLogout}>Log out</Button>
+            <br></br>
+            <Stack spacing={2} direction="column">
+              <Typography>Signed in as @{username}</Typography>
+              <Button variant="outlined" onClick={handleLogout}>Sign out</Button>
+            </Stack>
           </Box>
         </Box>
         <Box sx={{ width: "90vw" }}>
           <EachSidebarView value={value} index={0}>
-            <Rack token={token} />
-          </EachSidebarView>
-          <EachSidebarView value={value} index={1}>
-            {/* <Profile /> */}
+            <Rack token={token} username={username} />
           </EachSidebarView>
         </Box>
       </Box>

@@ -18,6 +18,7 @@ import PlayerContainer from "../Player/PlayerContainer.jsx";
 
 export default function EachMixtape({
   eachMix,
+  username,
   index,
   token,
   favoriteClicked,
@@ -158,6 +159,7 @@ export default function EachMixtape({
               token={token}
               selectedMix={selectedMix}
               setSelectedMix={setSelectedMix}
+              username={username}
             />
           ) : (
             <>

@@ -18,7 +18,7 @@ const steps = [
     "Choose theme"
 ];
 
-export default function Wizard({ token, setAddMixtapeButtonClicked }) {
+export default function Wizard({ username, token, setAddMixtapeButtonClicked }) {
     const [activeStep, setActiveStep] = React.useState(0);
     const [mixTitle, setMixTitle] = React.useState('')
     const [mixId, setMixId] = React.useState('')
@@ -27,12 +27,16 @@ export default function Wizard({ token, setAddMixtapeButtonClicked }) {
     function getStepContent(step) {
         switch (step) {
             case 0:
-                return <Title token={token} setActiveStep={setActiveStep} setMixTitle={setMixTitle} mixTitle={mixTitle} setMixId={setMixId} setDelete />;
+                return <Title username={username} token={token} setActiveStep={setActiveStep} setMixTitle={setMixTitle} mixTitle={mixTitle} setMixId={setMixId} setDelete />;
             case 1:
-                return <SongSearch token={token} setActiveStep={setActiveStep} mixTitle={mixTitle} mixId={mixId} deleteConfirmOpen={deleteConfirmOpen} setDeleteConfirmOpen={setDeleteConfirmOpen} />;
+                return (
+                    <>
+                        {username}
+                        < SongSearch username={username} token={token} setActiveStep={setActiveStep} mixTitle={mixTitle} mixId={mixId} deleteConfirmOpen={deleteConfirmOpen} setDeleteConfirmOpen={setDeleteConfirmOpen} />
+                    </>);
             case 2:
                 return (
-                    <Customization token={token} setActiveStep={setActiveStep} mixTitle={mixTitle} mixId={mixId} deleteConfirmOpen={deleteConfirmOpen} setDeleteConfirmOpen={setDeleteConfirmOpen} setAddMixtapeButtonClicked={setAddMixtapeButtonClicked} />
+                    <Customization username={username} token={token} setActiveStep={setActiveStep} mixTitle={mixTitle} mixId={mixId} deleteConfirmOpen={deleteConfirmOpen} setDeleteConfirmOpen={setDeleteConfirmOpen} setAddMixtapeButtonClicked={setAddMixtapeButtonClicked} />
                 );
             default:
                 return "Unknown step";

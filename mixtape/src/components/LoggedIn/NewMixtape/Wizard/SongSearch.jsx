@@ -26,7 +26,7 @@ import Dialog from "@mui/material/Dialog"
 import WizardDelete from "../WizardDelete"
 
 
-export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, isLoggedIn, token, deleteConfirmOpen, setDeleteConfirmOpen, username, selectedArtist }) {
+export default function SongSearch({ username, setAuth, mixId, mixTitle, setActiveStep, isLoggedIn, token, deleteConfirmOpen, setDeleteConfirmOpen, selectedArtist }) {
   const [isLoading, setIsLoading] = useState(false)
   const [allResults, setAllResults] = useState([])
   const [error, setError] = useState('')
@@ -144,6 +144,7 @@ export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, is
   return (
     <>
       <Typography variant="h5">Add songs to {mixTitle}</Typography>
+      {username}
       <br></br>
       <Box sx={{ textAlign: "left", justifyContent: "center" }}>
         <Stack spacing={2} direction="column">
@@ -274,7 +275,7 @@ export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, is
               </>
             )}
           </Stack>
-          <Tracklist token={token} mixId={mixId} mixTitle={mixTitle} trackAdded={trackAdded} setTrackAdded={setTrackAdded} />
+          <Tracklist username={username} token={token} mixId={mixId} mixTitle={mixTitle} trackAdded={trackAdded} setTrackAdded={setTrackAdded} />
         </Stack>
       </Box>
       {deleteConfirmOpen ? (

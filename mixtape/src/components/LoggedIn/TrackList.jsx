@@ -17,10 +17,11 @@ import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import CircularProgress from '@mui/material/CircularProgress';
 
-export default function Tracklist({ token, mixId, AddRemoveTrack, mixTitle, trackAdded, setTrackAdded }) {
+export default function Tracklist({ token, mixId, AddRemoveTrack, mixTitle, trackAdded, setTrackAdded, username }) {
     const [pageDidLoad, setPageDidLoad] = useState(false)
     const [trackData, setTrackData] = useState([])
     const [error, setError] = useState('')
+    const [creator, setCreator] = useState('')
 
     useEffect(() => {
         axios
@@ -32,6 +33,8 @@ export default function Tracklist({ token, mixId, AddRemoveTrack, mixTitle, trac
                 console.log(res.data);
                 const tracklist = res.data.songs
                 setTrackData(tracklist)
+                const mixCreator = res.data.creator
+                setCreator(mixCreator)
                 console.log(`here is the track data: ${trackData}`)
                 setPageDidLoad(true)
             })

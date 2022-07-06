@@ -56,6 +56,7 @@ export default function Title({
 
     return (
         <>
+            {username}
             {mixTitle.length === 0 ? (
                 <Box sx={{ textAlign: "left", justifyContent: "left" }}>
                     <Stack spacing={2} direction="column">
