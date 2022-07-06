@@ -33,7 +33,7 @@ const Puller = styled(Box)(({ theme }) => ({
     left: "calc(50% - 15px)"
 }));
 
-export default function WizardContainer({ addMixtapeButtonClicked, setAddMixtapeButtonClicked, token }) {
+export default function WizardContainer({ username, addMixtapeButtonClicked, setAddMixtapeButtonClicked, token }) {
     const [open, setOpen] = useState(true);
 
     const handleClose = (e) => {
@@ -82,7 +82,7 @@ export default function WizardContainer({ addMixtapeButtonClicked, setAddMixtape
                 >
                     <Puller />
                     <Typography sx={{ p: 2, color: "text.secondary" }}>
-                        Create New Mixtape
+                        ‎
                     </Typography>
                 </StyledBox>
                 <StyledBox
@@ -93,7 +93,7 @@ export default function WizardContainer({ addMixtapeButtonClicked, setAddMixtape
                         overflow: "auto"
                     }}
                 >
-                    <Wizard token={token} />
+                    <Wizard username={username} token={token} setAddMixtapeButtonClicked={setAddMixtapeButtonClicked} />
                 </StyledBox>
             </SwipeableDrawer>
         </Root>

@@ -19,7 +19,7 @@ import WizardContainer from "../NewMixtape/WizardContainer.jsx"
 
 import PlayerContainer from "../Player/PlayerContainer.jsx"
 
-export default function Rack({ token }) {
+export default function Rack({ token, username }) {
 
   const [addMixtapeButtonClicked, setAddMixtapeButtonClicked] = useState(false)
 
@@ -63,7 +63,7 @@ export default function Rack({ token }) {
         setError(e.message);
       });
     console.log(error);
-  }, [token, error, favoriteClicked]);
+  }, [token, error, favoriteClicked, addMixtapeButtonClicked]);
 
   function ShowMyMixtapes(e) {
     e.preventDefault();
@@ -152,33 +152,13 @@ export default function Rack({ token }) {
       : setAllMixtapesDisplayed([])(setAllMixtapesIsSelected(false));
   }
 
-  // function MixSelect({ mixId }) {
-  //   const result = mixId
-  //   this.setState({ mixId });
-  //   this.setSelectedMix({ result });
-  //   console.log(selectedMix)
-
-  //   // const putEachMixInState = mixId
-  //   // console.log(`here is the variable: ${putEachMixInState}`)
-  //   // setSelectedMix(putEachMixInState);
-  //   // console.log(selectedMix)
-  // };
-
-  // const MixSelect = ({ mixId }) => {
-  //   const result = mixId
-  //   console.log(result)
-  //   // even if you comment this back in, it still won't work
-  //   // setSelectedMix(result)
-  //   console.log(selectedMix)
-  // }
-
   return (
     <>
       <div>
         {addMixtapeButtonClicked === false && (
-          <AddMixtapeButton addMixtape={() => setAddMixtapeButtonClicked(true)} />
+          <AddMixtapeButton username={username} addMixtape={() => setAddMixtapeButtonClicked(true)} />
         )}
-        {addMixtapeButtonClicked === true && <WizardContainer token={token} addMixtapeButtonClicked={addMixtapeButtonClicked} setAddMixtapeButtonClicked={setAddMixtapeButtonClicked} />}
+        {addMixtapeButtonClicked === true && <WizardContainer username={username} token={token} addMixtapeButtonClicked={addMixtapeButtonClicked} setAddMixtapeButtonClicked={setAddMixtapeButtonClicked} />}
       </div>
       <Box sx={{ display: "flexbox", alignContent: "center" }}>
         <Stack spacing={2} direction="column">
@@ -263,6 +243,7 @@ export default function Rack({ token }) {
                             <>
                               <EachMixtape
                                 eachMix={eachMix}
+                                username={username}
                                 favoriteClicked={favoriteClicked}
                                 setFavoriteClicked={setFavoriteClicked}
                                 deleteClicked={deleteClicked}
@@ -294,6 +275,7 @@ export default function Rack({ token }) {
                             return (
                               <EachMixtape
                                 eachMix={eachMix}
+                                username={username}
                                 favoriteClicked={favoriteClicked}
                                 setFavoriteClicked={setFavoriteClicked}
                                 deleteClicked={deleteClicked}
@@ -324,6 +306,7 @@ export default function Rack({ token }) {
                           return (
                             <EachMixtape
                               eachMix={eachMix}
+                              username={username}
                               favoriteClicked={favoriteClicked}
                               setFavoriteClicked={setFavoriteClicked}
                               deleteClicked={deleteClicked}
