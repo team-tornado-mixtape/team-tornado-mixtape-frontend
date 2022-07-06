@@ -5,9 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 
-import PermanentMarker from './fonts/Permanent_Marker/Permanent_Marker/PermanentMarker-Regular.ttf'
-import BeatStreet from './fonts/beatstreet.ttf'
-import Poppins from './fonts/Poppins/Poppins-Regular.ttf'
+import './fonts/Permanent_Marker/Permanent_Marker/PermanentMarker-Regular.ttf'
+import './fonts/beatstreet.ttf'
+import './fonts/Poppins/Poppins-Regular.ttf'
 
 const theme = createTheme({
   // palette: {
@@ -137,7 +137,7 @@ const theme = createTheme({
     divider: '#ececeb',
   },
   typography: {
-    fontFamily: Poppins,
+    fontFamily: 'Poppins',
     h1: {
       fontWeight: 600,
     },
@@ -156,7 +156,7 @@ const theme = createTheme({
     landing: {
       fontWeight: 600,
       // fontFamily: 'kshandwrt',
-      fontFamily: BeatStreet,
+      fontFamily: 'BeatStreet',
       
       fontSize: '9rem',
     },
@@ -165,7 +165,7 @@ const theme = createTheme({
     },
     eachmix: {
       fontWeight: 500,
-      fontFamily: PermanentMarker,
+      fontFamily: 'PermanentMarker',
       // fontFamily: 'Beatstreet',
       fontSize: '1.5rem',
     },
