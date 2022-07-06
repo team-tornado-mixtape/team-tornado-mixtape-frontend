@@ -55,79 +55,70 @@ export default function EachMixtape({
 
   console.log(eachMix.id);
 
-  const THEMES = {
-    0: "Default",
-    1: "Wilmington",
-    2: "Seattle",
-    3: "Momentum",
-  };
+  // const THEMES = {
+  //   0: "Default",
+  //   1: "Wilmington",
+  //   2: "Seattle",
+  //   3: "Momentum",
+  // };
 
-  function handleFavorite(e) {
-    setFavoriteClicked(false);
-    e.preventDefault();
-    console.log(
-      `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${eachMix.id}/favorites`
-    );
-    console.log(token);
-    axios
-      .patch(
-        `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${eachMix.id}/favorites`,
-        {
-          title: mixTitle,
-        },
-        {
-          headers: { Authorization: `Token ${token}` },
-        }
-      )
-      .then((res) => {
-        console.log(res.status);
-        console.log(res.data);
-        setFavoriteClicked(true);
-      })
-      .catch((e) => {
-        console.log(e.message);
-      });
-  }
+  // function handleFavorite(e) {
+  //   setFavoriteClicked(false);
+  //   e.preventDefault();
+  //   console.log(
+  //     `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${eachMix.id}/favorites`
+  //   );
+  //   console.log(token);
+  //   axios
+  //     .patch(
+  //       `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${eachMix.id}/favorites`,
+  //       {
+  //         title: mixTitle,
+  //       },
+  //       {
+  //         headers: { Authorization: `Token ${token}` },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       console.log(res.status);
+  //       console.log(res.data);
+  //       setFavoriteClicked(true);
+  //     })
+  //     .catch((e) => {
+  //       console.log(e.message);
+  //     });
+  // }
 
-  function handleDelete(e) {
-    setDeleteClicked(false);
-    e.preventDefault();
-    console.log(
-      `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${eachMix.id}`
-    );
-    console.log(token);
-    axios
-      .delete(
-        `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${eachMix.id}`,
-        {
-          detail: deleteMix,
-        },
-        {
-          headers: { Authorization: `Token ${token}` },
-        }
-      )
-      .then((res) => {
-        console.log(res.status);
-        console.log(res.data);
-        setDeleteClicked(true);
-      })
-      .catch((e) => {
-        console.log(e.message);
-      });
-  }
+  // function handleDelete(e) {
+  //   setDeleteClicked(false);
+  //   e.preventDefault();
+  //   console.log(
+  //     `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${eachMix.id}`
+  //   );
+  //   console.log(token);
+  //   axios
+  //     .delete(
+  //       `https://team-tornado-mixtape.herokuapp.com/api/mixtapes/${eachMix.id}`,
+  //       {
+  //         detail: deleteMix,
+  //       },
+  //       {
+  //         headers: { Authorization: `Token ${token}` },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       console.log(res.status);
+  //       console.log(res.data);
+  //       setDeleteClicked(true);
+  //     })
+  //     .catch((e) => {
+  //       console.log(e.message);
+  //     });
+  // }
 
   return (
     <>
       <Box key={index}>
-        {/* <Card
-          sx={{
-            width: "28vw",
-            variant: "outlined",
-            border: "2px solid #E2E2DF",
-          }}
-        // onClick={() => MixSelect(eachMix.id)}
-        >
-          <CardContent> */}
         <Button>
           <Box className="cassette-spine" style={{ position: "relative" }} onClick={() => MixSelect(eachMix.id)}>
             {theme === 0 ? (
@@ -152,7 +143,6 @@ export default function EachMixtape({
             </Typography>
           </Box>
         </Button>
-        {/* </CardContent> */}
         <>
           {selectedMix !== 0 ? (
             <PlayerContainer

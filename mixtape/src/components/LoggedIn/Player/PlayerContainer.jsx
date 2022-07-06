@@ -92,7 +92,7 @@ export default function PlayerContainer({ selectedMix, mixTitle, setSelectedMix,
                         overflow: "auto"
                     }}
                 >
-                    <Player token={token} selectedMix={selectedMix} setSelectedMix={setSelectedMix} username={username} />
+                    <Player token={token} selectedMix={selectedMix} setSelectedMix={setSelectedMix} username={username} setOpen={setOpen} />
                 </StyledBox>
             </SwipeableDrawer>
         </Root>
