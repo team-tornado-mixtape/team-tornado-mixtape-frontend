@@ -85,8 +85,8 @@ export default function Tracklist({ token, mixId, AddRemoveTrack, mixTitle, trac
 
     return (
         <Stack spacing={2} direction="column">
-            <Typography variant="p">Mixtape tracklist</Typography>
-            <TableContainer component={Paper} sx={{ width: "45vw", border: "2px solid #E2E2DF" }}>
+            <Typography variant="p">Tracklist</Typography>
+            <TableContainer component={Paper} sx={{ width: "40vw", border: "2px solid #E2E2DF" }}>
                 <Table>
                     {pageDidLoad === false ? (
                         <CircularProgress />

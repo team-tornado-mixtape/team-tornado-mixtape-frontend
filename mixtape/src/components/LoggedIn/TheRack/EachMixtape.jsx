@@ -118,17 +118,17 @@ export default function EachMixtape({
   return (
     <>
       <Box key={index}>
-        <Card
+        {/* <Card
           sx={{
             width: "28vw",
             variant: "outlined",
             border: "2px solid #E2E2DF",
           }}
+        // onClick={() => MixSelect(eachMix.id)}
         >
-          <CardContent>
-            {/* <img src={THEMES[theme]} alt="Default" /> */}
-
-            <div className="cassette-spine" style={{ position: "relative" }}>
+          <CardContent> */}
+        <Button>
+          <Box className="cassette-spine" style={{ position: "relative" }} onClick={() => MixSelect(eachMix.id)}>
             {theme === 0 ? (
               <img src={Default} alt="Default"></img>
             ) : theme === 1 ? (
@@ -138,38 +138,36 @@ export default function EachMixtape({
             ) : theme === 3 ? (
               <img src={Momentum} alt="Momentum"></img>
             ) : (<></>)}
-              <Typography
-                variant="eachmix"
-                sx={{
-                  color: "#000000",
-                  position: "absolute",
-                  top: "13px",
-                  left: "27px",
-                }}
-              >
-                {mixTitle}
-              </Typography>
-            </div>
-            {/* ^^^^^ */}
-          </CardContent>
-          <>
-            {selectedMix !== 0 ? (
-              <PlayerContainer
-                token={token}
-                selectedMix={selectedMix}
-                setSelectedMix={setSelectedMix}
-              />
-            ) : (
-              <>
-                <Button onClick={() => MixSelect(eachMix.id)}>
+            <Typography
+              variant="eachmix"
+              sx={{
+                color: "#000000",
+                position: "absolute",
+                top: "13px",
+                left: "27px",
+              }}
+            >
+              {mixTitle}
+            </Typography>
+          </Box>
+        </Button>
+        {/* </CardContent> */}
+        <>
+          {selectedMix !== 0 ? (
+            <PlayerContainer
+              token={token}
+              selectedMix={selectedMix}
+              setSelectedMix={setSelectedMix}
+            />
+          ) : (
+            <>
+              {/* <Button onClick={() => MixSelect(eachMix.id)}>
                   Show details for {mixTitle}
-                </Button>
-                {/* <Button onClick={() => setSelectedMix(4)}>
-                  Show details for {mixTitle}</Button> */}
-              </>
-            )}
-          </>
-        </Card>
+                </Button> */}
+            </>
+          )}
+        </>
+        {/* </Card> */}
       </Box>
     </>
   );

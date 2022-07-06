@@ -13,7 +13,7 @@ import Dialog from "@mui/material/Dialog"
 
 import WizardDelete from "../WizardDelete"
 
-export default function Customization({ setActiveStep, mixId, mixTitle, setAuth, isLoggedIn, token, username, deleteConfirmOpen, setDeleteConfirmOpen }) {
+export default function Customization({ setActiveStep, mixId, mixTitle, setAuth, isLoggedIn, token, username, deleteConfirmOpen, setDeleteConfirmOpen, setAddMixtapeButtonClicked }) {
     const [theme, setTheme] = useState(0)
     const [error, setError] = useState('')
 
@@ -51,7 +51,8 @@ export default function Customization({ setActiveStep, mixId, mixTitle, setAuth,
 
     function handleFinish(e) {
         e.preventDefault();
-        setActiveStep(3)
+        // setActiveStep(3)
+        setAddMixtapeButtonClicked(false)
     }
 
     const handleDeleteConfirmOpen = () => {

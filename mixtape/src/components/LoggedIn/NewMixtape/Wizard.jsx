@@ -18,7 +18,7 @@ const steps = [
     "Choose theme"
 ];
 
-export default function Wizard({ token }) {
+export default function Wizard({ token, setAddMixtapeButtonClicked }) {
     const [activeStep, setActiveStep] = React.useState(0);
     const [mixTitle, setMixTitle] = React.useState('')
     const [mixId, setMixId] = React.useState('')
@@ -32,7 +32,7 @@ export default function Wizard({ token }) {
                 return <SongSearch token={token} setActiveStep={setActiveStep} mixTitle={mixTitle} mixId={mixId} deleteConfirmOpen={deleteConfirmOpen} setDeleteConfirmOpen={setDeleteConfirmOpen} />;
             case 2:
                 return (
-                    <Customization token={token} setActiveStep={setActiveStep} mixTitle={mixTitle} mixId={mixId} deleteConfirmOpen={deleteConfirmOpen} setDeleteConfirmOpen={setDeleteConfirmOpen} />
+                    <Customization token={token} setActiveStep={setActiveStep} mixTitle={mixTitle} mixId={mixId} deleteConfirmOpen={deleteConfirmOpen} setDeleteConfirmOpen={setDeleteConfirmOpen} setAddMixtapeButtonClicked={setAddMixtapeButtonClicked} />
                 );
             default:
                 return "Unknown step";

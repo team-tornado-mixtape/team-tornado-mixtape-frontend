@@ -82,7 +82,7 @@ export default function WizardContainer({ addMixtapeButtonClicked, setAddMixtape
                 >
                     <Puller />
                     <Typography sx={{ p: 2, color: "text.secondary" }}>
-                        Create New Mixtape
+                        ‎
                     </Typography>
                 </StyledBox>
                 <StyledBox
@@ -93,7 +93,7 @@ export default function WizardContainer({ addMixtapeButtonClicked, setAddMixtape
                         overflow: "auto"
                     }}
                 >
-                    <Wizard token={token} />
+                    <Wizard token={token} setAddMixtapeButtonClicked={setAddMixtapeButtonClicked} />
                 </StyledBox>
             </SwipeableDrawer>
         </Root>

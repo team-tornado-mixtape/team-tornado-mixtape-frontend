@@ -63,7 +63,7 @@ export default function Rack({ token }) {
         setError(e.message);
       });
     console.log(error);
-  }, [token, error, favoriteClicked]);
+  }, [token, error, favoriteClicked, addMixtapeButtonClicked]);
 
   function ShowMyMixtapes(e) {
     e.preventDefault();
@@ -151,26 +151,6 @@ export default function Rack({ token }) {
       ? setError("You must have at least one view selected.")
       : setAllMixtapesDisplayed([])(setAllMixtapesIsSelected(false));
   }
-
-  // function MixSelect({ mixId }) {
-  //   const result = mixId
-  //   this.setState({ mixId });
-  //   this.setSelectedMix({ result });
-  //   console.log(selectedMix)
-
-  //   // const putEachMixInState = mixId
-  //   // console.log(`here is the variable: ${putEachMixInState}`)
-  //   // setSelectedMix(putEachMixInState);
-  //   // console.log(selectedMix)
-  // };
-
-  // const MixSelect = ({ mixId }) => {
-  //   const result = mixId
-  //   console.log(result)
-  //   // even if you comment this back in, it still won't work
-  //   // setSelectedMix(result)
-  //   console.log(selectedMix)
-  // }
 
   return (
     <>

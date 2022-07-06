@@ -34,6 +34,7 @@ export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, is
   const [artistRefiner, setArtistRefiner] = useState('')
   // const [deleteIsProcessing, setDeleteIsProcessing] = useState(false)
   const [trackAdded, setTrackAdded] = useState(false)
+  const [noSearchMade, setNoSearchMade] = useState(true)
 
   console.log(`Here is the mix ID: ${mixId}`)
 
@@ -78,6 +79,7 @@ export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, is
         }
       )
       .then((res) => {
+        setNoSearchMade(false)
         setAllResults(res.data)
         setIsLoading(false)
       })
@@ -157,16 +159,18 @@ export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, is
               Search
             </Button>
           </Stack>
-          <Typography variant="p">Search results</Typography>
           <Stack spacing={2} direction="row">
             {artistRefiner !== '' ? (
-              <Stack spacing={2} direction="row">
-                <Tooltip title={`Show all artists for this search`} placement="bottom">
-                  <Chip
-                    label={artistRefiner} variant="outlined"
-                    onDelete={handleUndoRefinedSearch} />
-                </Tooltip>
-              </Stack>
+              <>
+                <Typography variant="p">Search results</Typography>
+                <Stack spacing={2} direction="row">
+                  <Tooltip title={`Show all artists for this search`} placement="bottom">
+                    <Chip
+                      label={artistRefiner} variant="outlined"
+                      onDelete={handleUndoRefinedSearch} />
+                  </Tooltip>
+                </Stack>
+              </>
             ) : (
               <>
                 {
@@ -202,13 +206,28 @@ export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, is
         <Stack spacing={10} direction="row">
           <Stack spacing={2} direction="column">
             <Box sx={{ height: "2vh" }}></Box>
-            {isLoading ? (
+            {noSearchMade ? (
               <>
-                <TableContainer component={Paper} sx={{ width: "45vw", border: "2px solid #E2E2DF" }}>
+                <Typography variant="p">Search results</Typography>
+                <TableContainer component={Paper} sx={{ width: "40vw", border: "2px solid #E2E2DF" }}>
                   <Table>
                     <TableBody>
-                      <TableRow sx={{ width: "45vw", border: "2px solid #E2E2DF" }}>
-                        <TableCell align="center" sx={{ width: "45vw", border: "2px solid #E2E2DF" }}>
+                      <TableRow>
+                        <TableCell align="center">
+                          <Typography>Search to see results here.</Typography>
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </>
+            ) : isLoading ? (
+              <>
+                <TableContainer component={Paper} sx={{ width: "40vw", border: "2px solid #E2E2DF" }}>
+                  <Table>
+                    <TableBody>
+                      <TableRow sx={{ width: "40vw", border: "2px solid #E2E2DF" }}>
+                        <TableCell align="center" sx={{ width: "40vw", border: "2px solid #E2E2DF" }}>
                           <CircularProgress></CircularProgress>
                         </TableCell>
                       </TableRow>
@@ -218,7 +237,7 @@ export default function SongSearch({ setAuth, mixId, mixTitle, setActiveStep, is
               </>
             ) : (
               <>
-                <TableContainer component={Paper} sx={{ width: "45vw", border: "2px solid #E2E2DF" }}>
+                <TableContainer component={Paper} sx={{ width: "40vw", border: "2px solid #E2E2DF" }}>
                   <Table>
                     <TableBody>
                       {allResults.map((eachResult, index) => {
