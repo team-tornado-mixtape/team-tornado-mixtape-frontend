@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 
-import './fonts/Permanent_Marker/Permanent_Marker/PermanentMarker-Regular.ttf'
+import './fonts/Poppins/Poppins-SemiBold.ttf'
 import './fonts/beatstreet.ttf'
 import './fonts/Poppins/Poppins-Regular.ttf'
 
