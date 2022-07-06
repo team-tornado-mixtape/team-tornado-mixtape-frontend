@@ -7,7 +7,7 @@ import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 
 import './fonts/Poppins/Poppins-SemiBold.ttf'
 import './fonts/beatstreet.ttf'
-import './fonts/Poppins/Poppins-Regular.ttf'
+import './fonts/Permanent_Marker/Permanent_Marker/PermanentMarker-Regular.ttf'
 
 const theme = createTheme({
   // palette: {
