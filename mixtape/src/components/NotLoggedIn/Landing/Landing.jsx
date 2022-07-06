@@ -35,10 +35,13 @@ export default function Landing({ setAuth, isLoggedIn, handleLogout }) {
           sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
         >
           <Typography variant="landing" >Mixtape</Typography>
-          <Typography variant="h5">
-            The best way to find and share songs, regardless of the streaming
-            service you use.
-          </Typography>
+          <Box textAlign="center" sx={{ width: "40vw" }}>
+            <Typography variant="h5">
+              The best way to find and share songs, regardless of the streaming
+              service you use.
+            </Typography>
+          </Box>
+          <Box sx={{ height: "17vh" }}></Box>
           <br></br>
           <SignIn
             setAuth={setAuth}
