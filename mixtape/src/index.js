@@ -151,15 +151,16 @@ const theme = createTheme({
     },
     landing: {
       fontWeight: 600,
-      fontFamily: 'Permanent Marker',
-      fontSize: '8rem',
+      fontFamily: 'kshandwrt',
+      
+      fontSize: '7rem',
     },
     subtitle1: {
       fontWeight: 600,
     },
     eachmix: {
       fontWeight: 500,
-      fontFamily: 'Permanent Marker',
+      fontFamily: 'kshandwrt',
       fontSize: '1.5rem',
     },
     fontWeightRegular: 600,

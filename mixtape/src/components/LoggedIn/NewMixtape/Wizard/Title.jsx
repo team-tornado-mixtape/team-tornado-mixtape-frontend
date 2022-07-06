@@ -62,8 +62,9 @@ export default function Title({
             <Box component="form" onSubmit={handleMixCreate}>
               <Box>
                 <TextField
-                  id="filled-multiline-static"
+                  // id="filled-multiline-static"
                   label="title"
+                  type="text"
                   value={mixTitle}
                   inputProps={{ maxLength: 27 }}
                   margin="normal"

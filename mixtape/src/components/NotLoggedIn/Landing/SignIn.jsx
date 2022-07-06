@@ -94,11 +94,11 @@ export default function SignIn({ setAuth, isLoggedIn, handleLogout }) {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <br></br>
+                {/* <br></br> */}
             </Box>
             <Box sx={{ width: "90%", textAlign: "center" }}>
             </Box>
-            <br></br>
+          
             {
                 error && (
                     <Snackbar
@@ -131,12 +131,12 @@ export default function SignIn({ setAuth, isLoggedIn, handleLogout }) {
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)} />
+                <Box textAlign="center">
+                    <Button size="large" variant="outlined" type="submit" onClick={handleLogin}>Sign in</Button>
+                </Box>
                 </Box>
                 <Box textAlign="center">
                     <Button size="large" component={Link} to="/signup">Create account</Button>
-                </Box>
-                <Box textAlign="center">
-                    <Button size="large" variant="outlined" type="submit" onClick={handleLogin}>Sign in</Button>
                 </Box>
             </Box>
         </>
