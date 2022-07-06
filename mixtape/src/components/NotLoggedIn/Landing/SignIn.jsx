@@ -76,10 +76,6 @@ export default function SignIn({ setAuth, isLoggedIn, handleLogout }) {
               <TableRow>
                 <TableCell colSpan={2} align="center">
                   <Typography variant="h3">Sign In to Continue</Typography>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell align="center">
                   <Box
                     component="form"
                     onSubmit={handleLogin}
@@ -100,23 +96,28 @@ export default function SignIn({ setAuth, isLoggedIn, handleLogout }) {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
-
-                      <Box textAlign="center">
-                        <br></br>
-                        <Button
-                          size="large"
-                          variant="outlined"
-                          type="submit"
-                          onClick={handleLogin}
-                        >
-                          Sign in
-                        </Button>
+                      <Box sx={{ height: "3vh" }}></Box>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flexDirection: "column",
+                        }}
+                      >
+                        <Stack spacing={5} direction="row">
+                          <Button size="large" variant="outlined" color="secondary" component={Link} to="/signup">
+                            Create account
+                          </Button>
+                          <Button
+                            size="large"
+                            variant="contained"
+                            type="submit"
+                            onClick={handleLogin}>
+                            Sign in
+                          </Button>
+                        </Stack>
                       </Box>
-                    </Box>
-                    <Box textAlign="center">
-                      <Button size="large" component={Link} to="/signup">
-                        Create account
-                      </Button>
                     </Box>
                   </Box>
                 </TableCell>
@@ -128,22 +129,24 @@ export default function SignIn({ setAuth, isLoggedIn, handleLogout }) {
       </Box>
       <Box sx={{ width: "90%", textAlign: "center" }}></Box>
 
-      {error && (
-        <Snackbar
-          open={open}
-          onClose={handleClose}
-          autoHideDuration={6000}
-          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        >
-          <Alert
+      {
+        error && (
+          <Snackbar
+            open={open}
             onClose={handleClose}
-            severity="warning"
-            sx={{ width: "100%" }}
+            autoHideDuration={6000}
+            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
           >
-            {error}
-          </Alert>
-        </Snackbar>
-      )}
+            <Alert
+              onClose={handleClose}
+              severity="warning"
+              sx={{ width: "100%" }}
+            >
+              {error}
+            </Alert>
+          </Snackbar>
+        )
+      }
     </>
   );
 }
