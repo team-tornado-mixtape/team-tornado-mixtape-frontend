@@ -31,7 +31,6 @@ export default function Wizard({ username, token, setAddMixtapeButtonClicked }) 
             case 1:
                 return (
                     <>
-                        {username}
                         < SongSearch username={username} token={token} setActiveStep={setActiveStep} mixTitle={mixTitle} mixId={mixId} deleteConfirmOpen={deleteConfirmOpen} setDeleteConfirmOpen={setDeleteConfirmOpen} />
                     </>);
             case 2:

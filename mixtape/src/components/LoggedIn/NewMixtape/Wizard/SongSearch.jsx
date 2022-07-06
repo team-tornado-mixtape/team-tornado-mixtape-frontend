@@ -144,7 +144,6 @@ export default function SongSearch({ username, setAuth, mixId, mixTitle, setActi
   return (
     <>
       <Typography variant="h5">Add songs to {mixTitle}</Typography>
-      {username}
       <br></br>
       <Box sx={{ textAlign: "left", justifyContent: "center" }}>
         <Stack spacing={2} direction="column">
