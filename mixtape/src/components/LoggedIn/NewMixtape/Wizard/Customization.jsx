@@ -4,12 +4,13 @@ import { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import Default from "../../../../images/cassettes/Default.png"
-import Momentum from "../../../../images/cassettes/Momentum.png"
-import Seattle from "../../../../images/cassettes/Seattle.png"
-import Wilmington from "../../../../images/cassettes/Wilmington.png"
+import DefaultMini from "../../../../images/cassettes/Default_mini.png"
+import MomentumMini from "../../../../images/cassettes/Momentum_mini.png"
+import SeattleMini from "../../../../images/cassettes/Seattle_mini.png"
+import WilmingtonMini from "../../../../images/cassettes/Wilmington_mini.png"
 import Chip from "@mui/material/Chip"
 import Dialog from "@mui/material/Dialog"
+import Box from "@mui/material/Box";
 
 import WizardDelete from "../WizardDelete"
 
@@ -75,7 +76,20 @@ export default function Customization({ setActiveStep, mixId, mixTitle, setAuth,
                         <Chip label="Seattle" variant="outlined" themeId={2} onClick={handleThemeChange} />
                         <Chip label="Momentum" variant="outlined" themeId={3} onClick={handleThemeChange} />
                     </Stack>
-                    <img src={Default} alt="Default" />
+                    <Box className="cassette-spine" style={{ position: "relative" }}>
+                        <img src={DefaultMini} alt="Default" />
+                        <Typography
+                            variant="eachmix"
+                            sx={{
+                                color: "#000000",
+                                position: "absolute",
+                                top: "62px",
+                                left: "535px",
+                            }}
+                        >
+                            {mixTitle}
+                        </Typography>
+                    </Box>
                 </>
             ) : theme === 1 ? (
                 <>
@@ -85,7 +99,20 @@ export default function Customization({ setActiveStep, mixId, mixTitle, setAuth,
                         <Chip label="Seattle" variant="outlined" themeId={2} onClick={handleThemeChange} />
                         <Chip label="Momentum" variant="outlined" themeId={3} onClick={handleThemeChange} />
                     </Stack>
-                    <img src={Wilmington} alt="Wilmington" />
+                    <Box className="cassette-spine" style={{ position: "relative" }}>
+                        <img src={WilmingtonMini} alt="Wilmington" />
+                        <Typography
+                            variant="eachmix"
+                            sx={{
+                                color: "#000000",
+                                position: "absolute",
+                                top: "62px",
+                                left: "535px",
+                            }}
+                        >
+                            {mixTitle}
+                        </Typography>
+                    </Box>
                 </>
             ) : theme === 2 ? (
                 <>
@@ -95,7 +122,20 @@ export default function Customization({ setActiveStep, mixId, mixTitle, setAuth,
                         <Chip label="Seattle" color="primary" themeId={2} onClick={handleThemeChange} />
                         <Chip label="Momentum" variant="outlined" themeId={3} onClick={handleThemeChange} />
                     </Stack>
-                    <img src={Seattle} alt="Seattle" />
+                    <Box className="cassette-spine" style={{ position: "relative" }}>
+                        <img src={SeattleMini} alt="Seattle" />
+                        <Typography
+                            variant="eachmix"
+                            sx={{
+                                color: "#000000",
+                                position: "absolute",
+                                top: "62px",
+                                left: "535px",
+                            }}
+                        >
+                            {mixTitle}
+                        </Typography>
+                    </Box>
                 </>
             ) : theme === 3 ? (
                 <>
@@ -105,7 +145,20 @@ export default function Customization({ setActiveStep, mixId, mixTitle, setAuth,
                         <Chip label="Seattle" variant="outlined" themeId={2} onClick={handleThemeChange} />
                         <Chip label="Momentum" color="primary" themeId={3} onClick={handleThemeChange} />
                     </Stack>
-                    <img src={Momentum} alt="Momentum" />
+                    <Box className="cassette-spine" style={{ position: "relative" }}>
+                        <img src={MomentumMini} alt="Momentum" />
+                        <Typography
+                            variant="eachmix"
+                            sx={{
+                                color: "#000000",
+                                position: "absolute",
+                                top: "62px",
+                                left: "535px",
+                            }}
+                        >
+                            {mixTitle}
+                        </Typography>
+                    </Box>
                 </>
             ) : (
                 <>
