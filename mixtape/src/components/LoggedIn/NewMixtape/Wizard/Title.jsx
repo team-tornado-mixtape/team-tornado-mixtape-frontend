@@ -1,8 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -19,7 +18,6 @@ export default function Title({
     username,
 }) {
     const [isLoading, setIsLoading] = useState(false);
-    // const [title, setTitle] = useState('')
     const [description, setDescription] = useState("");
     const [error, setError] = useState("");
 
@@ -56,7 +54,6 @@ export default function Title({
 
     return (
         <>
-            {username}
             {mixTitle.length === 0 ? (
                 <Box sx={{ textAlign: "left", justifyContent: "left" }}>
                     <Stack spacing={2} direction="column">
@@ -118,7 +115,6 @@ export default function Title({
                             Next
                         </Button>
                     ) : (
-                        // <Button variant="contained" onClick={() => setActiveStep(1)}>Continue</Button>
                         <CircularProgress />
                     )}
                 </Box>
