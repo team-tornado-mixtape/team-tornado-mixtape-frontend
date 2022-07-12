@@ -19,10 +19,10 @@
 # Overview
 
 
-#### Mixtape is [Team Mixtape's](https://github.com/team-tornado-mixtape) final project as students of [Team 12](https://github.com/Momentum-Team-12) at [Momentum](https://www.momentumlearn.com/). It is a web app that breaks the Spotify/Apple Music duoplogy -- allowing you to create playlists ("mixtapes") that aren't restricted to either streaming service. All of this is offered in a skeumorphic, themable UX reminiscent of the cassette days of yesteryear.
+#### Mixtape is [Team Mixtape's](https://github.com/team-tornado-mixtape) final project as students of [Team 12](https://github.com/Momentum-Team-12) at [Momentum](https://www.momentumlearn.com/). It is a web app that breaks the Spotify/Apple Music duopoly -- allowing you to create playlists ("mixtapes") that aren't restricted to either streaming service. All of this is offered in a skeumorphic, themable UX reminiscent of the cassette days of yesteryear.
 
 
-#### When you create a mixtape, you are prompted to add songs. When you search for songs in our interface, our backend makes requests to Spotify and Apple Music asynchronously, checks for matches between the two services and only surfaces song results that are available on both streaming services. The song objects that are returned to the user contain basic metadata such as track previews, titles, artists and albums, as well as more streaming service-specific information such as a track's respective Apple Music/Spotify URIs. This is what allows us to make mixtapes that are not exclusively for Spotify or Apple Music -- each song object contains the necessary metadata for each.
+#### When you create a mixtape, you are prompted to add songs. When you search for songs in our interface, our backend makes requests to Spotify and Apple Music asynchronously, checks for matches between the two services and only surfaces song results that are available on both streaming services. The song objects that are returned to the user contain basic metadata -- such as track previews, titles, artists and albums -- as well as more streaming service-specific information -- such as a track's respective Apple Music/Spotify URIs. This is what allows us to make mixtapes that are not exclusively for Spotify or Apple Music -- each song object contains the necessary metadata for each.
 
 
 #### We have several upcoming goals to better improve this project:
