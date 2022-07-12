@@ -4,12 +4,7 @@ import useLocalStorageState from "use-local-storage-state";
 import axios from "axios";
 import Landing from "./components/NotLoggedIn/Landing/Landing";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Player from "./components/LoggedIn/Player/Player";
-import PasswordReset from "./components/NotLoggedIn/Landing/PasswordReset";
-import ResetForm from "./components/NotLoggedIn/Landing/ResetForm";
-import SignIn from "./components/NotLoggedIn/Landing/SignIn";
 import SignUp from "./components/NotLoggedIn/Landing/SignUp";
-import MixCreate from "./components/LoggedIn/NewMixtape/Wizard/SongSearch";
 import Sidebar from "./components/LoggedIn/Sidebar";
 
 function App() {
@@ -50,8 +45,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing setAuth={setAuth} isLoggedIn={isLoggedIn} handleLogout={handleLogout} />}></Route>
           <Route path="/signup" element={<SignUp isLoggedIn={isLoggedIn} setAuth={setAuth} />}></Route>
-          <Route path="/passwordreset" element={<PasswordReset />}></Route>
-          <Route path="/resetform" element={<ResetForm isLoggedIn={isLoggedIn} />}></Route>
         </Routes>
       )}
     </BrowserRouter>

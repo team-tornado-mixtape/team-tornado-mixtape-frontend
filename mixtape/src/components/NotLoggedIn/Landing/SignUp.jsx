@@ -1,15 +1,13 @@
 import React from "react";
 import axios from "axios";
 import { Link, Navigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import MuiAlert from "@mui/material/Alert";
 import { Snackbar } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import Grid from "@mui/material/Grid";
 import useLocalStorageState from "use-local-storage-state";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -32,11 +30,6 @@ export default function SignUp({ isLoggedIn, setAuth }) {
     "reactMixtapeUsername",
     ""
   );
-
-  // const setAuth = (username, token) => {
-  //   setToken(token);
-  //   setUsername(username);
-  // };
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -76,11 +69,9 @@ export default function SignUp({ isLoggedIn, setAuth }) {
         console.log(res.data);
         console.log(`this is the token: ${res.data.auth_token}`);
         setToken(res.data.auth_token);
-        // setIssuedToken(res.data.auth_token)
         const token = res.data.auth_token;
         setAuth(username, token);
         setIsRegistered(true);
-        // setSignUpSignInComplete(true)
       })
       .catch((e) => {
         setError(e.message);
@@ -103,8 +94,6 @@ export default function SignUp({ isLoggedIn, setAuth }) {
       .then((res) => {
         console.log(res);
         console.log("Profile registered with spotify");
-        // HandleLogin()
-        // setSignUpSignInComplete(true)
       })
       .catch((e) => {
         setError(e.message);

@@ -3,7 +3,7 @@ import axios from "axios";
 import { Snackbar } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import { Link, Navigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
@@ -72,7 +72,6 @@ export default function SignIn({ setAuth, isLoggedIn, handleLogout }) {
         >
           <Table sx={{ width: 430 }}>
             <TableBody>
-              {/* <TableRow sx={{ backgroundColor: "#8F4F6A" }}> */}
               <TableRow>
                 <TableCell colSpan={2} align="center">
                   <Typography variant="h3">Sign In to Continue</Typography>
@@ -125,10 +124,8 @@ export default function SignIn({ setAuth, isLoggedIn, handleLogout }) {
             </TableBody>
           </Table>
         </TableContainer>
-        {/* <br></br> */}
       </Box>
       <Box sx={{ width: "90%", textAlign: "center" }}></Box>
-
       {
         error && (
           <Snackbar
