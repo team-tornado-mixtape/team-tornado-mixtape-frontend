@@ -50,7 +50,7 @@
 2) In your terminal, ```cd``` into your directory of choice.
 3) Type ```git clone``` and append your pasted link. Press enter to clone this repo.
 4) Once cloned, ```cd``` into ```team-tornado-mixtape-frontend/```, then into ```mixtape/```.
-5) Run ```npm install``` to install/resolve any missing associated with this project.
+5) Run ```npm install``` to install/resolve any missing dependencies associated with this project.
 6) Run ```npm start``` to begin running the installation locally.
 
 
