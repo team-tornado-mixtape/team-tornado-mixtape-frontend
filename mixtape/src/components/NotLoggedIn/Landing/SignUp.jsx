@@ -51,11 +51,23 @@ export default function SignUp({ isLoggedIn, setAuth }) {
       })
       .then((res) => {
         console.log(res.data);
-        HandleLogin();
+        console.log(`this is the token: ${res.data.auth_token}`);
+        setToken(res.data.auth_token);
+        const token = res.data.auth_token;
+        setAuth(username, token);
+        setIsRegistered(true);
+        HandleLogin()
       })
       .catch((e) => {
-        setError(e.message);
-      });
+        e.message === 'Request failed with status code 400'
+          ? setError(
+            'Passwords must: be at least 8 characters, contain at least one special character and contain at least one number.'
+          )
+          : setError(
+            'Your account has been created. Please log in to continue.'
+          )
+        setOpen(true)
+      })
   };
 
   function HandleLogin() {
@@ -71,14 +83,20 @@ export default function SignUp({ isLoggedIn, setAuth }) {
         setToken(res.data.auth_token);
         const token = res.data.auth_token;
         setAuth(username, token);
-        setIsRegistered(true);
       })
       .catch((e) => {
-        setError(e.message);
-      });
+        e.message === 'Request failed with status code 400'
+          ? setError(
+            'An error occurred while trying to log in. Please try again.'
+          )
+          : setError(
+            'An error occurred while trying to log in. Please try again.'
+          )
+        setOpen(true)
+      })
   }
 
-  function RegisterSpotifyAccount() {
+  function RegisterSpotifyAccount(token) {
     console.log("you got to this step!");
     console.log(token);
     axios
@@ -96,8 +114,15 @@ export default function SignUp({ isLoggedIn, setAuth }) {
         console.log("Profile registered with spotify");
       })
       .catch((e) => {
-        setError(e.message);
-      });
+        e.message === 'Request failed with status code 401'
+          ? setError(
+            'Not authorized. Are you logged in?'
+          )
+          : setError(
+            'An error occurred while trying to log in. Please try again.'
+          )
+        setOpen(true)
+      })
   }
 
   if (signUpSignInComplete) {
